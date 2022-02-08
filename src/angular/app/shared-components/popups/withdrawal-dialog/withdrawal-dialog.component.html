@@ -1,0 +1,104 @@
+<div class="cash-giving-away bg-white d-flex flex-column align-items-center">
+  <div class="col pb-28px font-color-dark font-size-20 font-family-bold w-100 d-flex px-0">
+    თანხის გაცემა
+  </div>
+
+  <form class="w-100" [formGroup]="form" (keydown.enter)="$event.preventDefault()">
+    <div class="font-family-regular font-color-dark font-size-16 pb-1">
+      თანხა
+    </div>
+    <div
+      class="d-flex mb-28px rounded align-items-center border border-item-border-color input-wrapper position-relative"
+      style="height: 56px;"
+      [class.active]="focusedFormControlName === 'number'"
+    >
+      <input
+        type="text"
+        formControlName="number"
+        (focus)="onInputFocus('number', $event.target.parentElement)"
+        mask="separator.2"
+        thousandSeparator=","
+        placeholder="ჩაწერე თანხა"
+        class="form-control shadow-none h-100 border-0 font-family-regular font-size-16 font-color-dark px-3"
+      />
+      <!--  placeholder="ჩაწერე თანხა" -->
+
+      <app-icon icon="lari-one" class="mx-4"></app-icon>
+    </div>
+
+    <div class="font-family-regular font-color-dark font-size-16 pb-1">
+      მიზეზი
+    </div>
+    <div class="d-flex rounded align-items-center input-wrapper" style="height: 56px;">
+      <ng-select
+        [items]="reasons"
+        bindLabel="label"
+        bindValue="value"
+        formControlName="reason"
+        [clearable]="false"
+        [searchable]="false"
+        class="form-control custom-ng-select h-56px shadow-none d-flex align-items-center cursor-pointer border border-item-border-color"
+        (change)="onReasonChange($event)"
+      >
+        <!--  placeholder="აირჩიეთ" -->
+      </ng-select>
+    </div>
+
+    <ng-container *ngIf="getValue('reason') == WithdrawReason.Other">
+      <div class="font-family-regular font-color-dark font-size-16 pb-1 pt-4">
+        კომენტარი
+      </div>
+
+      <textarea
+        formControlName="comment"
+        (focus)="onInputFocus('comment', $event.target)"
+        style="height: 112px; resize: none;"
+        [class.active]="focusedFormControlName === 'comment'"
+        class="form-control shadow-none border border-item-border-color"
+      ></textarea>
+      <!-- placeholder="ჩაწერე კომენტარი" -->
+    </ng-container>
+
+    <div class="d-flex mt-32px" style="height: 56px;">
+      <button
+        type="button"
+        (click)="this.dialogRef.close(false)"
+        class="btn col shadow-none border-0 p-0 bg-product-list-bg px-32px mr-2 font-color-dark font-family-bold font-size-16"
+      >
+        გაუქმება
+      </button>
+      <button
+        type="button"
+        (click)="onSubmit()"
+        [disabled]="form.invalid || isSubmited"
+        class="btn col shadow-none border-0 p-0 bg-blue px-32px ml-2 font-color-white font-family-bold font-size-16"
+      >
+        დადასტურება
+      </button>
+    </div>
+
+    <div
+      *ngIf="focusedFormControlName"
+      (focusOut)="onNumpadFocusOut($event)"
+      [class.top]="numpadCoordinates.openTop"
+      [style.top.px]="numpadCoordinates.y"
+      [style.left.px]="numpadCoordinates.x"
+      class="numpad-second-wrapper"
+    >
+      <div class="numpad-second">
+        <app-numpad
+          [formControl]="form.controls[focusedFormControlName]"
+          [isDecimal]="true"
+        ></app-numpad>
+      </div>
+      <div class="row m-0 justify-content-center">
+        <button
+          class="btn btn-clean font-size-16 font-family-bold font-color-dark pt-4"
+          (click)="onNumpadClose()"
+        >
+          დახურვა
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

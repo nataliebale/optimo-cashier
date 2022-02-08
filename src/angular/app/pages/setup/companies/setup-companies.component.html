@@ -1,0 +1,35 @@
+<div class="card">
+  <div class="card-header">კომპანია</div>
+  <div class="card-body">
+    <ng-select
+      [items]="companies"
+      [(ngModel)]="company"
+      bindLabel="companyName"
+      [searchable]="true"
+      [clearable]="false"
+      class="form-control custom-ng-select setup-select"
+      placeholder="აირჩიეთ კომპანია"
+    >
+    </ng-select>
+  </div>
+  <div class="card-footer">
+    <button
+      class="form-button setup__form-button-back"
+      (click)="back.emit()"
+      style="height: 48px;"
+      type="button"
+    >
+      უკან
+    </button>
+    <button
+      class="form-button setup__form-button-next"
+      style="height: 48px;"
+      [disabled]="!company"
+      type="submit"
+      (click)="onSubmit()"
+    >
+      შემდეგ
+    </button>
+    <div style="clear: both;"></div>
+  </div>
+</div>

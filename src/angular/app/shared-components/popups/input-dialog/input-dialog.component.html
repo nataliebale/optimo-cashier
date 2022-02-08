@@ -1,0 +1,51 @@
+<div class="d-flex flex-column bg-white justify-content-center pt-4 px-52px">
+  <div class="font-family-bold font-color-dark font-size-20 line-height-normal px-1">
+    <span>{{ data.title }}</span>
+  </div>
+
+  <div class="font-family-regular font-color-dark font-size-16 pt-4 pb-1 line-height-normal px-1">
+    {{ data.subTitle }}
+  </div>
+
+  <form class="w-100 pt-2px pb-3" [formGroup]="form" (keydown.enter)="$event.preventDefault()">
+    <div class="w-100 px-1">
+      <input
+        class="input-regular h-56px w-100"
+        type="text"
+        name="text"
+        formControlName="number"
+        [patterns]="customPatterns"
+        [mask]="data.maxLength ? 'D{' + data.maxLength + '}' : 'separator.2'"
+        [ngClass]="{ error: error }"
+        thousandSeparator=","
+      />
+    </div>
+
+    <div class="numpad-sixth-wrapper pt-20px pr-0">
+      <app-numpad [formControl]="numberControl" [isDecimal]="true"></app-numpad>
+    </div>
+
+    <div class="row m-0 px-1">
+      <button
+        type="button"
+        (click)="onDecline()"
+        class="btn shadow-none h-56px col mr-2 border-0 rounded w-100 mt-20px bg-product-list-bg font-size-16 font-family-bold font-color-dark"
+      >
+        {{ data.declineLabel || 'გაუქმება' }}
+      </button>
+
+      <button
+        type="button"
+        (click)="onApprove()"
+        [disabled]="form.invalid || isFormSubmited"
+        class="btn shadow-none h-56px col ml-2 border-0 rounded w-100 mt-20px bg-blue font-size-16 font-family-bold font-color-white"
+      >
+        {{ data.approveLabel || 'შენახვა' }}
+      </button>
+    </div>
+  </form>
+
+  <div *ngIf="data.footerTemp" class="row mx-1 border-top border-item-border-color pt-3">
+    <ng-container [ngTemplateOutlet]="data.footerTemp"></ng-container>
+  </div>
+</div>

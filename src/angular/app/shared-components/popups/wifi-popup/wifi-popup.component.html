@@ -1,0 +1,75 @@
+<!-- is poppi rac rcheba aq -->
+<div class="pt-4 pb-2 px-56px">
+  <div
+    class="font-family-bold font-color-dark font-size-20 pb-32px border-bottom border-product-list-bg mx-20px line-height-normal mb-2"
+  >
+    აირჩიე ქსელი
+  </div>
+
+  <div
+    class="wifi-networks-wrapper custom-scroll-2"
+    *ngIf="wifiNetworks"
+    style="max-height: 325px;"
+  >
+    <div
+      class="py-3 px-3 d-flex justify-content-between wifi-network-item"
+      *ngFor="let item of wifiNetworks"
+      (click)="openWifiPasswordPopup(item)"
+      [ngClass]="{
+        active: activeWifiNetwork.ssid === item.ssid,
+        blocked: item.authentication !== 'Open'
+      }"
+    >
+      <div class="font-family-regular font-color-dark font-size-16 cursor-pointer">
+        {{ item.ssid }}
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="mx-20px border-top border-product-list-bg py-3 font-size-15 font-family-regular font-color-dark mt-2"
+  >
+    შენი დევაისი ავტომატურად დაუკავშირდება დამახსოვრებულ ქსელს, ან მოგიწევს ხელით არჩევა.
+  </div>
+
+  <div class="mx-20px border-top border-product-list-bg pt-32px d-flex justify-content-center">
+    <button
+      (click)="onClose()"
+      class="btn shadow-none border-0 bg-blue px-32px h-56px font-family-bold font-size-16 font-color-white"
+    >
+      დაბრუნება
+    </button>
+  </div>
+</div>
+
+<!-- 
+<div class="pt-4 pb-12px px-56px">
+  <div
+    class="font-family-bold font-color-dark font-size-20 pb-4 line-height-normal"
+  >
+    saxekiii
+  </div>
+  <div
+    class="pb-3 font-family-bold font-color-dark font-size-16 line-height-normal"
+  >
+    პაროლი
+  </div>
+  <input type="password" class="h-56px input-regular w-100" />
+
+  <div class="font-color-red-regular font-family-regular font-size-15 pt-2">
+    პაროლი არასწორია, სცადეთ თავიდან...
+  </div>
+
+  <div class="d-flex justify-content-center pt-32px">
+    <button
+      class="btn shadow-none border-0 bg-product-list-bg w-100 h-56px font-family-bold font-size-16 font-color-dark mr-2"
+    >
+      გაუქმება
+    </button>
+    <button
+      class="btn shadow-none border-0 bg-blue w-100 h-56px font-family-bold font-size-16 font-color-white ml-2"
+    >
+      დადასტურება
+    </button>
+  </div>
+</div> -->

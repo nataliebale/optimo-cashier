@@ -1,0 +1,50 @@
+<!-- <div class="numpad">
+  <div class="numpad-keys">
+    <ng-container *ngFor="let row of buttonsRows">
+      <button
+        type="button"
+        class="numpad-key"
+        *ngFor="let button of row"
+        [disabled]="isDisabled || (hideDot && button === '.')"
+        (click)="onPadClick(button)"
+      >
+        {{ button }}
+      </button>
+    </ng-container>
+    <button
+      *ngIf="!hideBack"
+      type="button"
+      class="numpad-key"
+      (click)="onPadClick('back')"
+    >
+      <img src="assets/images/icons/backspace1.svg" width="27" />
+    </button>
+  </div>
+</div> -->
+
+<div class="d-flex flex-column align-items-center h-100">
+  <ng-container *ngFor="let row of buttonsRows; let ind = index">
+    <div class="numbers-row d-flex w-100 h-100">
+      <div class="col-4" *ngIf="ind === buttonsRows.length - 1">
+        <div
+          class="btn-div number-btn d-flex align-items-center justify-content-center"
+          (click)="onPadClick('back')"
+        >
+          <app-icon icon="backspace" class="backspace-svg"></app-icon>
+        </div>
+      </div>
+      <div class="col-4" *ngFor="let button of row">
+        <div
+          class="btn-div number-btn d-flex align-items-center justify-content-center"
+          [class.disabled]="isDisabled || (hideDot && button === '.')"
+          (click)="onPadClick(button)"
+        >
+          <!-- btn-numpad -->
+          <span class="font-color-dark font-size-24 font-family-regular text-truncate">
+            {{ button }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

@@ -1,0 +1,80 @@
+<div class="headbar d-flex shadow-header px-5">
+  <div class="col-3 px-0 d-flex align-items-center">
+    <button
+      class="btn shadow-none border-0 p-0 m-0"
+      (click)="step = 'operators-list'"
+      *ngIf="step === 'pincode'"
+    >
+      <app-icon icon="back"></app-icon>
+    </button>
+  </div>
+
+  <div class="col d-flex justify-content-center align-items-center">
+    <a>
+      <img class="headbar-logo" src="../../../../assets/images/logo/logo.svg" />
+    </a>
+  </div>
+
+  <div class="col-3 d-flex justify-content-end align-items-center px-0 position-relative">
+    <div
+      class="font-size-16 font-color-dark font-family-bold pr-4 d-flex align-items-center"
+      *ngIf="step === 'pincode'"
+    >
+      <button
+        class="btn shadow-none p-0 m-0 border-0 bg-payment-details-bg rounded-circle mr-2 d-flex justify-content-center align-items-center"
+        style="width: 36px; height: 36px; flex: 0 0 36px;"
+      >
+        <span class="pt-2px font-color-white font-family-bold font-size-15">
+          {{ selectedOperator.name[0] }}
+        </span>
+      </button>
+
+      <span class="ml-1 cursor-pointer">
+        {{ selectedOperator.name.split(' ')[0] }}
+        <ng-container *ngIf="selectedOperator.name.split(' ')[1]">
+          {{ selectedOperator.name.split(' ')[1][0] }}.
+        </ng-container>
+      </span>
+    </div>
+
+    <div class="bg-border-color-bg mr-30px" style="width: 1px; height: 24px;"></div>
+
+    <button
+      (click)="onBurgerMenuClick()"
+      class="btn shadow-none p-0 m-0 border-0 bg-blue rounded-circle d-flex justify-content-center align-items-center"
+      style="width: 36px; height: 36px; flex: 0 0 36px;"
+    >
+      <app-icon icon="burger-white"></app-icon>
+    </button>
+  </div>
+</div>
+
+<div
+  class="bg-white w-100 h-100 pt-custlg-5 pt-1 px-xl-5 px-36px d-flex flex-column login-wrapper"
+  [ngSwitch]="step"
+>
+  <app-pincode
+    *ngSwitchCase="'pincode'"
+    [disabled]="!selectedOperator"
+    [reset$]="resetPincode$"
+    (filled)="onPincodeFilled($event)"
+    class="flex-grow-1"
+  ></app-pincode>
+
+  <app-operators-list
+    *ngSwitchCase="'operators-list'"
+    [sync$]="sync$"
+    [activeShiftOperator]="activeShiftOperator"
+    [isHorecaMode]="isHorecaMode"
+    (operatorChange)="onOperatorChange($event)"
+    class="flex-grow-1 operators-list-wrapper"
+  ></app-operators-list>
+
+  <ng-container *ngSwitchCase="'operators-list'">
+    <!-- [disabled]="!activeShiftOperator" -->
+    <app-synchronization
+      (sync)="onSync()"
+      class="pb-2 synchronization-wrapper"
+    ></app-synchronization>
+  </ng-container>
+</div>

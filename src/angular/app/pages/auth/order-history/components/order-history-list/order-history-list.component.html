@@ -1,0 +1,83 @@
+<div class="w-100 h-100">
+  <!-- papun es search iseve unda mushaobdes rogorc dashboardze aris posshi-->
+  <div class="w-100 pl-custlg-5 pl-4 pr-30px pr-xl-5 py-12px border-bottom border-product-list-bg">
+    <div
+      class="d-flex px-3 border border-border-color rounded align-items-center py-1 item-searchbar height-unset"
+    >
+      <div class="btn-div opacity-05">
+        <app-icon icon="search"></app-icon>
+      </div>
+
+      <input
+        #searchInput
+        type="text"
+        name="search"
+        placeholder="ჩაწერე ბარკოდი ან ტრანზაქციის ნომერი"
+        class="font-size-custlg-15 font-size-14 col font-family-regular font-color-dark border-0 bg-transparent placeholder-currentcolor py-7px pl-2"
+        (keyup)="handleSearchChange(searchInput.value)"
+      />
+      <div class="btn-div item-searchbar-close">
+        <!--  [class.disabled]="isDisabled"
+      [ngClass]="{ active: value.length }"
+      (click)="onClear()" -->
+        <app-icon icon="close"></app-icon>
+      </div>
+    </div>
+  </div>
+  <div
+    class="w-100 pl-custlg-5 pl-4 bg-white font-size-custlg-15 font-size-14 font-family-regular font-color-dark py-10px text-truncate"
+  >
+    {{ filter?.from | date: 'd MMM y' }} - {{ filter?.to | date: 'd MMM y' }}
+  </div>
+  <ng-container *ngIf="transactionList && transactionList.length">
+    <div
+      class="order-history-short-info border-top border-product-list-bg px-custlg-5 pl-4 pr-32px"
+      (click)="selectOrder.emit(transaction.id)"
+      [class.active]="selectedTransactionId === transaction.id"
+      *ngFor="let transaction of transactionList"
+    >
+      <div
+        class="status-icon"
+        [class.both-display]="transaction.isCorrected && transaction.isCancelled"
+      >
+        <app-icon
+          icon="status-corrected"
+          class="mt-n2px"
+          *ngIf="transaction.isCorrected"
+        ></app-icon>
+        <app-icon icon="status-refunded" class="mt-n1" *ngIf="transaction.isCancelled"></app-icon>
+      </div>
+      <div class="d-flex flex-column justify-content-center h-100 col-8 px-0 pr-2">
+        <div class="d-flex">
+          <div
+            class="check-id font-family-bold text-truncate font-size-custlg-16 font-size-14 font-color-dark"
+          >
+            #{{ transaction.id }}
+          </div>
+          <div
+            class="table-name text-truncate font-family-bold font-size-custlg-16 font-size-14 font-color-dark"
+            *ngIf="isHorecaMode"
+          >
+            ,&nbsp;{{ transaction.tableName }}
+          </div>
+        </div>
+        <div class="font-size-custlg-16 font-size-13 font-color-dark">
+          {{ transaction.orderDate | date: 'HH:mm' }}
+        </div>
+      </div>
+      <div
+        class="amount col-4 text-right px-0 text-truncate pl-2 font-size-custlg-16 font-size-14 font-color-dark"
+      >
+        {{ transaction.totalAmount | number: '1.2-2':'en' }} ₾
+      </div>
+    </div>
+  </ng-container>
+  <div
+    style="padding-top: 155px;"
+    *ngIf="!(transactionList && transactionList.length)"
+    class="font-family-bold font-size-custlg-16 font-size-14 font-color-dark d-flex flex-column align-items-center"
+  >
+    <app-icon icon="no-data"></app-icon>
+    <span class="pt-2">მონაცემები ცარიელია</span>
+  </div>
+</div>

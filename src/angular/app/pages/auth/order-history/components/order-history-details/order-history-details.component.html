@@ -1,0 +1,250 @@
+<ng-container *ngIf="transactionDetails">
+  <div class="m-auto w-100" style="max-width: 900px;">
+    <div
+      class="d-flex line-height-normal pb-custlg-32px pb-3 order-history-description-text text-truncate"
+    >
+      <div
+        class="font-size-custlg-20 font-size-18 font-family-bold font-color-dark text-nowrap ticket-name-text pr-2"
+      >
+        <span class="pr-2">ქვითარი</span>
+        #{{ transactionDetails.id }}<span *ngIf="isHorecaMode">,</span>
+      </div>
+      <div
+        class="font-size-custlg-20 font-size-18 font-family-bold font-color-dark text-nowrap table-name-text pr-2"
+        *ngIf="isHorecaMode"
+      >
+        {{ transactionDetails.tableName }}
+      </div>
+      <div
+        class="font-size-custlg-20 font-size-18 font-family-bold font-color-dark text-truncate space-name-text"
+        *ngIf="isHorecaMode"
+      >
+        ({{ transactionDetails.spaceName }})
+      </div>
+    </div>
+    <div class="w-100 d-flex py-custlg-12px py-10px border-bottom border-product-list-bg">
+      <div
+        class="col px-0 text-truncate font-family-bold font-color-dark font-size-custlg-16 font-size-14"
+      >
+        {{ isHorecaMode ? 'მიმტანის სახელი' : 'თანამშრომელი' }}
+      </div>
+      <div
+        class="col px-0 text-truncate font-family-regular font-color-dark font-size-custlg-16 font-size-14 text-right"
+      >
+        {{ transactionDetails.operatorName }}
+      </div>
+    </div>
+    <div
+      class="w-100 d-flex py-custlg-12px py-10px border-bottom border-product-list-bg"
+      *ngIf="isHorecaMode"
+    >
+      <div
+        class="col px-0 text-truncate font-family-bold font-color-dark font-size-custlg-16 font-size-14"
+      >
+        სტუმრების რაოდენობა
+      </div>
+      <div
+        class="col px-0 text-truncate font-family-regular font-color-dark font-size-custlg-16 font-size-14 text-right"
+      >
+        {{ transactionDetails.guestCount }}
+      </div>
+    </div>
+    <div class="w-100 d-flex py-custlg-12px py-10px border-bottom border-product-list-bg">
+      <div
+        class="col px-0 text-truncate font-family-bold font-color-dark font-size-custlg-16 font-size-14"
+      >
+        გადახდის მეთოდი
+      </div>
+      <div
+        class="col px-0 text-truncate font-family-regular font-color-dark font-size-custlg-16 font-size-14 text-right"
+      >
+        {{
+          transactionDetails.paymentMethod === PaymentMethods.Cash ||
+          transactionDetails.paymentMethod === EntityPaymentMethods.Cash
+            ? 'ნაღდი ანგარიშწორება'
+            : 'უნაღდო ანგარიშსწორება'
+        }}
+      </div>
+    </div>
+    <div class="w-100 d-flex py-custlg-12px py-10px">
+      <div
+        class="col px-0 text-truncate font-family-bold font-color-dark font-size-custlg-16 font-size-14"
+      >
+        გადახდის დრო
+      </div>
+      <div
+        class="col px-0 text-truncate font-family-regular font-color-dark font-size-custlg-16 font-size-14 text-right"
+      >
+        {{ transactionDetails.orderDate | date: 'd MMM y HH:mm' }}
+      </div>
+    </div>
+    <div class="pt-custlg-32px pt-4">
+      <div class="w-100 py-custlg-17px py-13px d-flex line-height-normal">
+        <div
+          class="font-size-custlg-16 font-size-14 font-family-bold font-color-dark text-truncate pr-4"
+          style="width: 40%;"
+        >
+          დასახელება
+        </div>
+        <div
+          class="font-size-custlg-16 font-size-14 font-family-bold font-color-dark text-truncate text-right pr-4"
+          style="width: 20%;"
+        >
+          ფასი
+        </div>
+        <div
+          class="font-size-custlg-16 font-size-14 font-family-bold font-color-dark text-truncate text-right pr-4"
+          style="width: 20%;"
+        >
+          რაოდენობა
+        </div>
+        <div
+          class="font-size-custlg-16 font-size-14 font-family-bold font-color-dark text-truncate text-right"
+          style="width: 20%;"
+        >
+          ჯამი
+        </div>
+      </div>
+      <div
+        class="w-100 py-custlg-14 py-13px d-flex line-height-normal border-top border-product-list-bg"
+        *ngFor="let order of transactionDetails.orderLines"
+      >
+        <div
+          class="font-size-custlg-16 font-size-14 font-family-regular font-color-dark text-truncate"
+          style="width: 40%;"
+        >
+          {{ order.name }}
+        </div>
+        <div
+          class="font-size-custlg-16 font-size-14 font-family-regular font-color-dark text-truncate text-right pr-4"
+          style="width: 20%;"
+        >
+          {{ order.unitPrice | number: '1.2-2':'en' }}<span class="ml-3px">₾</span>
+        </div>
+        <div
+          class="font-size-custlg-16 font-size-14 font-family-regular font-color-dark text-truncate text-right pr-4"
+          style="width: 20%;"
+        >
+          {{ order.quantity
+          }}<span class="ml-2px">{{ getUnitOfMeasurement(order.unitOfMeasurement) }}</span>
+        </div>
+        <div
+          class="font-size-custlg-16 font-size-14 font-family-regular font-color-dark text-truncate text-right"
+          style="width: 20%;"
+        >
+          {{ order.totalPrice | number: '1.2-2':'en' }}<span class="ml-3px">₾</span>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-between pt-4">
+      <div class="d-flex align-items-start" data-button-container>
+        <!-- <div
+          class="order-history-payment-method by-cash d-flex justify-content-center align-items-center mr-3"
+          [class.active]="
+            transactionDetails.paymentMethod === PaymentMethods.Cash ||
+            (transactionDetails.paymentMethod === PaymentMethods.Manual && !entity)
+          "
+        >
+          <app-icon icon="cash"></app-icon>
+        </div>
+
+        <div
+          class="order-history-payment-method by-card d-flex justify-content-center align-items-center mr-3"
+          [class.active]="transactionDetails.paymentMethod === PaymentMethods.Card"
+        >
+          <app-icon icon="card"></app-icon>
+        </div>
+
+        <div
+          *ngIf="entity"
+          class="order-history-payment-method by-consignation d-flex justify-content-center align-items-center"
+          [class.active]="transactionDetails.paymentMethod === PaymentMethods.Manual"
+        >
+          <app-icon icon="doc"></app-icon>
+        </div> -->
+
+        <div
+          *ngIf="
+            hasReturnPermission &&
+            !transactionDetails.isCancelled &&
+            transactionDetails.canBeReversed
+          "
+          class="btn-div px-custlg-32px px-4 py-3 font-size-custlg-16 font-size-14 bg-product-list-bg font-family-bold mr-custlg-3 mr-2"
+          (click)="emitAction('return')"
+        >
+          დაბრუნება
+        </div>
+        <!-- <div
+          class="btn-div px-custlg-27px px-3 py-10px bg-product-list-bg font-family-bold mr-custlg-3 mr-2"
+          (click)="emitAction('return')"
+        >
+          <app-icon icon="print"></app-icon>
+        </div> -->
+        <div
+          class="btn-div px-custlg-33px px-22px py-3 bg-product-list-bg font-family-bold mr-custlg-3 mr-2"
+          *ngIf="transactionDetails.linkedTransactionId"
+          (click)="emitAction('open-linked')"
+        >
+          <app-icon
+            icon="status-corrected"
+            class="icon-w-h-24px icon-fill-dark icon-stroke-dark"
+          ></app-icon>
+        </div>
+        <div
+          class="btn-div px-custlg-33px px-22px py-3 bg-product-list-bg font-family-bold mr-custlg-3 mr-2"
+          *ngIf="transactionDetails.cancelledTransactionId"
+          (click)="emitAction('open-cancelled')"
+        >
+          <app-icon
+            icon="status-refunded"
+            class="icon-w-h-24px icon-fill-dark icon-stroke-dark"
+          ></app-icon>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-end text-truncate">
+        <div class="d-flex flex-column pr-custlg-4 pr-40">
+          <ng-container *ngIf="isHorecaMode">
+            <span
+              class="pb-10px text-right font-size-custlg-16 font-size-14 font-color-dark font-family-regular line-height-normal"
+            >
+              <span>შეკვეთის ჯამი:</span>
+            </span>
+            <span
+              class="pb-10px text-right font-size-custlg-16 font-size-14 font-color-dark font-family-regular line-height-normal"
+            >
+              მომსახურების საკომისიო:
+            </span>
+          </ng-container>
+
+          <span
+            class="text-right font-size-custlg-20 font-size-18 font-color-dark font-family-bold line-height-normal"
+          >
+            სულ გადახდილი:
+          </span>
+        </div>
+        <div class="d-flex flex-column text-truncate">
+          <ng-container *ngIf="isHorecaMode">
+            <span
+              class="pb-10px text-right font-size-custlg-16 font-size-14 font-color-dark font-family-bold line-height-normal text-truncate"
+              >{{
+                transactionDetails.orderTotalPrice - transactionDetails.taxAmount
+                  | number: '1.2-2':'en'
+              }}
+              ₾
+            </span>
+            <span
+              class="pb-10px text-right font-size-custlg-16 font-size-14 font-color-dark font-family-bold line-height-normal text-truncate"
+              >{{ transactionDetails.taxAmount | number: '1.2-2':'en' }} ₾</span
+            >
+          </ng-container>
+          <span
+            class="text-right font-size-custlg-20 font-size-18 font-color-dark font-family-bold line-height-normal text-truncate"
+            >{{ transactionDetails.orderTotalPrice | number: '1.2-2':'en' }}
+            <span class="font-size-custlg-16 font-size-14"> ₾</span></span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

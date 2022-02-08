@@ -1,0 +1,85 @@
+[class^='icon-'] {
+  @include transition;
+}
+
+.icon {
+  $root: &;
+
+  &-keys-48 {
+    svg {
+      width: 48px;
+      height: 48px;
+    }
+  }
+  &-off-48 {
+    svg {
+      width: 48px;
+      height: 48px;
+    }
+  }
+  &-w-h-48px {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &-w-h-24px {
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+  &-w-h-42px {
+    svg {
+      width: 42px;
+      height: 42px;
+    }
+  }
+  &-arrow-down {
+    svg {
+      @include transition;
+    }
+
+    &.open {
+      svg {
+        transform: rotate(180deg);
+      }
+    }
+  }
+  &-keys-white {
+    svg {
+      path {
+        opacity: 1;
+      }
+    }
+  }
+  &-dark {
+    svg {
+      path {
+        fill: $dark;
+        opacity: 1 !important;
+      }
+    }
+  }
+  &-fill-dark {
+    .fill-dark {
+      fill: $dark !important;
+    }
+  }
+  &-stroke-dark {
+    .stroke-dark {
+      stroke: $dark !important;
+    }
+  }
+}
+
+svg {
+  cursor: pointer !important;
+  g {
+    cursor: pointer !important;
+  }
+  path {
+    cursor: pointer !important;
+  }
+}

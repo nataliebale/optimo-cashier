@@ -1,0 +1,90 @@
+<div class="row m-0 pt-custlg-5 pt-3">
+  <div
+    class="d-flex flex-column align-items-center w-100 text-center pt-56px mt-56px"
+    *ngIf="!items.length"
+  >
+    <app-icon icon="no-data"></app-icon>
+    <span class="pt-3 font-size-16 font-family-bold font-color-dark line-height-normal"
+      >მონაცემები ცარიელია</span
+    >
+  </div>
+
+  <ng-container *ngIf="items">
+    <div
+      class="col-4 p-0 px-custlg-12px px-custmd-2 px-1 mb-4 d-flex flex-column align-items-start cursor-pointer"
+      *ngFor="let product of items; trackBy: trackBy"
+      (click)="onProductClick(product)"
+    >
+      <div
+        class="w-100 rounded overflow-hidden mb-custlg-2 mb-3 item-bg-1 border rounded item-img-custom-border position-relative cursor-pointer"
+        style="
+          padding-top: 75%;
+          background-size: contain;
+          background-position: center;
+          background-repeat: no-repeat;
+        "
+        [ngStyle]="{
+          'background-image':
+            'url(' +
+            (product.photoPath || '../../../../../../../assets/images/icons/image.svg') +
+            ')'
+        }"
+        [ngClass]="{ 'images-dark-overlay': !product.photoPath }"
+      >
+        <div
+          class="product-entity rounded text-truncate py-2 px-3 font-size-custlg-16 font-size-14 font-family-bold"
+          [ngClass]="{
+            red: product.quantity < product.lowStockThreshold,
+            green: product.quantity >= product.lowStockThreshold
+          }"
+          *ngIf="!isHorecaMode"
+        >
+          {{ product.quantity }}
+        </div>
+      </div>
+      <div
+        class="rounded bg-product-list-bg text-truncate py-2 px-3 font-size-custmd-16 font-size-14 font-family-bold font-color-dark line-height-normal"
+        style="max-width: 100%;"
+      >
+        {{ product.unitPrice | number: '1.2-9':'en' }} ₾
+      </div>
+      <div
+        class="font-size-custlg-16 font-size-custmd-14 font-size-13 font-family-bold font-color-dark pt-2 text-truncate"
+        style="max-width: 100%;"
+      >
+        {{ product.name }}
+      </div>
+      <div class="font-size-custlg-14 font-size-12 font-family-regular font-color-dark pt-1">
+        {{ product.barcode }}
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+<ng-template #exhaustionTitle>
+  <div
+    class="m-auto px-0 d-flex rounded-circle bg-light-red d-flex justify-content-center align-items-center"
+    style="width: 80px; height: 80px;"
+  >
+    <app-icon icon="alert"></app-icon>
+  </div>
+
+  <div
+    class="col text-center font-family-bold font-color-dark font-size-20 line-height-normal"
+  ></div>
+  <div class="pt-32px font-family-bold font-color-dark font-size-20 pb-30px line-height-normal">
+    პროდუქტი რაოდენობაში აღარ არის
+  </div>
+</ng-template>
+
+<ng-template #exhaustionMessage>
+  <div class="pb-3 font-family-regular font-size-16 font-color-dark line-height-21">
+    თუ თანახმა ხარ, რომ პროდუქტის გაყიდვა გაგრძელდეს ბოლო შესყიდვის ფასით, დააჭირე
+    <p class="font-family-bold font-color-dark text-decoration-none mb-0">
+      გაგრძელებას.
+    </p>
+  </div>
+  <div class="font-family-regular font-size-16 font-color-dark line-height-21 pb-32px">
+    სხვა შემთხვევაში დაუკავშირდი ადმინისტრატორს და დაელოდე ახალი შესყიდვის დადასტურებას.
+  </div>
+</ng-template>

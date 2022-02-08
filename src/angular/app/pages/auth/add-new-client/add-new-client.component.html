@@ -1,0 +1,209 @@
+<div class="container-fluid h-100 px-0 custom-scroll-1">
+  <div
+    class="row m-0 justify-content-between pr-5 pl-0 d-flex align-items-center"
+    style="height: 100px;"
+  >
+    <div class="col-2 px-0 h-100">
+      <button class="btn shadow-none border-0 m-0 p-0 pl-5 h-100" (click)="backToDashboard()">
+        <app-icon icon="back"></app-icon>
+      </button>
+    </div>
+    <div class="col text-center font-size-20 font-family-bold font-color-dark">
+      ი/პ გაყიდვის დამატება
+    </div>
+    <div class="col-2 px-0"></div>
+  </div>
+
+  <div class="m-auto pt-5" style="max-width: 808px;">
+    <div class="font-size-18 font-family-bold font-color-dark pb-32px">
+      ზოგადი ინფორმაცია
+    </div>
+
+    <form *ngIf="form" class="w-100 pb-5" (ngSubmit)="onSubmit()" [formGroup]="form">
+      <div class="row m-0">
+        <div class="col pr-3 pl-0">
+          <div class="mb-4">
+            <div class="font-size-16 font-family-regular font-color-dark pb-5px">
+              დასახელება*
+            </div>
+            <input class="input-regular h-56px w-100" formControlName="name" type="text" />
+          </div>
+
+          <div class="mb-4">
+            <div class="font-size-16 font-family-regular font-color-dark pb-5px">
+              საწყისი მისამართი*
+            </div>
+            <input class="input-regular h-56px w-100" formControlName="startAddress" type="text" />
+          </div>
+        </div>
+
+        <div class="col pl-3 pr-0">
+          <div class="mb-4">
+            <div class="font-size-16 font-family-regular font-color-dark pb-5px">
+              საიდენტიფიკაციო კოდი*
+            </div>
+            <input
+              class="input-regular h-56px w-100"
+              formControlName="code"
+              type="text"
+              [mask]="codeMask"
+            />
+          </div>
+
+          <div class="mb-4">
+            <div class="font-size-16 font-family-regular font-color-dark pb-5px">
+              გადახდის მეთოდი*
+            </div>
+
+            <ng-select
+              [items]="paymentTypeItems"
+              formControlName="paymentType"
+              bindLabel="text"
+              bindValue="value"
+              [searchable]="false"
+              [clearable]="false"
+              class="form-control custom-ng-select h-56px shadow-none d-flex align-items-center cursor-pointer border border-item-border-color"
+              (change)="onPaymentTypeClick($event)"
+            >
+            </ng-select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row m-0 pb-18px">
+        <div class="font-size-16 font-family-regular font-color-dark">
+          აღწერა
+        </div>
+        <textarea
+          style="height: 130px;"
+          class="form-control shadow-none border border-item-border-color mb-32px"
+          formControlName="comment"
+        ></textarea>
+
+        <div class="d-flex align-items-center">
+          <!-- <input
+              type="checkbox"
+              id="with-shipping"
+              class="custom-blue-checkbox"
+            />
+            <label
+              for="with-shipping"
+              class="font-size-16 font-family-regular font-color-dark m-0"
+            >
+              <span class="line-height-normal ml-2">ტრანსპორტირებით</span>
+            </label> -->
+          <mat-checkbox
+            formControlName="hasTransportation"
+            (click)="onTransportationToggle()"
+            [(ngModel)]="transportation"
+          >
+            <span class="pl-2 font-family-regular"> ტრანსპორტირებით </span>
+          </mat-checkbox>
+        </div>
+      </div>
+
+      <ng-container *ngIf="this.transportation">
+        <div class="font-size-18 font-color-dark font-family-bold pt-64px pb-32px">
+          ტრანსპორტირება
+        </div>
+        <div class="row m-0 pb-2">
+          <div class="mb-4 col-6 pr-3 pl-0">
+            <div class="font-size-16 font-family-regular font-color-dark pb-5px">
+              მძღოლის სახელი და გვარი*
+            </div>
+            <input class="input-regular h-56px w-100" formControlName="driverName" type="text" />
+          </div>
+          <div class="mb-4 col-6 pr-0 pl-3">
+            <div class="font-size-16 font-family-regular font-color-dark pb-5px">
+              მძღოლის პირადი ნომერი*
+            </div>
+            <input
+              class="input-regular h-56px w-100"
+              formControlName="driverPIN"
+              type="text"
+              [mask]="driverPINMask"
+            />
+          </div>
+          <div class="mb-4 col-6 pr-3 pl-0">
+            <div class="font-size-16 font-family-regular font-color-dark pb-5px">
+              მოქალაქეობა*
+            </div>
+            <ng-select
+              [items]="citizenItems"
+              formControlName="driverIsForeignСitizen"
+              bindLabel="text"
+              bindValue="value"
+              [searchable]="false"
+              [clearable]="false"
+              class="form-control custom-ng-select h-56px shadow-none d-flex align-items-center cursor-pointer border border-item-border-color"
+              (change)="onCitizenshipChange($event)"
+            >
+            </ng-select>
+          </div>
+          <div class="mb-4 col-6 pr-0 pl-3">
+            <div class="font-size-16 font-family-regular font-color-dark pb-5px">
+              ავტომობილის ნომერი*
+            </div>
+            <input
+              class="input-regular h-56px w-100"
+              formControlName="driverCarNumber"
+              type="text"
+            />
+          </div>
+
+          <div class="mb-4 col-6 pr-3 pl-0">
+            <div class="font-size-16 font-family-regular font-color-dark pb-5px">
+              საბოლოო მისამართი*
+            </div>
+            <input class="input-regular h-56px w-100" formControlName="endAddress" type="text" />
+          </div>
+
+          <!-- <div class="col pr-3 pl-0">
+            <div class="mb-4">
+              <div class="font-size-16 font-family-regular font-color-dark pb-5px">
+                მძღოლის პირადი ნომერი*
+              </div>
+              <input
+                class="input-regular h-56px w-100"
+                formControlName="driverPIN"
+                type="text"
+                [mask]="driverPINMask"
+              />
+            </div>
+             
+          </div> -->
+        </div>
+      </ng-container>
+
+      <div class="row m-0 flex-column pt-5">
+        <div class="font-size-18 font-family-bold font-color-dark">
+          არჩეული პროდუქტები
+        </div>
+
+        <app-legal-entity-products
+          [products]="products"
+          [totalPrice]="totalPrice"
+          [taxAmount]="taxAmount"
+          [checkTaxRateIsOff]="checkTaxRateIsOff"
+          [totalCost]="totalCost"
+        ></app-legal-entity-products>
+      </div>
+
+      <button
+        class="btn btn-clean w-100 bg-blue d-flex align-items-center justify-content-center mt-40"
+        style="height: 92px;"
+        type="submit"
+        [disabled]="form.invalid"
+        [ngClass]="{ disabled: form.invalid }"
+      >
+        <div class="col-2"></div>
+        <div class="col font-color-white font-size-20 font-family-bold">
+          გაგრძელება
+        </div>
+        <div class="col-2 text-right pr-42px">
+          <app-icon icon="pay"></app-icon>
+        </div>
+      </button>
+    </form>
+  </div>
+</div>

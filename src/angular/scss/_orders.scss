@@ -1,0 +1,25 @@
+.orders-row {
+  &:last-child {
+    border-bottom: none;
+  }
+  border-bottom: 1px solid $product-list-bg;
+}
+
+.orders-card {
+  // max-width: 31.4%;
+
+  // @media screen and (min-width:1685px){
+  //     width: 100%;
+  //     max-width: 23.5%;
+
+  // }
+
+  @include transition;
+  border: 1px solid $border-color;
+  &.overtime {
+    border: 2px solid $orange;
+  }
+  &.today {
+    border: 2px solid $lightish-blue;
+  }
+}

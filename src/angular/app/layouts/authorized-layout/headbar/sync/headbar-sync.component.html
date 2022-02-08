@@ -1,0 +1,48 @@
+<div class="position-relative d-flex justify-content-center pl-3">
+  <div
+    class="btn-div headbar_notifier-dot"
+    [ngClass]="{
+      orange: syncStatus === SyncStatus.Error,
+      green: syncStatus === SyncStatus.Success,
+      disabled: syncStatus === SyncStatus.Progress
+    }"
+    (click)="onToggleDropdown($event)"
+  >
+    <app-icon icon="sync"></app-icon>
+  </div>
+
+  <div
+    class="headbar-icons-popup w-unset px-custlg-5 px-32px"
+    (focusOut)="onToggleDropdown()"
+    *ngIf="showDropdown"
+  >
+    <div class="font-family-regular font-size-16 font-color-dark white-space-nw" *ngIf="lastSync">
+      <span> ბოლო სინქრონიზაცია: {{ lastSync | date: 'medium' }}</span>
+      <!-- <span> მიმდინარე ვერსია: 031920 </span>  -->
+    </div>
+
+    <div class="d-flex mt-32px" style="height: 56px;">
+      <div
+        class="btn-div col px-0 bg-blue font-color-white font-family-bold font-size-16 d-flex align-items-center justify-content-center"
+        (click)="sync.emit()"
+        style="min-width: 193px;"
+        [class.bg-light-blue]="syncStatus === SyncStatus.Success"
+      >
+        <!-- [class.bg-light-blue]="syncStatus === SyncStatus.Success" -->
+        <span
+          class="cursor-pointer"
+          [class.d-none]="syncStatus === SyncStatus.Progress || syncStatus === SyncStatus.Success"
+          >სინქრონიზაცია
+        </span>
+
+        <div *ngIf="syncStatus === SyncStatus.Progress">
+          <app-icon icon="loader"></app-icon>
+        </div>
+
+        <div *ngIf="syncStatus === SyncStatus.Success">
+          <app-icon icon="correct-blue"></app-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

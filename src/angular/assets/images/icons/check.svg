@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20">
+    <defs>
+        <path id="a" d="M10 20c5.523 0 10-4.477 10-10S15.523 0 10 0 0 4.477 0 10s4.477 10 10 10zm-2.222-4.444L2.222 10 3.79 8.433l3.989 3.978 8.433-8.433 1.567 1.578-10 10z"/>
+        <path id="b" d="M5.556 12.222L0 6.667 1.567 5.1l3.989 3.978L13.989.644l1.567 1.578z"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <use fill="#4562ff" fill-rule="nonzero" xlink:href="#a"/>
+        <use fill="#FFF" fill-rule="nonzero" transform="translate(2.222 3.333)" xlink:href="#b"/>
+    </g>
+</svg>

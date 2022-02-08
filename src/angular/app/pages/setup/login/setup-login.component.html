@@ -1,0 +1,30 @@
+<div class="card">
+  <div class="card-body">
+    <div class="card-text mt-8 mb-40 text-center">ავტორიზაცია</div>
+    <form *ngIf="form" [formGroup]="form" (submit)="onSignIn()">
+      <input
+        class="form-control setup__form-input h-56px"
+        placeholder="ტელეფონი ან ელ.ფოსტა"
+        formControlName="userName"
+        style="height: 56px;"
+      />
+
+      <input
+        class="form-control setup__form-input"
+        type="password"
+        placeholder="პაროლი"
+        formControlName="password"
+        style="height: 56px;"
+      />
+
+      <button
+        [disabled]="form.invalid"
+        class="form-button setup__form-button"
+        type="submit"
+        [ngClass]="{ disabled: form.invalid }"
+      >
+        შემდეგ
+      </button>
+    </form>
+  </div>
+</div>

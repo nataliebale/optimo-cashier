@@ -1,0 +1,89 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import './scss/variables';
+@import './scss/functions';
+@import './scss/mixins';
+@import './scss/bootstrap-override';
+@import './scss/bootstrap-imports';
+@import './scss/helper-classes';
+@import './scss/icons';
+@import './scss/font-all-generators';
+@import './scss/box-shadow-generator';
+@import './scss/fonts';
+@import './scss/card';
+@import './scss/forms';
+@import './scss/borders';
+@import './scss/headbar';
+@import './scss/dashboard';
+@import './scss/popups';
+@import './scss/buttons';
+@import './scss/tables';
+@import './scss/login';
+@import './scss/payment';
+@import './scss/alerts';
+@import './scss/animations';
+@import './scss/orders';
+@import './scss/numpad';
+@import './scss/material-override';
+@import './scss/date-range-picker-wrapper';
+@import './scss/datepicker';
+@import './scss/filter';
+@import './scss/order-history';
+@import './scss/custom-switcher';
+@import './scss/custom-select';
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: auto !important;
+}
+
+/* disable text selection */
+:not(input):not(textarea),
+:not(input):not(textarea)::after,
+:not(input):not(textarea)::before {
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+input,
+button,
+textarea,
+:focus {
+  outline: none;
+}
+/* disable text selection */
+
+.disabled {
+  pointer-events: none;
+}
+
+.authorized-layout {
+  height: 100%;
+}
+
+.container-after-titlebar {
+  height: 100%;
+  top: 0px !important;
+  position: relative !important;
+}
+
+.with-titlebar {
+  .container-after-titlebar {
+    height: calc(100% - 30px);
+    top: 30px !important;
+  }
+}
+
+div.headbar + div.login-wrapper {
+  height: calc(100% - 100px) !important;
+
+  @media screen and (max-width: 1440px) {
+    height: calc(100% - 80px) !important;
+  }
+  @media screen and (max-width: 1280px) {
+    height: calc(100% - 70px) !important;
+  }
+}

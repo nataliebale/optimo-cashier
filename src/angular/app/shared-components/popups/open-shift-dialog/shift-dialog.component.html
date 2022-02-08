@@ -1,0 +1,83 @@
+<div mat-dialog-content class="open-shift-dialog">
+  <button class="open-shift-dialog__close" type="submit" (click)="decline()">
+    <img src="../../../../assets/images/icons/delete.svg" alt="" />
+  </button>
+
+  <p class="open-shift-dialog__title">{{ data.title }}</p>
+  <form
+    class="open-shift-dialog__form"
+    [formGroup]="shiftForm"
+    (keydown.enter)="$event.preventDefault()"
+  >
+    <div *ngIf="data.formTitle" class="open-shift-dialog__message">
+      {{ data.formTitle }}
+
+      <input
+        class="open-shift-dialog__input"
+        type="text"
+        name="text"
+        formControlName="number"
+        placeholder="{{ data.formPlaceholder }}"
+        (input)="keyPress($event)"
+        [ngClass]="{ error: deleteError }"
+        value="{{ clickedKey }}"
+      />
+    </div>
+
+    <div class="shift-numpad__keyboard">
+      <div class="shift-numpad__keyboard-keys">
+        <div class="shift-numpad__keyboard-numbers">
+          <div
+            *ngFor="let key of keys"
+            class="shift-numpad__keyboard-key"
+            (click)="triggerKey(key)"
+          >
+            <span *ngIf="key">
+              {{ key.view }}
+            </span>
+          </div>
+        </div>
+
+        <div class="clear"></div>
+
+        <div class="shift-numpad__keyboard-key" (click)="triggerDot()">
+          <span>
+            .
+          </span>
+        </div>
+
+        <div class="shift-numpad__keyboard-key" (click)="triggerZero()">
+          <span>
+            0
+          </span>
+        </div>
+
+        <div class="shift-numpad__keyboard-key" (click)="triggerBackspace()">
+          <img src="../../../assets/images/icons/backspace1.svg" alt="" />
+        </div>
+
+        <div class="clear"></div>
+      </div>
+
+      <div class="clear"></div>
+    </div>
+
+    <button
+      class="open-shift-dialog__approve"
+      type="button"
+      (click)="approve()"
+      [disabled]="!clickedKey.length || clickedKey.indexOf('.') === clickedKey.length - 1"
+      [ngClass]="{
+        disabled: !clickedKey.length || clickedKey.indexOf('.') === clickedKey.length - 1
+      }"
+    >
+      {{ data.approveLabel || 'შენახვა' }}
+    </button>
+
+    <button class="open-shift-dialog__decline" type="button" (click)="decline()">
+      {{ data.declineLabel || 'გაუქმება' }}
+    </button>
+  </form>
+
+  <div class="clear"></div>
+</div>

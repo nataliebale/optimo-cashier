@@ -1,0 +1,32 @@
+<div class="h-100 w-100" [ngClass]="{ active: true }">
+  <div class="w-100 d-flex p-36px flex-wrap">
+    <div class="col-4 py-12px">
+      <button
+        class="btn btn-clean single-receipt-new bg-blue w-100 rounded d-flex flex-column align-items-center justify-content-center"
+        (click)="addCheck.emit()"
+      >
+        <app-icon icon="add-rounded"></app-icon>
+        <span class="font-color-white font-family-bold font-size-custlg-20 font-size-14 pt-3"
+          >ახალი ჩეკი</span
+        >
+      </button>
+    </div>
+    <div class="col-4 py-12px" *ngFor="let check of checks">
+      <div
+        class="p-2 single-receipt w-100 rounded position-relative d-flex flex-column align-items-center justify-content-center text-truncate"
+        [ngClass]="{ active: check.id === activeCheckId }"
+      >
+        <button class="btn btn-clean position-absolute" (click)="deleteCheck.emit(check.id)">
+          <app-icon icon="close"></app-icon>
+        </button>
+
+        <span
+          class="font-size-custlg-20 font-size-14 font-family-bold font-color-dark text-truncate text-center w-100 h-100 d-flex align-items-center justify-content-center"
+          (click)="selectCheck.emit(check.id)"
+        >
+          ჩეკი #{{ check.id }}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

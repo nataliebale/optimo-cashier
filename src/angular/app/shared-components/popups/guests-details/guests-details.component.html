@@ -1,0 +1,41 @@
+<div class="d-flex justify-content-center align-items-start">
+  <div class="d-flex flex-column align-items-center">
+    <div class="font-color-dark font-family-bold font-size-20 pt-2 pb-4 mb-2">{{ data.title }}</div>
+    <form action="" class="form-group w-100 d-flex flex-column align-items-center mb-3">
+      <div class="d-flex mb-4" style="padding: 0px 96px; height: 56px;">
+        <button
+          class="btn shadow-none border-0 p-0 bg-product-list-bg px-3 d-flex justify-content-center"
+          (click)="decreaseValue()"
+        >
+          <app-icon icon="minus" class="px-1"></app-icon>
+        </button>
+        <input
+          type="number"
+          class="form-control h-100 mx-3 text-center shadow-none border font-family-bold font-size-24 font-color-dark"
+          readonly
+          [value]="data.value"
+        />
+        <button
+          class="btn shadow-none border-0 p-0 bg-product-list-bg px-3 d-flex justify-content-center"
+          (click)="increaseValue()"
+        >
+          <app-icon icon="plus" class="px-1"></app-icon>
+        </button>
+      </div>
+      <div class="d-flex" style="height: 56px;">
+        <button
+          class="btn shadow-none border-0 p-0 bg-product-list-bg px-32px mr-2 font-color-dark font-family-bold font-size-16"
+          (click)="onDecline()"
+        >
+          {{ data.declineLabel }}
+        </button>
+        <button
+          class="btn shadow-none border-0 p-0 bg-blue px-32px ml-2 font-color-white font-family-bold font-size-16"
+          (click)="onApprove()"
+        >
+          {{ data.approveLabel }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

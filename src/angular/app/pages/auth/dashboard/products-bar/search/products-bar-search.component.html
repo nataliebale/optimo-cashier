@@ -1,0 +1,28 @@
+<div
+  class="row m-0 px-4 mx-custlg-12px mx-custmd-2 mx-1 bg-product-item-bg rounded align-items-center py-1 item-searchbar"
+>
+  <div class="btn-div">
+    <app-icon icon="search"></app-icon>
+  </div>
+
+  <input
+    type="text"
+    name="search"
+    id="searchField"
+    class="font-size-custlg-16 font-size-14 col font-family-regular font-color-dark ml-custmd-2 border-0 bg-transparent placeholder-currentcolor bg-product-item-bg"
+    [(ngModel)]="value"
+    (focus)="focus.emit()"
+    (blur)="onTouched()"
+    [placeholder]="placeholderLabel && !hasSubtitle ? placeholderLabel : 'პროდუქტის ძიება'"
+    [disabled]="isDisabled"
+  />
+
+  <div
+    class="btn-div item-searchbar-close"
+    [class.disabled]="isDisabled"
+    [ngClass]="{ active: value.length }"
+    (click)="onClear()"
+  >
+    <app-icon icon="close"></app-icon>
+  </div>
+</div>

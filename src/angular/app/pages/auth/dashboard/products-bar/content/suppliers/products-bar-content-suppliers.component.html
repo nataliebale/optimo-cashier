@@ -1,0 +1,41 @@
+<div class="row m-0 pt-4">
+  <div
+    class="font-size-16 font-family-regular w-100 text-center pt-5 mt-4 font-color-dark pt-1"
+    *ngIf="!items.length"
+  >
+    მომწოდებელი ვერ მოიძებნა
+  </div>
+  <div
+    class="col-4 p-0 px-custlg-12px px-custmd-2 px-1 mb-4 d-flex flex-column align-items-start"
+    *ngFor="let supplier of items; trackBy: trackBy"
+    (click)="selectSupplier.emit(supplier)"
+  >
+    <div
+      class="w-100 mb-2 position-relative d-flex justify-content-center category-divs"
+      style="padding-top: 85%;"
+    >
+      <!-- item-img-custom-border  -->
+
+      <div
+        class="item-bg-2 w-100 h-100 rounded overflow-hidden category-divs_first images-dark-overlay"
+        style="background-size: cover; background-position: center; background-repeat: no-repeat;"
+        [ngStyle]="{
+          'background-image': 'url(../../../../../../../assets/images/icons/image.svg)'
+        }"
+      ></div>
+
+      <!-- <div
+      class="position-absolute h-100 rounded overflow-hidden category-divs_sec"
+    ></div>
+    <div
+      class="position-absolute h-100 rounded overflow-hidden category-divs_third"
+    ></div> -->
+    </div>
+
+    <div
+      class="font-size-custlg-16 font-size-custmd-14 font-size-13 font-family-bold font-color-dark pt-1"
+    >
+      {{ supplier.name }}
+    </div>
+  </div>
+</div>

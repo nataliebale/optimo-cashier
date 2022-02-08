@@ -1,0 +1,58 @@
+<div class="row m-0 flex-column pt-2">
+  <div
+    class="print-bill-wrapper border border-item-border-color rounded d-flex align-items-center pl-4 pr-12px justify-content-between"
+    [class.active]="printCheck"
+  >
+    <div class="font-size-16 font-family-bold font-color-dark">
+      ჩეკის ამობეჭდვა
+    </div>
+
+    <div (click)="onPrintCheckButtonChange()" class="p-12px cursor-pointer">
+      <button
+        class="btn btn-toggle shadow-none border-0 rounded-12px position-relative"
+        style="width: 40px; height: 24px;"
+        [class.active]="this.printCheck"
+      ></button>
+    </div>
+  </div>
+</div>
+<div class="row m-0 flex-column pt-5">
+  <div
+    class="font-size-custlg-20 font-size-18 font-family-bold font-color-dark pb-custlg-3 pb-14 pr-1 pt-2px"
+  >
+    ბარათით გადახდა
+  </div>
+</div>
+
+<div class="row m-0">
+  <button
+    class="mr-2 integrated-method position-relative d-flex justify-content-center btn-payment-method align-items-center btn shadow-none bg-white rounded d-flex align-items-center d-flex border border-item-border-color pr-14"
+    (click)="onPaymentClick(PaymentType.BOG, 'ინტეგრირებული / საქართველოს ბანკის ბარათით')"
+  >
+    <app-icon icon="gb"></app-icon>
+  </button>
+  <button
+    class="mr-2 d-flex justify-content-center position-relative btn-payment-method align-items-center btn shadow-none bg-white rounded d-flex align-items-center d-flex border border-item-border-color pr-14"
+    (click)="onPaymentClick(PaymentType.BOGExternal, 'საქართველოს ბანკის ბარათით')"
+  >
+    <app-icon icon="gb"></app-icon>
+  </button>
+  <button
+    class="mr-2 d-flex justify-content-center position-relative btn-payment-method align-items-center btn shadow-none bg-white rounded d-flex align-items-center d-flex border border-item-border-color pr-14"
+    (click)="onPaymentClick(PaymentType.TBCExternal, 'თიბისი ბანკის ბარათით')"
+  >
+    <app-icon icon="tb"></app-icon>
+  </button>
+  <!-- <button
+    class="mr-2 d-flex justify-content-center position-relative btn-payment-method align-items-center btn shadow-none bg-white rounded d-flex align-items-center d-flex border border-item-border-color pr-14"
+    (click)="onPaymentClick(PaymentType.Other, 'ლიბერთი ბანკის ბარათით')"
+  >
+    <app-icon icon="lb"></app-icon>
+  </button> -->
+  <button
+    class="bg-product-list-bg border flex-grow-1 d-flex justify-content-center align-items-center btn shadow-none rounded d-flex align-items-center d-flex border border-item-border-color pr-14"
+    (click)="onOpenCardPayment()"
+  >
+    <app-icon icon="more-black"> </app-icon>
+  </button>
+</div>

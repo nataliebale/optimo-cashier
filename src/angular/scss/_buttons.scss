@@ -1,0 +1,148 @@
+button:disabled {
+  pointer-events: none !important;
+}
+.btn {
+  @include transition;
+  &-div {
+    @include transition;
+    cursor: pointer;
+    border-radius: 5px;
+    &.disabled {
+      pointer-events: none !important;
+      opacity: 0.35;
+    }
+    &.bg-product-list-bg {
+      &:hover {
+        background-color: darken($product-list-bg, 10%) !important;
+      }
+    }
+    &.bg-payment-details-bg {
+      &:hover {
+        background-color: darken($payment-details-bg, 10%) !important;
+      }
+    }
+    &.bg-blue {
+      &:hover {
+        background-color: darken($blue, 10%) !important;
+      }
+      &.bg-light-blue {
+        &:hover {
+          background-color: darken($light-blue, 10%) !important;
+        }
+      }
+      &.bg-pay-btn-green {
+        &:hover {
+          background-color: darken($pay-btn-green, 10%) !important;
+        }
+      }
+    }
+    .back-category {
+      @media only screen and (max-width: 1440px) {
+        svg {
+          height: 18px;
+        }
+      }
+    }
+  }
+  &-clean {
+    box-shadow: none !important;
+    border: 0px !important;
+    padding: 0px !important;
+  }
+  &-more {
+    &.active {
+      background-color: #b6b9c7 !important;
+    }
+  }
+  &-print {
+    &.active {
+      background-color: #b6b9c7 !important;
+    }
+  }
+  &-numpad {
+    // width: 125px !important;
+    // height: 90px;
+
+    // &:hover {
+    //   border-color: #c5cad9 !important;
+    // }
+  }
+  &-payment-method {
+    width: 154px;
+    height: 80px;
+    svg {
+      max-width: 100%;
+    }
+    @media only screen and (max-width: 1440px) {
+      width: 135px;
+      height: 74px;
+    }
+    @media only screen and (max-width: 1280px) {
+      width: 127px;
+    }
+
+    &.active {
+      border: 2px solid $lightish-blue !important;
+    }
+  }
+  &-toggle {
+    background-color: $product-list-bg;
+
+    padding: 3px;
+
+    &::after {
+      content: '';
+      cursor: pointer;
+      position: absolute;
+      width: 18px !important;
+      height: 18px !important;
+      border-radius: 12px;
+      background-color: white;
+      left: 3px;
+      top: 3px;
+      box-shadow: 0 1px 1px 0 #b5b9c7;
+      @include transition;
+    }
+
+    &.active {
+      background-color: $lightish-blue;
+
+      &::after {
+        left: 19px !important;
+      }
+    }
+  }
+  &-payment-numpad {
+    width: 124px;
+    height: 80px;
+
+    &:hover {
+      border-color: #c5cad9 !important;
+    }
+  }
+  &-custom-disabled {
+    opacity: 1 !important;
+    div:first-child {
+      opacity: 0.35;
+    }
+  }
+  &-white-on-hover:enabled {
+    &:hover {
+      background-color: #e4e6ed !important;
+    }
+  }
+}
+
+.shift-btn {
+  &:disabled,
+  &.disabled {
+    app-icon {
+      svg {
+        path {
+          @include transition;
+          fill: #b6b9c7 !important;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+<form [formGroup]="amountFormGroup">
+  <div class="row m-0 flex-column">
+    <div
+      class="font-size-custlg-20 font-size-18 font-family-bold font-color-dark pb-custlg-18px pb-20px pr-1"
+    >
+      ნაღდი ანგარიშსწორება
+    </div>
+    <div class="active input-payment-wrapper rounded d-flex align-items-center d-flex pr-14">
+      <input
+        type="text"
+        placeholder="0.00"
+        class="form-control h-100 pl-4 flex-grow-1 pr-4 placeholder-gray shadow-none font-family-regular font-size-24 border-0 font-color-dark"
+        id="cash-payment"
+        formControlName="amount"
+        mask="separator.2"
+        thousandSeparator=","
+        (ngModelChange)="onInputChange()"
+      />
+      <button
+        class="bg-product-list-bg border rounded btn shadow-none py-15px px-32px d-flex align-items-center justify-content-center"
+        (click)="onExactAmount()"
+      >
+        <span
+          class="font-color-dark font-size-custlg-16 font-size-14 font-family-bold text-truncate"
+          >ზუსტი თანხა</span
+        >
+      </button>
+    </div>
+  </div>
+</form>

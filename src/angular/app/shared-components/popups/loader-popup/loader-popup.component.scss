@@ -1,0 +1,204 @@
+.loader-popup {
+  padding: 30px;
+  position: relative;
+
+  &__text {
+    text-align: center;
+    font-family: NotoSans;
+    margin: 0;
+    margin-top: 30px;
+    font-size: 18px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #8b8f9b;
+  }
+
+  &__close {
+    position: absolute;
+    right: 32px;
+    top: 32px;
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+
+  &__close-img {
+    width: 20px;
+    opacity: 0.6;
+  }
+
+  &-image {
+    width: 55px;
+  }
+
+  &__content {
+    // display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  &__content-error {
+    text-align: center;
+    img {
+      margin-bottom: 32px;
+      width: 72px;
+    }
+  }
+
+  &__error-buttons {
+    button {
+      width: calc(50% - 12px);
+      height: 64px;
+      border: none;
+      font-family: NotoSans;
+      font-size: 20px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: center;
+      outline: none;
+      border-radius: 4px;
+      margin-top: 40px;
+    }
+  }
+
+  &__error-try-again {
+    background-color: #fc3c2d;
+    color: #ffffff;
+    font-family: NotoSans;
+  }
+
+  &__message {
+    font-family: NotoSans;
+    font-size: 20px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #8b8f9b;
+  }
+
+  &__error-close {
+    border-radius: 4px;
+    border: solid 1px #e6ecf5 !important;
+    background-color: #ffffff;
+    color: #515366;
+    margin-left: 24px;
+  }
+
+  &__back-to-dashboard {
+    border-radius: 4px;
+    background-color: #2fcd8a;
+    width: 100% !important;
+    font-size: 20px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ffffff;
+  }
+
+  &__text-return-amount {
+    font-size: 50px;
+    text-align: center;
+    font-family: NotoSans;
+    margin: 0;
+    margin-top: 10px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #8b8f9b;
+  }
+
+  &__text-secondary {
+    font-size: 18px;
+    text-align: center;
+    font-family: NotoSans;
+    margin: 0;
+    margin-top: 10px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #8b8f9b;
+  }
+}
+
+.lds-css {
+  display: flex;
+  justify-content: center;
+}
+
+@keyframes lds-rolling {
+  0% {
+    -webkit-transform: translate(-50%, -50%) rotate(0deg);
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    -webkit-transform: translate(-50%, -50%) rotate(360deg);
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+@-webkit-keyframes lds-rolling {
+  0% {
+    -webkit-transform: translate(-50%, -50%) rotate(0deg);
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    -webkit-transform: translate(-50%, -50%) rotate(360deg);
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+.lds-rolling {
+  position: relative;
+}
+.lds-rolling div,
+.lds-rolling div:after {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 6px solid #d5d7e2;
+}
+.lds-rolling div {
+  -webkit-animation: lds-rolling 1s linear infinite;
+  animation: lds-rolling 1s linear infinite;
+  top: 100px;
+  left: 100px;
+}
+
+.lds-rolling div:last-child {
+  top: 100px;
+  left: 100px;
+
+  border: 6px solid #4562ff;
+  border-top-color: transparent;
+  border-left-color: transparent;
+}
+.lds-rolling div:after {
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+.lds-rolling {
+  width: 62px !important;
+  height: 62px !important;
+  -webkit-transform: translate(-31px, -31px) scale(0.26) translate(31px, 31px);
+  transform: translate(-31px, -31px) scale(0.26) translate(31px, 31px);
+}

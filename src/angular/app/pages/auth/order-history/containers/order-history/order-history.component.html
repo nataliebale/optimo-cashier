@@ -1,0 +1,265 @@
+<app-authorized-layout [isHorecaMode]="isHorecaMode" [isOrderHistoryPage]="true">
+  <div class="w-100 h-100 d-flex">
+    <div
+      class="col px-0 border-right border-product-list-bg d-flex flex-column"
+      style="max-width: 29.8%; min-width: 320px;"
+    >
+      <div class="border-bottom border-product-list-bg order-history-filter-wrapper">
+        <app-order-history-filter
+          [filter]="filter"
+          [entity]="entity"
+          [paymentMethodsList]="entity ? entityPaymentMethodsList : paymentMethodsList"
+          (changeFilter)="changeOrderFilter($event)"
+          (changeOrderType)="changeOrderType($event)"
+          class="w-100 d-block"
+        ></app-order-history-filter>
+      </div>
+      <div class="flex-grow-1 custom-scroll-2">
+        <app-order-history-list
+          [transactionList]="transactionList"
+          [isHorecaMode]="isHorecaMode"
+          [selectedTransactionId]="selectedTransactionId"
+          [filter]="filter"
+          (selectOrder)="getOrderDetails($event)"
+          (searchChanged)="handleSearchChange($event)"
+        ></app-order-history-list>
+      </div>
+    </div>
+    <div
+      class="col px-4 h-100 pt-custlg-5 pt-32px custom-scroll-2 pb-custlg-42px pb-4"
+      style="min-width: 0px;"
+    >
+      <app-order-history-details
+        [transactionDetails]="transactionDetails"
+        [isHorecaMode]="isHorecaMode"
+        [entity]="entity"
+        (action)="handleTransactionAction($event)"
+      ></app-order-history-details>
+    </div>
+  </div>
+</app-authorized-layout>
+
+<ng-template #returnPopup>
+  <div style="width: 890px;" *ngIf="returnPopupStep == returnPopupSteps.form">
+    <div class="w-100 h-100 d-flex flex-column">
+      <div class="d-flex w-100 align-items-center pt-32px pb-4 px-28px">
+        <div class="col-3 px-0"></div>
+        <div
+          class="col text-center font-color-dark font-size-20 font-family-bold line-height-normal"
+        >
+          პროდუქტის დაბრუნება
+        </div>
+        <div class="col-3 d-flex justify-content-end px-0">
+          <button class="btn shadow-none border-0 p-0" (click)="closeDialog()">
+            <app-icon icon="close-bold"></app-icon>
+          </button>
+        </div>
+      </div>
+      <app-return-order
+        [orderData]="transactionDetails"
+        (returnDetails)="submitReturn($event)"
+      ></app-return-order>
+    </div>
+  </div>
+
+  <div
+    *ngIf="returnPopupStep == returnPopupSteps.confirm"
+    style="width: 497px; height: 325px;"
+    class="d-flex flex-column align-items-center justify-content-center"
+  >
+    <div
+      class="rounded-circle d-flex justify-content-center align-items-center bg-product-list-bg"
+      style="width: 80px; height: 80px;"
+    >
+      <app-icon
+        icon="status-refunded"
+        class="icon-fill-dark icon-stroke-dark icon-w-h-42px"
+      ></app-icon>
+    </div>
+    <div class="pt-32px font-size-20 font-color-dark font-family-bold">
+      ნამდვილად გსურს დაბრუნება?
+    </div>
+    <!-- <div>დასაბრუნებელი თანხა {{ returnOrderDetails.returnAmount | number: '1.2-2':'en' }}</div> -->
+    <div class="pt-2 pb-34px font-size-16 font-color-dark font-family-regular line-height-normal">
+      დასაბრუნებელი თანხა: {{ returnOrderDetails?.returnAmount | number: '1.2-2':'en' }}&nbsp;₾
+    </div>
+    <div class="d-flex w-100 justify-content-center">
+      <div
+        style="width: 120px;"
+        class="btn-div bg-product-list-bg h-56px d-flex align-items-center justify-content-center font-size-16 font-color-dark font-family-bold mx-2"
+        (click)="handleCancelReturn()"
+      >
+        არა
+      </div>
+      <div
+        style="width: 120px;"
+        class="btn-div bg-blue h-56px d-flex align-items-center justify-content-center font-size-16 font-color-white font-family-bold mx-2"
+        (click)="handleConfirmReturn()"
+      >
+        კი
+      </div>
+    </div>
+  </div>
+  <!-- <div
+    class="d-flex flex-column align-items-center pb-32px pt-4"
+    style="width: 497px; height: 300px;"
+    *ngIf="returnPopupStep == returnPopupSteps.loading"
+  >
+    <div class="row m-0 justify-content-center">
+      <div
+        class="rounded-circle d-flex justify-content-center align-items-center position-relative"
+        style="width: 94px; height: 94px;"
+      >
+        <app-icon class="position-absolute w-100 h-100" icon="loader-big"></app-icon>
+        <div
+          style="width: 80px; height: 80px;"
+          class="rounded-circle bg-product-list-bg d-flex justify-content-center align-items-center"
+        >
+          <app-icon icon="card" class="icon-dark"></app-icon>
+        </div>
+      </div>
+    </div>
+
+    <div class="font-size-20 font-family-bold font-color-dark py-4 w-100 text-center">
+      {{ loadingMessage }}
+    </div>
+
+    <div
+      class="font-size-36 font-family-bold font-color-dark w-100 text-center line-height-normal"
+      *ngIf="displayPaymentSumOnLoading"
+    >
+      ფასი:&nbsp;{{ returnOrderDetails?.returnAmount }}&nbsp;₾
+    </div>
+  </div> -->
+  <!-- dublireb -->
+  <div
+    *ngIf="returnPopupStep == returnPopupSteps.loading"
+    style="width: 497px; height: 280px;"
+    class="d-flex flex-column align-items-center py-32px"
+  >
+    <div class="row m-0 justify-content-center">
+      <div
+        class="rounded-circle d-flex justify-content-center align-items-center position-relative"
+        style="width: 94px; height: 94px;"
+      >
+        <app-icon class="position-absolute w-100 h-100" icon="loader-big"></app-icon>
+        <div
+          style="width: 80px; height: 80px;"
+          class="rounded-circle bg-product-list-bg d-flex justify-content-center align-items-center"
+        >
+          <app-icon
+            icon="status-refunded"
+            class="icon-fill-dark icon-stroke-dark icon-w-h-42px"
+          ></app-icon>
+        </div>
+      </div>
+    </div>
+
+    <div class="pt-32px font-size-20 font-color-dark font-family-bold">
+      მიმდინარეობს უკან დაბრუნება
+    </div>
+    <!-- <div>დასაბრუნებელი თანხა {{ returnOrderDetails.returnAmount | number: '1.2-2':'en' }}</div> -->
+    <div class="pt-2 pb-34px font-size-16 font-color-dark font-family-regular line-height-normal">
+      ფასი:&nbsp;{{ returnOrderDetails?.returnAmount }}&nbsp;₾
+    </div>
+    <!-- <div class="d-flex w-100 justify-content-center">
+      <div
+        style="width: 120px;"
+        class="btn-div bg-product-list-bg h-56px d-flex align-items-center justify-content-center font-size-16 font-color-dark font-family-bold mx-2"
+        (click)="handleCancelReturn()"
+      >
+        არა
+      </div>
+      <div
+        style="width: 120px;"
+        class="btn-div bg-blue h-56px d-flex align-items-center justify-content-center font-size-16 font-color-white font-family-bold mx-2"
+        (click)="handleConfirmReturn()"
+      >
+        კი
+      </div>
+    </div> -->
+  </div>
+  <!-- dublireb -->
+
+  <div
+    *ngIf="returnPopupStep == returnPopupSteps.failed"
+    style="width: 497px; height: 325px;"
+    class="d-flex flex-column align-items-center py-32px"
+  >
+    <div
+      class="rounded-circle d-flex justify-content-center align-items-center bg-light-red"
+      style="width: 80px; height: 80px;"
+    >
+      <app-icon icon="alert"></app-icon>
+    </div>
+    <div
+      class="font-size-20 font-color-dark font-family-bold flex flex-grow-1 d-flex align-items-center"
+    >
+      შეკვეთის დაბრუნება ვერ მოხერხდა
+    </div>
+    <div
+      class="btn-div bg-blue px-32px h-56px d-flex align-items-center font-size-16 font-color-white font-family-bold"
+      (click)="closeDialog()"
+    >
+      დახურვა
+    </div>
+  </div>
+
+  <div
+    *ngIf="returnPopupStep == returnPopupSteps.retry"
+    style="width: 497px; height: 320px;"
+    class="d-flex flex-column align-items-center py-32px"
+  >
+    <div
+      class="rounded-circle d-flex justify-content-center align-items-center bg-light-red"
+      style="width: 80px; height: 80px;"
+    >
+      <app-icon icon="alert"></app-icon>
+    </div>
+    <div
+      class="font-size-20 font-color-dark font-family-bold flex flex-grow-1 d-flex align-items-center py-32px text-center px-5"
+    >
+      {{ returnPopupRetryMessage }}
+    </div>
+    <div class="d-flex align-items-center">
+      <div
+        class="btn-div px-32px h-56px d-flex align-items-center font-size-16 bg-product-list-bg font-family-bold mx-2"
+        (click)="handleReturnFailed()"
+      >
+        გაუქმება
+      </div>
+      <div
+        class="btn-div bg-blue px-32px h-56px d-flex align-items-center font-size-16 font-color-white font-family-bold mx-2"
+        (click)="returnRetryStep()"
+      >
+        ახლიდან
+      </div>
+    </div>
+  </div>
+
+  <div
+    *ngIf="returnPopupStep == returnPopupSteps.success"
+    style="width: 497px; height: 325px;"
+    class="py-32px d-flex flex-column align-items-center"
+  >
+    <div
+      class="rounded-circle d-flex justify-content-center align-items-center bg-light-green"
+      style="width: 80px; height: 80px;"
+    >
+      <app-icon icon="complete"></app-icon>
+    </div>
+
+    <div class="pt-32px font-size-20 font-color-dark font-family-bold">
+      დაბრუნება წარმატებით შესრულდა
+    </div>
+    <div class="pt-2 pb-34px font-size-16 font-color-dark font-family-regular line-height-normal">
+      დაბრუნებული თანხა: {{ returnOrderDetails?.returnAmount | number: '1.2-2':'en' }}&nbsp;₾
+    </div>
+    <div
+      class="btn-div bg-blue px-32px h-56px d-flex align-items-center font-size-16 font-color-white font-family-bold"
+      (click)="closeDialog()"
+    >
+      დასრულება
+    </div>
+  </div>
+</ng-template>

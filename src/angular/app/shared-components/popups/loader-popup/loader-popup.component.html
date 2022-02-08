@@ -1,0 +1,64 @@
+<div class="d-flex flex-column">
+  <!-- <ng-container *ngIf="result === undefined"> -->
+  <div class="pt-2 pb-32px w-100 d-flex justify-content-center">
+    <app-icon class="  " icon="loader-big"></app-icon>
+  </div>
+
+  <div class="font-size-20 font-color-dark font-family-bold text-center pb-2">
+    მიმდინარეობს {{ data.message }}
+  </div>
+  <!-- </ng-container> -->
+
+  <!-- <div class="loader-popup__content">
+    <ng-container *ngIf="result">
+      <img
+        src="../../../../assets/images/icons/success-circle.svg"
+        alt="Success"
+        class="loader-popup-image"
+      />
+      <p class="loader-popup__text">
+        {{ data.message }} წარმატებით განხორციელდა
+      </p>
+      <p class="loader-popup__text" *ngIf="returnAmount && !data.isCloseDay">
+        დასაბრუნებელი ხურდა
+      </p>
+      <p
+        class="loader-popup__text-return-amount"
+        *ngIf="returnAmount && !data.isCloseDay"
+      >
+        ₾ {{ returnAmount?.toFixed(2) }}
+      </p>
+      <div class="loader-popup__error-buttons">
+        <button
+          class="loader-popup__back-to-dashboard"
+          (click)="backToDashboard(true)"
+        >
+          დაბრუნება
+        </button>
+      </div>
+    </ng-container> 
+  </div>-->
+
+  <!-- <div class="loader-popup__content-error">
+    <ng-container class="fail" *ngIf="result === false">
+      <div>
+        <img
+          src="../../../../../assets/images/icons/error-circle.svg"
+          alt="Success"
+          class="loader-popup__success-image"
+        />
+        <div class="loader-popup__loader">
+          <p class="loader-popup__text">{{ dataMessage }}</p>
+        </div>
+        <div class="loader-popup__error-buttons">
+          <button class="loader-popup__error-try-again" (click)="subscribe()">
+            ახლიდან
+          </button>
+          <button class="loader-popup__error-close" (click)="onClose()">
+            გაუქმება
+          </button>
+        </div>
+      </div>
+    </ng-container>
+  </div> -->
+</div>

@@ -1,0 +1,115 @@
+.product {
+  position: relative;
+  padding: 16px;
+  background-color: #f5f6f9;
+  border: 1px solid transparent;
+  border-bottom: 1px solid rgba(0, 119, 255, 0.07);
+  border-right: 1px solid rgba(0, 119, 255, 0.07);
+
+  @media only screen and (max-width: 1640px) {
+    padding: 12px 14px;
+  }
+
+  &__light {
+    background-color: #fafbfc;
+  }
+
+  &__selected {
+    border: 1px solid #4562ff;
+    background: rgba(0, 119, 255, 0.05);
+  }
+
+  &__title {
+    font-weight: bold;
+    font-size: 22px;
+    color: #495057;
+    width: calc(100% - 56px);
+    line-height: 1.4;
+    font-family: NotoSans;
+    font-weight: 600;
+
+    @media only screen and (max-width: 1640px) {
+      font-size: 16px;
+    }
+  }
+
+  &__delete {
+    position: absolute;
+    width: 40px;
+    cursor: pointer;
+    top: 16px;
+    outline: none;
+    right: 24px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    @media only screen and (max-width: 1640px) {
+      right: 14px;
+    }
+
+    img {
+      @media only screen and (max-width: 1640px) {
+        width: 100%;
+      }
+    }
+  }
+
+  &__barcode {
+    color: #627381;
+    float: left;
+    font-family: NotoSans;
+    font-weight: normal;
+    line-height: 1;
+    font-size: 22px;
+
+    @media only screen and (max-width: 1640px) {
+      font-size: 16px;
+    }
+  }
+
+  &__serial-code {
+    color: #627381;
+    float: none;
+    font-family: NotoSans;
+    font-weight: normal;
+    line-height: 1;
+    margin-bottom: 15px;
+    font-size: 22px;
+
+    @media only screen and (max-width: 1640px) {
+      font-size: 16px;
+    }
+  }
+
+  &__amount {
+    line-height: 1;
+    margin: 12px 0 14px;
+    font-size: 22px;
+    color: #627381;
+    font-family: NotoSans;
+    font-weight: normal;
+
+    @media only screen and (max-width: 1640px) {
+      font-size: 16px;
+      margin: 10px 0;
+    }
+  }
+
+  &__price {
+    float: right;
+    font-family: NotoSans;
+    font-size: 22px;
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: right;
+    color: #495057;
+    font-weight: bold;
+
+    @media only screen and (max-width: 1640px) {
+      font-size: 16px;
+    }
+  }
+}

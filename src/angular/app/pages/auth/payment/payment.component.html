@@ -1,0 +1,146 @@
+<app-authorized-layout
+  [isPaymentPage]="true"
+  [deletePrivilegePassword]="false"
+  [isHorecaMode]="isHorecaMode"
+>
+  <!-- <div class="payment__header">
+    <a class="payment__header-back-btn" (click)="goToDashboard()">
+      <img
+        src="../../../../assets/images/icons/arrow-back.svg"
+        alt=""
+        class="payment__header-back-btn-image"
+      />
+      უკან დაბრუნება
+    </a>
+
+    <p class="payment__header-title">
+      გადახდა
+    </p>
+  </div>
+
+  <div *ngIf="!paymentMethod" class="amount__total-price">
+    <div>
+      <div class="amount__total-price-number">
+        {{ totalPrice | number: '1.2-2':'en' }} ₾
+      </div>
+      <div class="amount__total-price-desc">მიუთითეთ გადახდის მეთოდი</div>
+    </div>
+  </div>
+
+  <app-payment-amount
+    *ngIf="paymentMethod"
+    [amountFormGroup]="form"
+    [totalPrice]="totalPrice"
+    (close)="onPaymentMethodChange(null)"
+  ></app-payment-amount>
+
+  <div class="payment__keyboard">
+    <div class="payment__keyboard-block">
+      <app-payment-methods
+        [paymentMethod]="paymentMethod"
+        (methodChange)="onPaymentMethodChange($event)"
+      ></app-payment-methods>
+    </div>
+
+    <div class="payment__keyboard-block second">
+      <app-payment-numpad
+        [amountControl]="amountControl"
+        [disabled]="!paymentMethod"
+        (exactAmount)="onExactAmount()"
+      ></app-payment-numpad>
+
+      <div class="numpad__submit-title">
+        დაადასტურე გადახდა
+      </div>
+
+      <button
+        class="numpad__submit"
+        [ngClass]="{
+          active:
+            (paymentMethod && totalPrice <= amountControl.value) ||
+            isConsignation
+        }"
+        [disabled]="
+          !(
+            (paymentMethod && totalPrice <= amountControl.value) ||
+            isConsignation
+          )
+        "
+        (click)="onSubmit()"
+      >
+        დადასტურება
+        <img src="../../../../../assets/images/icons/next-1.svg" alt="" />
+      </button>
+    </div>
+
+    <div class="clear"></div>
+  </div> -->
+  <div class="h-100 w-100 d-custlg-block d-flex align-items-center">
+    <form action="" class="form-group m-0 p-0 d-flex justify-content-center w-100 pt-custlg-5">
+      <div class="w-100 pt-custlg-5 mr-custlg-4 mr-12px payment-content-section">
+        <div class="row m-0 flex-column align-items-end pr-custlg-5 pr-20px pb-custlg-40 pb-32px">
+          <div
+            class="font-size-custlg-20 font-size-18 font-family-bold font-color-dark pb-custlg-3 pb-12px pr-1"
+          >
+            სულ გადასახდელი
+          </div>
+          <div class="font-size-custlg-36 font-size-24 font-family-bold font-color-dark pr-38px">
+            {{ totalPrice | number: '1.2-2':'en' }} ₾
+          </div>
+        </div>
+
+        <app-payment-amount
+          [amountFormGroup]="form"
+          [totalPrice]="totalPrice"
+          (outReturnAmount)="onReturnAmountChange($event)"
+        ></app-payment-amount>
+
+        <app-payment-methods
+          [paymentMethod]="checkPrint"
+          [legalEntityData]="legalEntityData"
+          (printCheckOutput)="onPrintCheckButtonChange($event)"
+        ></app-payment-methods>
+      </div>
+
+      <div class="w-100 pt-custlg-5 ml-custlg-4 ml-12px payment-content-section">
+        <div class="row m-0 flex-column align-items-start pl-custlg-5 pl-20px pb-custlg-40 pb-32px">
+          <div
+            class="font-size-custlg-20 font-size-18 font-family-bold font-color-dark pb-custlg-3 pb-12px pl-5 ml-20px"
+          >
+            ხურდა
+          </div>
+          <div
+            class="font-size-custlg-36 font-size-24 font-family-bold font-color-gray pr-38px pl-38px"
+            [style.color]="
+              returnAmount < 0 ? '#e21430' : returnAmount > 0 ? '
+            #35ae5a' : '#b5b9c7'
+            "
+          >
+            <ng-container *ngIf="returnAmount > 0">+</ng-container>
+            {{ returnAmount | number: '1.2-2':'en' }} ₾
+          </div>
+        </div>
+
+        <app-payment-numpad
+          [amountControl]="amountControl"
+          (exactAmount)="onExactAmount()"
+        ></app-payment-numpad>
+
+        <button
+          class="btn bg-blue w-100 mt-custlg-4 mt-3 font-color-white font-family-bold font-size-20 d-flex align-items-center py-custlg-21px py-15px"
+          [ngClass]="{
+            active: returnAmount >= 0 || isConsignation || isCash
+          }"
+          [disabled]="(!(returnAmount >= 0) && !isConsignation && !isCash) || disableSubmitButton"
+          (click)="onSubmit()"
+        >
+          <div class="col-2"></div>
+          <span class="col text-center"> დადასტურება </span>
+          <div class="col-2 d-flex justify-content-end pr-30px">
+            <app-icon icon="pay"></app-icon>
+          </div>
+        </button>
+      </div>
+    </form>
+  </div>
+</app-authorized-layout>

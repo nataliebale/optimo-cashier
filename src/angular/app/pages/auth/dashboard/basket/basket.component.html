@@ -1,0 +1,102 @@
+<div class="w-100 shadow-items bg-border-color-bg" *ngIf="products.length">
+  <div class="row d-flex pl-custmd-5 pl-4 bg-white m-1px ml-0 cursor-pointer" style="height: 37px;">
+    <div
+      class="col-xl-6 col-4 font-size-13 font-size-custlg-15 font-size-custmd-14 px-0 font-color-dark font-family-regular d-flex flex-column justify-content-center text-truncate pr-3"
+    >
+      <span class="text-truncate" style="max-width: 375px;">
+        დასახელება
+      </span>
+    </div>
+    <div
+      class="col text-right font-size-13 font-size-custlg-15 font-size-custmd-14 font-color-dark font-family-regular d-flex align-items-center justify-content-end pr-custmd-3 pr-0 pl-3 text-truncate"
+    >
+      <span class="text-truncate"> ფასი </span>
+    </div>
+    <div
+      class="col text-right font-size-13 font-size-custlg-15 font-size-custmd-14 font-color-dark font-family-regular d-flex align-items-center justify-content-end pr-custmd-3 pr-0 pl-3 text-truncate"
+    >
+      <span class="text-truncate"> რაოდ </span>
+    </div>
+    <div
+      class="col text-right font-size-13 font-size-custlg-15 font-size-custmd-14 font-color-dark font-family-regular d-flex align-items-center justify-content-end pr-custmd-3 pr-0 pl-3 text-truncate"
+    >
+      <span class="text-truncate">ჯამი</span>
+    </div>
+    <div
+      class="ml-4 text-right px-custmd-5 px-28px font-size-16 font-color-dark font-family-bold d-flex align-items-center justify-content-center"
+    ></div>
+  </div>
+
+  <div
+    class="row d-flex pl-custmd-5 pl-4 m-1px ml-0 cursor-pointer product-list-row"
+    *ngFor="let product of products; let i = index; trackBy: trackBy"
+    [ngClass]="{
+      active:
+        activeProduct.stockItemId === product.stockItemId &&
+        activeProduct?.stockItemIMEI === product?.stockItemIMEI
+    }"
+    (click)="activeProductChange.emit(product)"
+  >
+    <div
+      class="col-xl-6 col-4 px-0 font-color-dark d-flex flex-column justify-content-center text-truncate"
+    >
+      <span
+        class="text-truncate font-size-custlg-16 font-size-custmd-14 font-size-13 font-family-bold"
+        style="max-width: 375px;"
+      >
+        {{ product.name }}
+      </span>
+      <span
+        class="text-truncate font-family-regular font-size-custlg-14 font-size-12"
+        style="max-width: 375px;"
+      >
+        {{ product.barcode }}
+      </span>
+      <span
+        class="text-truncate font-family-regular font-size-custlg-14 font-size-12"
+        style="max-width: 375px;"
+        *ngIf="product.stockItemIMEI"
+      >
+        სერიული კოდი: {{ product.stockItemIMEI }}
+      </span>
+    </div>
+    <div
+      class="col text-right font-size-custlg-16 font-size-custmd-14 font-size-13 font-color-dark font-family-bold d-flex align-items-end justify-content-center pr-custmd-3 pr-0 pl-3 text-truncate flex-column"
+    >
+      <span class="text-truncate"> {{ product.unitPrice | number: '1.2-2':'en' }} ₾ </span>
+      <span
+        *ngIf="product.discountRate"
+        class="text-truncate font-size-custlg-13 font-size-11 font-family-regular"
+      >
+        -{{ product.discountRate }}%
+      </span>
+    </div>
+    <div
+      class="col text-right font-size-custlg-16 font-size-custmd-14 font-size-13 font-color-dark font-family-regular d-flex align-items-center justify-content-end pr-custmd-3 pr-0 pl-3 text-truncate"
+    >
+      <span class="text-truncate mr-1"> {{ product.quantity | number: '':'en' }} </span>
+      <span class="text-truncate" [class.pr-6px]="getUnitOfMeasurement(product)?.length == 1">
+        {{ getUnitOfMeasurement(product) }}
+      </span>
+    </div>
+    <div
+      class="col text-right font-size-custlg-16 font-size-custmd-14 font-size-13 font-color-dark font-family-bold d-flex align-items-center justify-content-end pr-custmd-3 pr-0 pl-3 text-truncate"
+    >
+      <span class="text-truncate">{{ countProductPrice(product) | number: '1.2-2':'en' }} ₾</span>
+    </div>
+    <div
+      class="pl-custmd-4 pl-3 text-right font-size-16 font-color-dark font-family-bold d-flex align-items-center justify-content-center"
+    >
+      <div
+        class="w-100 border-left d-flex justify-content-center pr-custmd-12px px-3 pl-custmd-12px"
+      >
+        <div
+          class="btn-div py-2px pr-custmd-4 pl-custmd-4"
+          (click)="productDeleteHandler.emit(product)"
+        >
+          <app-icon icon="trash" class="icon-trash-hover"></app-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

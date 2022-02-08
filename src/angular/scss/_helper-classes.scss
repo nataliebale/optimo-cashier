@@ -1,0 +1,114 @@
+.cursor-pointer {
+  cursor: pointer;
+}
+.outline-none {
+  outline: none;
+}
+.line-height-normal {
+  line-height: normal;
+}
+.line-height-21 {
+  line-height: 21px;
+}
+
+@mixin custom-scroll-1 {
+  overflow: overlay;
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    width: 5px;
+    border-radius: 10px;
+    background: #b6b9c7;
+  }
+}
+@mixin custom-scroll-2 {
+  overflow: overlay;
+  &::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    width: 3px;
+    border-radius: 2.5px;
+    background: #b6b9c7;
+    opacity: 0.8;
+  }
+}
+.custom-scroll-2 {
+  @include custom-scroll-2;
+}
+
+.custom-scroll-1 {
+  @include custom-scroll-1;
+}
+
+.white-space-nw {
+  white-space: nowrap;
+}
+
+.on-blur-shadow {
+  box-shadow: $popup-box-shadow;
+}
+
+//sizing
+.h-48px {
+  height: 48px;
+}
+.h-56px {
+  height: 56px;
+}
+.h-80px {
+  height: 80px;
+}
+.w-175px {
+  width: 175px;
+}
+.w-128px {
+  width: 128px;
+}
+.disabled {
+  pointer-events: none !important;
+  opacity: 0.35 !important;
+}
+.text-decoration-none {
+  text-decoration: none;
+}
+
+.opacity-015 {
+  opacity: 0.15;
+}
+
+.placeholder-currentcolor {
+  &::-webkit-input-placeholder {
+    color: currentColor;
+  }
+
+  &:-ms-input-placeholder {
+    color: currentColor;
+  }
+
+  &::placeholder {
+    color: currentColor;
+  }
+}
+.w-90 {
+  width: 90%;
+}
+.pointer-events-none {
+  pointer-events: none;
+}
+.pointer-events-all {
+  pointer-events: all;
+}
+.height-unset {
+  height: unset !important;
+}
+.opacity-05 {
+  opacity: 0.5;
+}
+.bg-cover {
+  background-size: cover;
+  background-position: center;
+}

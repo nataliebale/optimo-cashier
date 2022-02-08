@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="72px" height="72px" viewBox="0 0 72 72" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 57.1 (83088) - https://sketch.com -->
+    <title>Group 3</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="36" cy="36" r="36"></circle>
+        <path d="M3.60429922,11.0922992 C3.0452218,10.5332218 2.13453839,10.5374616 1.57218774,11.0998123 L1.59581226,11.0761877 C1.0325855,11.6394145 1.0326606,12.5526606 1.59731117,13.1173112 L7.61868883,19.1386888 C8.18274341,19.7027434 9.10219826,19.6978017 9.65643013,19.1435699 L24.9035699,3.89643013 C25.4649287,3.33507127 25.4625384,2.42253839 24.9001877,1.86018774 L24.9238123,1.88381226 C24.3605855,1.3205855 23.4471788,1.3208212 22.8787843,1.88921569 L8.64,16.128 L3.60429922,11.0922992 Z" id="path-3"></path>
+    </defs>
+    <g id="POS---Style-V6---Header&amp;Collapse" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="POS---სინქრონიზაცია-03" transform="translate(-765.000000, -487.000000)">
+            <g id="Group-5" transform="translate(541.000000, 431.000000)">
+                <g id="Group-4">
+                    <g id="Group" transform="translate(48.000000, 56.000000)">
+                        <g id="Group-3" transform="translate(176.000000, 0.000000)">
+                            <g id="Rectangle-3">
+                                <mask id="mask-2" fill="white">
+                                    <use xlink:href="#path-1"></use>
+                                </mask>
+                                <circle stroke="#2FCD8A" stroke-width="2.16" cx="36" cy="36" r="34.92"></circle>
+                            </g>
+                            <g id="ic_done" transform="translate(19.000000, 19.000000)">
+                                <g id="Icon-24px">
+                                    <polygon id="Shape" points="0 0 34.56 0 34.56 34.56 0 34.56"></polygon>
+                                    <g id="Color/White" transform="translate(4.320000, 7.200000)">
+                                        <mask id="mask-4" fill="white">
+                                            <use xlink:href="#path-3"></use>
+                                        </mask>
+                                        <use id="Mask" fill="#2FCD8A" xlink:href="#path-3"></use>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,17 @@
+<div class="authorized-layout">
+  <app-headbar
+    (checksButtonClicked)="checksButtonClicked.emit($event)"
+    (selectSpace)="selectSpace.emit($event)"
+    [isPaymentPage]="isPaymentPage"
+    [spaces]="spaces"
+    [selectedSpace]="selectedSpace"
+    [selectedTableName]="selectedTableName"
+    [deletePrivilegePassword]="deletePrivilegePassword"
+    [isHorecaMode]="isHorecaMode"
+    [openBurgerMenuForShiftStart]="openBurgerMenuForShiftStart"
+    [isOrderHistoryPage]="isOrderHistoryPage"
+  ></app-headbar>
+  <div class="authorized-layout__content-container">
+    <ng-content></ng-content>
+  </div>
+</div>

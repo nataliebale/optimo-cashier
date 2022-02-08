@@ -1,0 +1,75 @@
+.payment-content-section {
+  max-width: 600px;
+  @media only screen and (max-width: 1440px) {
+    max-width: 520px !important;
+  }
+  @media only screen and (max-width: 1280px) {
+    max-width: 475px !important;
+  }
+}
+
+.input {
+  &-payment-wrapper {
+    height: 80px !important ;
+    border: 1px solid $item-border-color;
+    @media only screen and (max-width: 1440px) {
+      height: 74px !important;
+    }
+
+    &.active {
+      border: 2px solid $lightish-blue !important;
+    }
+  }
+}
+
+.integrated-method {
+  &:after {
+    content: 'ინტეგრირებული';
+    position: absolute;
+    bottom: -7px;
+    background-color: white;
+    padding: 0px 5px;
+    font-family: $font-regular;
+    font-size: 13px;
+    color: $dark;
+  }
+}
+
+.payment-method-options {
+  .payment-method-options-row {
+    @include transition;
+    &:hover {
+      background-color: $item-border-color;
+    }
+    cursor: pointer;
+    border-top: 1px solid $product-list-bg;
+    .payment-method-logo-card {
+      cursor: pointer;
+      background-color: white;
+      width: 155px;
+      height: 80px;
+      border-radius: 5px;
+      border: 1px solid $item-border-color;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    &:first-child {
+      div:nth-child(2) {
+        font-family: $font-bold !important;
+      }
+    }
+  }
+}
+
+.print-bill-wrapper {
+  height: 74px;
+  @include media-breakpoint-up(custlg) {
+    height: 80px;
+  }
+  @include transition;
+  &.active {
+    background-color: $light-blue;
+    border-color: #ccd1ec;
+  }
+}

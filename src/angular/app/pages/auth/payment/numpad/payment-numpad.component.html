@@ -1,0 +1,32 @@
+<div class="row mt-5 mx-0">
+  <div class="numpad-fifth-wrapper">
+    <app-numpad [formControl]="amountControl"></app-numpad>
+  </div>
+
+  <div class="flex-grow-1">
+    <button
+      class="bg-payment-details-bg py-custlg-21px py-18px w-100 rounded btn shadow-none d-flex align-items-center justify-content-center mr-2 mb-2 cursor-pointer"
+      (click)="onAdd(10)"
+    >
+      <span class="font-color-white font-size-24 font-family-regular text-truncate">+10</span>
+    </button>
+    <button
+      class="bg-payment-details-bg py-custlg-21px py-18px w-100 rounded btn shadow-none d-flex align-items-center justify-content-center mr-2 mb-2 cursor-pointer"
+      (click)="onAdd(20)"
+    >
+      <span class="font-color-white font-size-24 font-family-regular text-truncate">+20</span>
+    </button>
+    <button
+      class="bg-payment-details-bg py-custlg-21px py-18px w-100 rounded btn shadow-none d-flex align-items-center justify-content-center mr-2 mb-2 cursor-pointer"
+      (click)="onAdd(50)"
+    >
+      <span class="font-color-white font-size-24 font-family-regular text-truncate">+50</span>
+    </button>
+    <button
+      class="bg-product-list-bg py-custlg-21px py-18px w-100 border border-border-color rounded btn shadow-none d-flex align-items-center justify-content-center mr-2 cursor-pointer"
+      (click)="onClear()"
+    >
+      <span class="font-color-dark font-size-24 font-family-regular text-truncate">C</span>
+    </button>
+  </div>
+</div>

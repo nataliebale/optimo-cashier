@@ -1,0 +1,30 @@
+image: node:10.15.3
+
+pipelines:
+  branches:
+    master:
+     - step:
+        name: Deployment of Production
+        deployment: Production
+        caches:
+          - node
+        script:
+          - echo 'jenkins'
+
+    staging:
+     - step:
+        name: Deployment of Staging
+        deployment: Staging
+        caches:
+          - node
+        script:
+          - echo 'jenkins'
+
+    develop:
+     - step:
+        name: Deployment of Development
+        deployment: Development
+        caches:
+          - node
+        script:
+          - echo 'jenkins'

@@ -1,0 +1,43 @@
+<div class="row m-0 justify-content-center pt-2 pb-32px">
+  <div
+    *ngIf="data.success"
+    class="bg-light-green d-flex justify-content-center align-items-center rounded-circle"
+    style="width: 80px; height: 80px;"
+  >
+    <app-icon icon="complete" class="icon-keys-48"> </app-icon>
+  </div>
+  <div
+    *ngIf="!data.success"
+    class="bg-light-red d-flex justify-content-center align-items-center rounded-circle"
+    style="width: 80px; height: 80px;"
+  >
+    <app-icon icon="alert" class="icon-keys-48"> </app-icon>
+  </div>
+</div>
+
+<div
+  *ngIf="data.message"
+  class="w-100 text-center font-color-dark font-size-20 font-family-bold pb-32px"
+>
+  {{ data.message }}
+</div>
+<div class="row m-0 justify-content-center pb-2">
+  <button
+    class="btn shadow-none border-0 bg-blue rounded font-size-16 font-family-bold font-color-white py-20px px-32px line-height-normal"
+    type="button"
+    (click)="approve(true)"
+    (keydown.enter)="$event.preventDefault()"
+    *ngIf="data.success"
+  >
+    დაბრუნება
+  </button>
+  <button
+    class="btn shadow-none border-0 bg-blue rounded font-size-16 font-family-bold font-color-white py-20px px-32px line-height-normal"
+    type="button"
+    (click)="approve(false)"
+    (keydown.enter)="$event.preventDefault()"
+    *ngIf="!data.success"
+  >
+    დაბრუნება
+  </button>
+</div>

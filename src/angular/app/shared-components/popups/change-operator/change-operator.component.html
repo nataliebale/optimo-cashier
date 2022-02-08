@@ -1,0 +1,29 @@
+<div class="pt-4 pb-2 px-56px">
+  <div
+    class="font-family-bold font-color-dark font-size-20 pb-32px border-bottom border-product-list-bg mx-20px line-height-normal mb-2"
+  >
+    აირჩიე მიმტანი
+  </div>
+
+  <div class="wifi-networks-wrapper custom-scroll-2" style="max-height: 325px;">
+    <div
+      class="py-3 px-3 d-flex justify-content-between wifi-network-item"
+      *ngFor="let item of operators"
+      [class.active]="item.id === currentOperatorId"
+      (click)="checkSetOperator(item.id)"
+    >
+      <div class="font-family-regular font-color-dark font-size-16 cursor-pointer">
+        {{ item.name }}
+      </div>
+    </div>
+  </div>
+
+  <div class="mx-20px border-top border-product-list-bg pt-32px d-flex justify-content-center mt-2">
+    <button
+      (click)="onClose()"
+      class="btn shadow-none border-0 bg-blue px-32px h-56px font-family-bold font-size-16 font-color-white"
+    >
+      დაბრუნება
+    </button>
+  </div>
+</div>

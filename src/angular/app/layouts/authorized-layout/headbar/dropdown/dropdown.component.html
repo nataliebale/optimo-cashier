@@ -1,0 +1,48 @@
+<div class="dropdown__operator button" [class.active]="showDropdown">
+  <div class="dropdown__operator-inside" (click)="onToggleDropdown($event)">
+    <div class="dropdown__operator-img">
+      <img src="../../../../assets/images/icons/user.svg" />
+      <div class="triangle"></div>
+    </div>
+    <div class="dropdown__operator-name">
+      <div *ngIf="operatorName">
+        <div>{{ operatorName[0] }}</div>
+        <div>{{ operatorName[1] }}</div>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+
+  <div *ngIf="showDropdown" (focusOut)="onToggleDropdown()" class="dropdown__operator-dropdown">
+    <button (click)="onOpenDailySalesDialog()">
+      <div>
+        <img src="../../../../assets/images/icons/income.svg" alt="" />
+        ცვლის ნავაჭრი
+      </div>
+    </button>
+    <button (click)="onOpenWithdrawalPopup()">
+      <div>
+        <img src="../../../../assets/images/icons/cashout.svg" alt="" />
+        თანხის გაცემა
+      </div>
+    </button>
+    <div (click)="onCloseDay()" class="button">
+      <div>
+        <img src="../../../../assets/images/icons/bookmark.svg" />
+        დღის დახურვა
+      </div>
+    </div>
+    <div (click)="onLogout()" class="button">
+      <div>
+        <img src="../../../../assets/images/icons/exit.svg" />
+        გასვლა
+      </div>
+    </div>
+    <div class="dropdown__close button" (click)="onShutDown()">
+      <div>
+        <img src="../../../../assets/images/icons/turn-off.svg" />
+        გათიშვა
+      </div>
+    </div>
+  </div>
+</div>

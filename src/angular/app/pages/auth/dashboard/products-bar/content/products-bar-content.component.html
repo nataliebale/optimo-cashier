@@ -1,0 +1,39 @@
+<div
+  *ngIf="subTitle"
+  (click)="onReset()"
+  class="px-custmd-12px d-flex pt-custlg-4 pt-3 align-items-center"
+>
+  <div class="btn-div">
+    <app-icon icon="back" class="back-category"></app-icon>
+  </div>
+  <div
+    class="pl-custlg-3 pl-2 font-size-custlg-16 font-size-14 font-family-bold font-color-dark btn-div"
+  >
+    {{ subTitle }}
+  </div>
+</div>
+
+<app-products-bar-content-categories
+  *ngIf="tab === ProductsBarTab.Categories && !filterValue.categoryId && !filterValue.topSold"
+  [filter]="filterValue"
+  (selectCategory)="onSelectCategory($event)"
+  (selectPopular)="onSelectPopular()"
+></app-products-bar-content-categories>
+
+<app-products-bar-content-suppliers
+  *ngIf="tab === ProductsBarTab.Suppliers && !filterValue.supplierId"
+  [filter]="filterValue"
+  (selectSupplier)="onSelectSupplier($event)"
+></app-products-bar-content-suppliers>
+
+<app-products-bar-content-list
+  *ngIf="
+    tab === ProductsBarTab.All ||
+    filterValue.supplierId ||
+    filterValue.categoryId ||
+    filterValue.topSold
+  "
+  [filter]="filterValue"
+  [isHorecaMode]="isHorecaMode"
+  (productChosen)="productChosen.emit($event)"
+></app-products-bar-content-list>

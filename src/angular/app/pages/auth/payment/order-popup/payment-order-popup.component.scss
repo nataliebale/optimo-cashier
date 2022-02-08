@@ -1,0 +1,213 @@
+.payment-dialog {
+  padding: 56px 48px 48px;
+  position: relative;
+
+  &__text {
+    position: relative;
+    font-family: NotoSans;
+    font-size: 18px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #8b8f9b;
+  }
+
+  &__amount {
+    font-size: 67px;
+    font-family: NotoSans;
+    text-align: center;
+    color: #4a4a4a;
+    font-size: 38.1px;
+    font-weight: 600;
+    font-style: normal;
+    margin-bottom: 24px;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #495057;
+  }
+
+  &__close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: transparent;
+    border: none;
+    outline: none;
+    z-index: 1;
+    cursor: pointer;
+  }
+
+  &__close-img {
+    width: 20px;
+    opacity: 0.6;
+  }
+
+  &__success-image {
+    width: 72px;
+    margin-bottom: 32px;
+  }
+
+  &__error-buttons {
+    button {
+      width: calc(50% - 12px);
+      height: 64px;
+      border: none;
+      font-family: NotoSans;
+      font-size: 20px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: center;
+      outline: none;
+      border-radius: 4px;
+      margin-top: 40px;
+    }
+  }
+
+  &__error-try-again {
+    background-color: #fc3c2d;
+    color: #ffffff;
+    font-family: NotoSans;
+  }
+
+  &__message {
+    font-family: NotoSans;
+    font-size: 20px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #8b8f9b;
+  }
+
+  &__error-close {
+    border-radius: 4px;
+    border: solid 1px #e6ecf5 !important;
+    background-color: #ffffff;
+    color: #515366;
+    margin-left: 24px;
+  }
+
+  &__back-to-dashboard {
+    border-radius: 4px;
+    background-color: #2fcd8a;
+    width: 100% !important;
+    font-size: 20px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ffffff;
+  }
+}
+
+.lds-css,
+.success {
+  width: 100%;
+  padding: 0;
+  cursor: pointer;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.lds-css {
+  display: flex;
+  padding: 40px 0;
+}
+
+.lds-double-ring {
+  position: relative;
+}
+
+.lds-double-ring div {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  border: 10px solid #000;
+  border-color: #ccc transparent #ccc transparent;
+  -webkit-animation: lds-double-ring 2.5s linear infinite;
+  animation: lds-double-ring 2.5s linear infinite;
+}
+
+.lds-double-ring div:nth-child(2) {
+  width: 96px;
+  height: 96px;
+  top: 52px;
+  left: 52px;
+  border-color: transparent #4562ff transparent #4562ff;
+  -webkit-animation: lds-double-ring_reverse 2.5s linear infinite;
+  animation: lds-double-ring_reverse 2.5s linear infinite;
+}
+
+.lds-double-ring {
+  width: 75px !important;
+  -webkit-transform: translate(-47.5px, -59.5px) scale(0.375) translate(37.5px, 37.5px);
+  transform: translate(-47.5px, -59.5px) scale(0.375) translate(37.5px, 37.5px);
+}
+
+// .mat-dialog-container .payment-dialog {
+//   margin: -24px;
+// }
+
+@keyframes lds-double-ring {
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes lds-double-ring {
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes lds-double-ring_reverse {
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+
+  100% {
+    -webkit-transform: rotate(-360deg);
+    transform: rotate(-360deg);
+  }
+}
+
+@-webkit-keyframes lds-double-ring_reverse {
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+
+  100% {
+    -webkit-transform: rotate(-360deg);
+    transform: rotate(-360deg);
+  }
+}

@@ -1,0 +1,55 @@
+<div class="more-btn-popup" (focusOut)="onToggleDropdown()" *ngIf="showDropdown">
+  <div
+    *ngIf="showGuestsButton"
+    class="btn-div w-100 p-0 pl-3 font-size-custmd-16 font-size-14 font-color-dark font-family-regular d-flex py-custmd-3 py-11px"
+    (click)="updateGuestCount.emit(); onToggleDropdown($event)"
+  >
+    სტუმრების რაოდენობის შეცვლა
+  </div>
+  <div
+    *ngIf="showTableChangeButton"
+    class="btn-div w-100 p-0 pl-3 font-size-custmd-16 font-size-14 font-color-dark font-family-regular d-flex py-custmd-3 py-11px"
+    [class.disabled]="!operatorData.permissions.canSeeAllOrders"
+    (click)="changeTable.emit(); onToggleDropdown($event)"
+  >
+    მაგიდის შეცვლა
+  </div>
+  <div
+    *ngIf="showOperatorChangeButton"
+    class="btn-div w-100 p-0 pl-3 font-size-custmd-16 font-size-14 font-color-dark font-family-regular d-flex py-custmd-3 py-11px"
+    [class.disabled]="!operatorData.permissions.canSeeAllOrders || !activeCheck"
+    (click)="changeOperator.emit(); onToggleDropdown($event)"
+  >
+    მიმტანის შეცვლა
+  </div>
+  <div
+    class="btn-div w-100 p-0 pl-3 font-size-custmd-16 font-size-14 font-color-dark font-family-regular d-flex py-custmd-3 py-11px"
+    (click)="clearCurrentCheck.emit(); onToggleDropdown($event)"
+    [class.disabled]="!checkProducts.length"
+  >
+    ჩეკის გასუფთავება
+  </div>
+  <div
+    class="btn-div w-100 pl-3 font-size-custmd-16 font-size-14 font-color-dark font-family-regular d-flex py-custmd-3 py-11px"
+    (click)="deleteCurrentCheck.emit(); onToggleDropdown($event)"
+    [class.disabled]="checkDeleteDisableState()"
+  >
+    ჩეკის წაშლა
+  </div>
+  <div
+    *ngIf="showChangeTaxRateButton"
+    class="btn-div w-100 p-0 pl-3 font-size-custmd-16 font-size-14 font-color-dark font-family-regular d-flex py-custmd-3 py-11px"
+    (click)="changeTaxRate.emit(); onToggleDropdown($event)"
+    [class.disabled]="!(globalTaxRate > 0) || !activeCheck"
+  >
+    {{ checkTaxRateIsOff ? 'მომსახ. საკომისიოს დამატება' : 'მომსახ. საკომისიოს გაუქმება' }}
+  </div>
+</div>
+
+<div
+  class="btn-div bg-white py-custmd-5px py-custlg-7px py-3px px-custmd-6px px-custlg-11px px-0 mr-2 btn-more"
+  (click)="onToggleDropdown($event)"
+  [class.active]="showDropdown"
+>
+  <app-icon icon="more" class="px-custmd-3 px-14"></app-icon>
+</div>

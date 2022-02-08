@@ -1,0 +1,38 @@
+<div mat-dialog-content class="py-2">
+  <!-- <button class="notifier-popup__close" (click)="decline()">
+    <img src="../../../../assets/images/icons/close.svg" />
+  </button> -->
+
+  <ng-container *ngIf="!data.success">
+    <div
+      class="m-auto px-0 d-flex rounded-circle bg-light-red d-flex justify-content-center align-items-center"
+      style="width: 80px; height: 80px;"
+    >
+      <app-icon icon="alert"></app-icon>
+    </div>
+
+    <div
+      *ngIf="data.message"
+      class="w-100 text-center font-size-20 font-family-bold font-color-dark py-32px line-height-normal"
+    >
+      {{ data.message }}
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="data.success">
+    <div class="notifier-popup__img">
+      <img src="../../../../assets/images/icons/error-circle.svg" />
+    </div>
+
+    <p *ngIf="data.message" class="notifier-popup__message">
+      {{ data.message }}
+    </p>
+  </ng-container>
+
+  <button
+    class="btn shadow-none border-0 d-flex m-auto align-items-center bg-blue px-32px h-56px font-color-white font-size-16 font-family-bold justify-content-center"
+    (click)="onDecline()"
+  >
+    დაბრუნება
+  </button>
+</div>

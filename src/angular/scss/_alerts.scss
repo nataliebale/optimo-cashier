@@ -1,0 +1,10 @@
+.alert {
+  &-error {
+    @include transition;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    background-color: $alert-red;
+    border: 1px solid $alert-border;
+  }
+}

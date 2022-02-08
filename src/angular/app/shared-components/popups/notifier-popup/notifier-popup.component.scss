@@ -1,0 +1,62 @@
+.notifier-popup {
+  padding: 48px;
+  margin: -24px;
+  position: relative;
+
+  &__img {
+    text-align: center;
+    padding: 8px 0 32px;
+  }
+
+  &__approve {
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 4px;
+    border: none;
+    background-color: #2fcd8a;
+    height: 60px;
+    outline: none;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-family: NotoSans;
+    font-size: 20px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ffffff;
+
+    &.red {
+      background: #fc3c2d;
+    }
+  }
+
+  &__message {
+    text-align: center;
+    margin: 0 0 30px;
+    font-family: NotoSans;
+    font-size: 20px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #8b8f9b;
+  }
+
+  &__close {
+    position: absolute;
+    background: transparent;
+    border: none;
+    right: 24px;
+    top: 24px;
+    outline: none;
+
+    img {
+      width: 20px;
+    }
+  }
+}

@@ -1,0 +1,60 @@
+<div class="row m-0 px-4 pt-2 pb-32px">
+  <div class="col-1 px-0"></div>
+  <div class="col text-center font-family-bold font-size-20 font-color-dark line-height-normal">
+    ცვლის ნავაჭრი
+  </div>
+  <div class="col-1 px-0 d-flex justify-content-end">
+    <button class="btn btn-clean" type="submit" (click)="this.dialogRef.close(false)">
+      <app-icon icon="close"></app-icon>
+    </button>
+  </div>
+</div>
+<div class="row m-0 w-100 justify-content-between pb-3">
+  <div style="max-width: 200px;" class="d-flex flex-column align-items-center w-100">
+    <div
+      class="px-0 d-flex rounded-circle bg-green-blue d-flex justify-content-center align-items-center font-color-dark"
+      style="width: 80px; height: 80px;"
+    >
+      <app-icon icon="cash"></app-icon>
+    </div>
+    <span class="font-size-16 font-family-bold font-color-dark pt-4 pb-2px">ნაღდი</span>
+    <span class="font-size-24 font-family-bold font-color-dark pt-2 w-100 text-center text-truncate"
+      >{{
+        dailySales?.entitySale?.totalCash +
+          dailySales?.individualSale?.totalCash +
+          dailySales?.individualSale?.totalManual || 0 | number: '1.2-2':'en'
+      }}
+      ₾</span
+    >
+  </div>
+
+  <div style="max-width: 200px;" class="d-flex flex-column align-items-center w-100">
+    <div
+      class="px-0 d-flex rounded-circle bg-grapefruit d-flex justify-content-center align-items-center font-color-dark"
+      style="width: 80px; height: 80px;"
+    >
+      <app-icon icon="card"></app-icon>
+    </div>
+    <span class="font-size-16 font-family-bold font-color-dark pt-4 pb-2px">ბარათი</span>
+    <span class="font-size-24 font-family-bold font-color-dark pt-2 w-100 text-center text-truncate"
+      >{{
+        dailySales?.entitySale?.totalCard + dailySales?.individualSale?.totalCard || 0
+          | number: '1.2-2':'en'
+      }}
+      ₾</span
+    >
+  </div>
+
+  <div style="max-width: 200px;" class="d-flex flex-column align-items-center w-100">
+    <div
+      class="px-0 d-flex rounded-circle bg-darkish-purple d-flex justify-content-center align-items-center font-color-dark"
+      style="width: 80px; height: 80px;"
+    >
+      <app-icon icon="doc"></app-icon>
+    </div>
+    <span class="font-size-16 font-family-bold font-color-dark pt-4 pb-2px">კონსიგნაცია</span>
+    <span class="font-size-24 font-family-bold font-color-dark pt-2 w-100 text-center text-truncate"
+      >{{ dailySales?.entitySale?.totalConsignation || 0 | number: '1.2-2':'en' }} ₾</span
+    >
+  </div>
+</div>

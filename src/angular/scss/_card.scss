@@ -1,0 +1,54 @@
+.card,
+.card * {
+  box-sizing: border-box;
+}
+
+.card {
+  line-height: 1.5;
+  background-color: $white;
+  max-width: 100%;
+  width: $card-width;
+  border-radius: $border-radius;
+}
+
+.card-header {
+  padding: ($card-padding-y / 2) ($card-padding-x / 2);
+  border-bottom: 1px solid $border-color;
+  color: $primary;
+  text-align: center;
+  font: {
+    size: 18px;
+    family: 'NotoSans';
+    weight: 600;
+  }
+}
+
+.card-body {
+  padding: ($card-body-padding-y / 2) ($card-padding-x / 2);
+}
+
+.card-text {
+  font: {
+    size: 26px;
+    family: 'NotoSans';
+    weight: 600;
+  }
+  color: #515366;
+}
+
+.card-footer {
+  padding: ($card-padding-y / 2) ($card-padding-x / 2);
+  border-top: 1px solid $border-color;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mt-8 {
+  margin-top: 8px;
+}
+
+.mb-40 {
+  margin-bottom: 40px;
+}

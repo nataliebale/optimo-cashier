@@ -1,0 +1,86 @@
+<div class="d-flex px-4 py-32px">
+  <div class="col-1 px-0"></div>
+  <div class="col font-size-20 font-family-bold font-color-dark text-center">
+    ბანკის არჩევა
+  </div>
+  <div class="col-1 px-0 d-flex justify-content-end">
+    <button (click)="onClose()" class="btn btn-clean">
+      <app-icon icon="close"></app-icon>
+    </button>
+  </div>
+</div>
+
+<div class="payment-method-options">
+  <button
+    (click)="onPaymentClick(PaymentType.BOG, 'საქართველოს ბანკის ბარათით')"
+    class="row m-0 btn shadow-none rounded-0 w-100 py-2 d-flex payment-method-options-row px-4 align-items-center"
+  >
+    <div class="payment-method-logo-card">
+      <img src="assets/images/logo/gb-logo.svg" alt="" class="cursor-pointer" />
+    </div>
+    <div class="pl-4 font-family-regular font-color-dark font-size-16 cursor-pointer">
+      საქართველოს ბანკი / ინტეგრირებული
+      <app-icon icon="correct-complete"></app-icon>
+    </div>
+  </button>
+
+  <button
+    (click)="onPaymentClick(PaymentType.BOGExternal, 'საქართველოს ბანკის ბარათით')"
+    class="row m-0 btn shadow-none rounded-0 w-100 py-2 d-flex payment-method-options-row px-4 align-items-center"
+  >
+    <div class="payment-method-logo-card">
+      <img src="assets/images/logo/gb-logo.svg" alt="" class="cursor-pointer" />
+    </div>
+    <div class="pl-4 font-family-regular font-color-dark font-size-16 cursor-pointer">
+      საქართველოს ბანკი
+    </div>
+  </button>
+
+  <button
+    (click)="onPaymentClick(PaymentType.TBCExternal, 'თიბისი ბანკის ბარათით')"
+    class="row m-0 btn shadow-none rounded-0 w-100 py-2 d-flex payment-method-options-row px-4 align-items-center"
+  >
+    <div class="payment-method-logo-card">
+      <img src="assets/images/logo/tbc-logo.svg" alt="" class="cursor-pointer" />
+    </div>
+    <div class="pl-4 font-family-regular font-color-dark font-size-16 cursor-pointer">
+      თიბისი ბანკი
+    </div>
+  </button>
+
+  <button
+    (click)="onPaymentClick(PaymentType.LibertyExternal, 'ლიბერთი ბანკის ბარათით')"
+    class="row m-0 btn shadow-none rounded-0 w-100 py-2 d-flex payment-method-options-row px-4 align-items-center"
+  >
+    <div class="payment-method-logo-card">
+      <img src="assets/images/logo/lb-logo.svg" alt="" class="cursor-pointer" />
+    </div>
+    <div class="pl-4 font-family-regular font-color-dark font-size-16 cursor-pointer">
+      ლიბერთი
+    </div>
+  </button>
+
+  <button
+    (click)="onPaymentClick(PaymentType.ProcreditExternal, 'პროკრედიტ ბანკის ბარათით')"
+    class="row m-0 btn shadow-none rounded-0 w-100 py-2 d-flex payment-method-options-row px-4 align-items-center"
+  >
+    <div class="payment-method-logo-card">
+      <img src="assets/images/logo/pc-logo.svg" alt="" class="cursor-pointer" />
+    </div>
+    <div class="pl-4 font-family-regular font-color-dark font-size-16 cursor-pointer">
+      პროკრედიტ ბანკი
+    </div>
+  </button>
+
+  <button
+    (click)="onPaymentClick(PaymentType.Other, 'სხვა ბარათით')"
+    class="row m-0 btn shadow-none rounded-0 w-100 py-2 d-flex payment-method-options-row px-4 align-items-center"
+  >
+    <div class="payment-method-logo-card">
+      <app-icon icon="debet-card" class="cursor-pointer"></app-icon>
+    </div>
+    <div class="pl-4 font-family-regular font-color-dark font-size-16 cursor-pointer">
+      სხვა
+    </div>
+  </button>
+</div>

@@ -1,0 +1,148 @@
+<ng-container>
+  <div
+    *ngIf="isFormInvalid"
+    class="mx-auto bg-alert-red px-3 rounded text-center border d-flex align-items-center border-alert-border w-100 position-relative mb-n2px mt-2px"
+    style="max-width: 825px; height: 54px; z-index: 5;"
+  >
+    <div class="col-1 d-flex px-0">
+      <app-icon icon="alert-rounded"></app-icon>
+    </div>
+    <div class="col text-center font-size-16 font-color-dark font-family-regular">
+      {{ validationErrorText }}
+    </div>
+    <div class="col-1 px-0"></div>
+  </div>
+  <div
+    class="custom-scroll-1 flex-grow-1"
+    [style.height.px]="isFormInvalid ? 400 : 384"
+    [class.mt-10px]="!isFormInvalid"
+    [class.pt-3]="isFormInvalid"
+  >
+    <div class="w-100 d-flex pb-2">
+      <div class="flex-grow-1 font-color-dark font-size-16 font-family-bold pl-32px">
+        დასახელება
+      </div>
+      <div class="font-color-dark font-size-16 font-family-bold" style="width: 165px;">
+        რაოდენობა
+      </div>
+      <div
+        class="font-color-dark font-size-16 font-family-bold px-32px text-nowrap"
+        style="width: 190px;"
+      >
+        ჩამოწერა
+      </div>
+    </div>
+    <div
+      class="w-100 d-flex py-13px border-bottom border-product-list-bg"
+      *ngFor="let orderLine of orderLines"
+    >
+      <div class="flex-grow-1 px-32px text-truncate">
+        <div class="d-flex align-items-center">
+          <div
+            class="bg-cover rounded bg-no-img-bg"
+            style="width: 68px; height: 56px; min-width: 68px;"
+            [ngStyle]="{
+              'background-image':
+                'url(' +
+                (orderLine?.photoUrl || '../../../../../../../assets/images/icons/image.svg') +
+                ')'
+            }"
+          ></div>
+          <div class="pl-3 d-flex flex-column justify-content-center text-truncate">
+            <div
+              class="font-color-dark font-size-16 font-family-bold line-height-normal pb-6px text-truncate text-nowrap"
+            >
+              {{ orderLine.name }}
+            </div>
+            <div
+              class="font-color-dark font-size-14 font-family-regular line-height-normal pb-1 text-truncate text-nowrap"
+            >
+              {{ orderLine.stockItemBarcode }}
+            </div>
+            <div
+              *ngIf="orderLine.IMEI"
+              class="font-color-dark font-size-14 font-family-bold line-height-normal text-truncate text-nowrap"
+            >
+              IMEI: <span class="font-family-regular">{{ orderLine.IMEI }}</span>
+            </div>
+            <!--  *ngIf="orderLine.IMEI" -->
+          </div>
+        </div>
+      </div>
+      <div class="d-flex align-items-center" style="width: 165px; min-width: 165px;">
+        <input
+          class="input-regular h-56px w-100 px-3"
+          type="text"
+          [formControl]="orderLine.controlGroup.controls.returnQuantity"
+          (focus)="
+            onInputFocus(
+              orderLine.controlGroup.controls.returnQuantity,
+              orderLine.isDecimal,
+              $event
+            )
+          "
+          [mask]="orderLine.mask"
+          thousandSeparator=","
+        />
+      </div>
+      <div
+        style="width: 190px; min-width: 190px;"
+        class="d-flex align-items-center justify-content-center"
+      >
+        <div class="p-12px cursor-pointer">
+          <button
+            (click)="toggleOrderLineDelist(orderLine)"
+            class="btn btn-toggle shadow-none border-0 rounded-12px position-relative"
+            style="width: 40px; height: 24px;"
+            [class.active]="orderLine.controlGroup.controls.delitsAfterReturn.value"
+          ></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="d-flex justify-content-between px-32px py-4 border-top border-product-list-bg mt-n1px"
+  >
+    <ng-select
+      class="form-control custom-ng-select h-56px w-270px shadow-none d-flex align-items-center cursor-pointer border border-item-border-color"
+      [items]="SaleReturnReasonOptions"
+      bindLabel="label"
+      bindValue="value"
+      [formControl]="form.controls.returnReason"
+      [clearable]="false"
+      [searchable]="false"
+      placeholder="აირჩიე მიზეზი"
+    ></ng-select>
+
+    <!-- <button type="button" (click)="logForm()">log</button> -->
+    <div
+      (click)="submitForm()"
+      class="btn-div bg-blue px-32px h-56px d-flex align-items-center font-color-white font-family-bold font-size-16"
+    >
+      გაგრძელება
+    </div>
+    <div
+      *ngIf="focusedFormControl"
+      (focusOut)="onNumpadFocusOut($event)"
+      class="numpad-second-wrapper d-flex flex-column justify-content-center"
+      [class.top]="numpadCoordinates.openTop"
+      [style.top.px]="numpadCoordinates.y"
+      [style.left.px]="numpadCoordinates.x"
+    >
+      <div class="numpad-second">
+        <app-numpad
+          [formControl]="focusedFormControl"
+          [isDecimal]="true"
+          [maxFractionDigits]="numpadIsDecimal ? 3 : 0"
+        ></app-numpad>
+      </div>
+
+      <button
+        (click)="onNumpadClose()"
+        class="btn btn-clean font-size-16 font-family-bold font-color-dark mt-20px"
+      >
+        დახურვა
+      </button>
+    </div>
+  </div>
+</ng-container>

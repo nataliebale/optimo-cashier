@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36">
+    <g fill="none" fill-rule="evenodd" stroke-linecap="round">
+        <g stroke="#3A3E56" stroke-width="1.9">
+            <g>
+                <g>
+                    <g>
+                        <g>
+                            <path stroke-dasharray="17.067 336" d="M10.206 16.533c4.124 0 7.467-3.343 7.467-7.466 0-4.124-3.343-7.467-7.467-7.467S2.739 4.943 2.739 9.067c0 4.123 3.343 7.466 7.467 7.466z" transform="translate(-1513 -33) translate(1461 31) translate(52 2) translate(8 8.5) matrix(-1 0 0 1 20 0) rotate(-104 10.206 9.067)"/>
+                            <path stroke-linejoin="round" d="M0.8 3.273L4 6.473 7.2 3.273" transform="translate(-1513 -33) translate(1461 31) translate(52 2) translate(8 8.5) matrix(-1 0 0 1 20 0) rotate(45 4 4.873)"/>
+                        </g>
+                    </g>
+                    <g>
+                        <path stroke-dasharray="17.067 336" d="M10.206 16.533c4.124 0 7.467-3.343 7.467-7.466 0-4.124-3.343-7.467-7.467-7.467S2.739 4.943 2.739 9.067c0 4.123 3.343 7.466 7.467 7.466z" transform="translate(-1513 -33) translate(1461 31) translate(52 2) matrix(1 0 0 -1 8 27.5) rotate(-104 10.206 9.067)"/>
+                        <path stroke-linejoin="round" d="M0.8 3.273L4 6.473 7.2 3.273" transform="translate(-1513 -33) translate(1461 31) translate(52 2) matrix(1 0 0 -1 8 27.5) rotate(45 4 4.873)"/>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

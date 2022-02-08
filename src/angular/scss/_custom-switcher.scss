@@ -1,0 +1,43 @@
+.custom-switcher {
+  &-wrapper {
+    border-radius: 7px;
+    border: solid 1px $table-border-color;
+    background-color: $basket-row-bg;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    position: relative;
+
+    .custom-switch {
+      font-family: $font-regular;
+      color: $dark;
+      font-size: 14px;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      cursor: pointer;
+      transition: all 1.2s linear;
+      &.active {
+        font-family: $font-bold;
+        &.first {
+          + div + div.custom-switch-bg {
+            margin-left: 0px;
+          }
+        }
+      }
+      &-bg {
+        width: 49%;
+        height: 40px;
+        border-radius: 4px;
+        box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.1);
+        background-color: white;
+        position: absolute;
+        @include transition;
+        margin-left: 48.5%;
+      }
+    }
+  }
+}

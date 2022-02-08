@@ -1,0 +1,99 @@
+<div class="card">
+  <form *ngIf="form" [formGroup]="form" (submit)="setConfiguration()">
+    <div class="card-header">კონფიგურაცია</div>
+    <div class="card-body">
+      <div class="form-group">
+        <ng-select
+          [items]="cashierTypes"
+          formControlName="cashier"
+          bindLabel="text"
+          bindValue="value"
+          class="form-control custom-ng-select setup-select"
+          placeholder="სალარო აპარატი"
+          [searchable]="true"
+          [clearable]="false"
+        >
+        </ng-select>
+      </div>
+      <div class="form-group">
+        <ng-select
+          [items]="cardTypes"
+          formControlName="card"
+          bindLabel="text"
+          bindValue="value"
+          placeholder="აირჩიე საქართველოს ბანკის პოს აპარატი"
+          [searchable]="true"
+          [clearable]="false"
+          class="form-control custom-ng-select setup-select"
+        >
+        </ng-select>
+      </div>
+      <div class="form-group pb-3">
+        <div>
+          <input
+            type="checkbox"
+            id="printer"
+            formControlName="hasReceiptPrinter"
+            (change)="onHasPrinterChange($event)"
+            class="custom-checkbox-control"
+          />
+          <label for="printer" class="custom-checkbox-label">
+            <span class="ml-3"> თერმული პრინტერი</span>
+          </label>
+        </div>
+        <div>
+          <input
+            type="checkbox"
+            id="cash-box"
+            formControlName="cashBox"
+            class="custom-checkbox-control"
+          />
+          <label for="cash-box" class="custom-checkbox-label">
+            <span class="ml-3"> Cash Box</span>
+          </label>
+        </div>
+        <div class="clear"></div>
+      </div>
+      <div class="clear"></div>
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control h-56px"
+          placeholder="მაღაზიის სახელი"
+          formControlName="receiptTitle"
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="checkbox"
+          id="full-screen"
+          formControlName="isFullScreen"
+          class="custom-checkbox-control"
+        />
+        <label for="full-screen" class="custom-checkbox-label">
+          <span class="ml-3"> მთელ ეკრანზე</span>
+        </label>
+        <div class="clear"></div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button
+        class="form-button setup__form-button-back"
+        (click)="back.emit()"
+        style="height: 48px;"
+        type="button"
+      >
+        უკან
+      </button>
+      <button
+        class="form-button setup__form-button-next"
+        [disabled]="form.invalid"
+        style="height: 48px;"
+        type="submit"
+      >
+        შენახვა
+      </button>
+      <div style="clear: both;"></div>
+    </div>
+  </form>
+</div>

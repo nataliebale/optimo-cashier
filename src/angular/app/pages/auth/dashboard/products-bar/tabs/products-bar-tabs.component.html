@@ -1,0 +1,35 @@
+<div class="row mx-custlg-12px mx-custmd-2 mx-1 pt-custlg-4 pt-3">
+  <div
+    class="btn-div col bg-product-list-bg mr-1 font-size-custlg-16 font-size-14 font-family-bold font-color-dark py-custlg-3 py-12px text-center"
+    [ngClass]="{
+      'bg-payment-details-bg font-color-white ': activeTab === ProductsBarTab.All
+    }"
+    (click)="activeTab = ProductsBarTab.All"
+  >
+    მთავარი
+  </div>
+
+  <div
+    class="btn-div col bg-product-list-bg rounded font-size-custlg-16 font-size-14 font-family-bold font-color-dark py-custlg-3 py-12px text-center"
+    [ngClass]="{
+      'bg-payment-details-bg font-color-white ': activeTab === ProductsBarTab.Categories
+    }"
+    (click)="activeTab = ProductsBarTab.Categories"
+    [ngClass]="{
+      'ml-custlg-22px ml-custmd-12px ml-1': isHorecaMode
+    }"
+  >
+    კატეგორიები
+  </div>
+
+  <div
+    class="btn-div col bg-product-list-bg rounded ml-1 font-size-custlg-16 font-size-14 font-family-bold font-color-dark py-custlg-3 py-12px text-center"
+    [ngClass]="{
+      'bg-payment-details-bg font-color-white ': activeTab === ProductsBarTab.Suppliers
+    }"
+    *ngIf="!isHorecaMode"
+    (click)="activeTab = ProductsBarTab.Suppliers"
+  >
+    მომწოდებლები
+  </div>
+</div>

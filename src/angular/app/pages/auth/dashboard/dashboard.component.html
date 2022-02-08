@@ -1,0 +1,253 @@
+<app-authorized-layout
+  (checksButtonClicked)="onToggleChecksBlock($event)"
+  [selectedTableName]="selectedTableName"
+  [deletePrivilegePassword]="canDeleteByPass"
+  [isHorecaMode]="isHorecaMode"
+  [isPaymentPage]="false"
+>
+  <div
+    class="dashboard w-100 h-100 d-flex overflow-auto"
+    #dashboard
+    [ngClass]="{ disabled: !shift }"
+    *ngLet="shift$ | async as shift"
+  >
+    <div class="col-6 px-0 d-flex flex-column">
+      <div
+        class="dashboard-checks bg-product-list-bg"
+        [ngClass]="{
+          disabled: canDeleteByPass,
+          active: showChecksBlock
+        }"
+      >
+        <app-check
+          (close)="onToggleChecksBlock(false)"
+          (selectCheck)="selectCheck($event)"
+          (deleteCheck)="onDeleteCheck($event)"
+          (addCheck)="addCheck()"
+          [checks]="checks"
+          [activeCheckId]="activeCheck ? activeCheck.id : 0"
+          *ngIf="showChecksBlock"
+        ></app-check>
+      </div>
+
+      <div
+        class="row bg-product-list-bg m-0 flex-grow-1 h-100 d-flex flex-column custom-scroll-1 overflow-auto"
+        style="min-height: 77px;"
+      >
+        <div
+          class="w-100 h-100 d-flex justify-content-center align-items-center"
+          *ngIf="!activeCheckProducts.length"
+        >
+          <div class="d-flex flex-column align-items-center">
+            <ng-container *ngIf="isHorecaMode">
+              <app-icon icon="no-order-horeca"></app-icon>
+            </ng-container>
+
+            <ng-container *ngIf="!isHorecaMode">
+              <app-icon icon="no-order-retail"></app-icon>
+            </ng-container>
+
+            <span class="font-color-dark font-family-regular font-size-16">
+              შეკვეთა ცარიელია
+            </span>
+
+            <!-- <input [(ngModel)]="fakeBarcode" /> // for testing barcode
+            <button (click)="submitFakeBarcode()">
+              ბარკოდის გატარება
+            </button> -->
+          </div>
+        </div>
+
+        <app-basket
+          [products]="activeCheckProducts"
+          [activeProduct]="activeProduct ? activeProduct : { StockItemId: 0 }"
+          (activeProductChange)="activateProduct($event)"
+          (productDeleteHandler)="deleteProduct($event)"
+        >
+        </app-basket>
+      </div>
+
+      <div class="row m-0 d-flex" *ngIf="canDeleteByPass">
+        <button
+          class="btn shadow-none bg-blue w-100 h-100 p-0 m-0 rounded-0 d-flex align-items-center"
+          (click)="onEndDeleting(deleteDialog)"
+        >
+          <div class="col-1 cursor-pointer"></div>
+          <span
+            class="font-color-white font-size-19 col text-center font-family-bold cursor-pointer"
+            >დადასტურება</span
+          >
+
+          <div class="col-1 mr-4 pr-2 py-4">
+            <!-- <app-icon icon="pay" class="cursor-pointer"></app-icon> -->
+            <app-icon icon="correct-white" class="cursor-pointer"></app-icon>
+          </div>
+        </button>
+      </div>
+
+      <div
+        class="row bg-border-color-bg m-0 d-flex flex-column justify-content-end"
+        style="max-height: 485px;"
+        *ngIf="!canDeleteByPass"
+        [ngClass]="{
+          disabled: canDeleteByPass
+        }"
+      >
+        <div class="row m-0 d-flex justify-content-between bg-payment-details-bg">
+          <div
+            class="d-flex align-items-center pl-xl-5 pl-custmd-32px pl-4 py-custmd-14 py-3 position-relative"
+            [ngClass]="{ 'py-custlg-22px': !isHorecaMode, 'py-custlg-32px': isHorecaMode }"
+          >
+            <app-check-dropdown-more
+              [checks]="checks"
+              [checkProducts]="activeCheck ? activeCheck.products : []"
+              [showGuestsButton]="isHorecaMode"
+              [showTableChangeButton]="isHorecaMode"
+              [showOperatorChangeButton]="isHorecaMode"
+              [showChangeTaxRateButton]="isHorecaMode"
+              [globalTaxRate]="globalTaxRate"
+              [checkTaxRateIsOff]="checkTaxRateIsOff"
+              [operatorData]="operatorData"
+              [activeCheck]="activeCheck"
+              (deleteCurrentCheck)="deleteCurrentCheck()"
+              (clearCurrentCheck)="clearCurrentCheck()"
+              (updateGuestCount)="openGuestsDetails()"
+              (changeTable)="changeTable()"
+              (changeOperator)="changeOperator()"
+              (changeTaxRate)="changeTaxRate()"
+            >
+            </app-check-dropdown-more>
+            <button
+              class="btn shadow-none bg-white py-custmd-5px py-custlg-7px py-3px px-custmd-6px px-custlg-11px px-0 mr-2 border-0"
+              (click)="checkPrint()"
+              *ngIf="isHorecaMode"
+              [disabled]="!activeCheck?.products.length"
+            >
+              <app-icon icon="print" class="px-custmd-3 px-14"></app-icon>
+            </button>
+          </div>
+
+          <div class="d-flex align-items-center py-custlg-1 py-2px">
+            <div class="d-flex py-1">
+              <div class="d-flex flex-column pr-lg-4 pr-2">
+                <ng-container *ngIf="isHorecaMode && !collapseNumpad && !checkTaxRateIsOff">
+                  <span
+                    class="pb-custlg-2 pb-1 text-right font-size-custlg-16 font-size-14 font-color-white font-family-regular line-height-normal"
+                  >
+                    <span>შეკვეთის ჯამი:</span>
+                    <!-- <span class="d-custmd-none d-inline">სულ:</span> -->
+                  </span>
+                  <span
+                    class="pb-custlg-2 pb-1 text-right font-size-custlg-16 font-size-14 font-color-white font-family-regular line-height-normal"
+                  >
+                    <span class="d-custmd-inline d-none">მომსახურების საკომისიო:</span>
+                    <span class="d-custmd-none d-inline">მომს. საკომისიო:</span>
+                  </span>
+                </ng-container>
+
+                <span
+                  [ngClass]="{ 'pr-custmd-0 pr-2': !isHorecaMode }"
+                  class="pb-2px text-right font-size-custlg-20 font-size-16 font-color-white font-family-bold line-height-normal"
+                  ><span class="d-custmd-inline d-none">სულ გადასახდელი:</span>
+                  <span class="d-custmd-none d-inline">სულ:</span></span
+                >
+              </div>
+              <div class="d-flex flex-column pr-xxl-44px pr-custmd-32px pr-lg-4 pr-3">
+                <ng-container *ngIf="isHorecaMode && !collapseNumpad && !checkTaxRateIsOff">
+                  <span
+                    class="pb-custlg-2 pb-1 text-right font-size-custlg-16 font-size-14 font-color-white font-family-regular line-height-normal"
+                    >{{ activeCheckBasketTotalPrice | number: '1.2-2':'en' }}
+                    ₾
+                  </span>
+                  <span
+                    class="pb-custlg-2 pb-1 text-right font-size-custlg-16 font-size-14 font-color-white font-family-regular line-height-normal"
+                    >{{ activeCheckTaxAmount | number: '1.2-2':'en' }} ₾</span
+                  >
+                </ng-container>
+                <span
+                  class="pb-2px text-right font-size-custlg-20 font-size-16 font-color-white font-family-bold line-height-normal"
+                  >{{ activeCheckTotalPrice | number: '1.2-2':'en' }} ₾</span
+                >
+              </div>
+            </div>
+            <div class="d-flex px-lg-18px px-custmd-2 border-left border-light-border">
+              <div class="btn-div py-2px px-custmd-4 px-3" (click)="onToggleNumpadCollapse()">
+                <app-icon
+                  icon="arrow-down-white"
+                  class="icon-arrow-down"
+                  [class.open]="collapseNumpad"
+                >
+                </app-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <app-dashboard-numpad
+          [collapse]="collapseNumpad"
+          [dashboardNumpadProps]="dashboardNumpadProps"
+          [isHorecaMode]="isHorecaMode"
+          [maxFractionDigits]="maxFractionDigits"
+          [operatorData]="operatorData"
+          [disabledPayButton]="!operatorData?.permissions?.canOrder"
+          (submited)="onSubmited()"
+          (activeActionChange)="activeActionChange($event)"
+        >
+        </app-dashboard-numpad>
+      </div>
+    </div>
+    <div
+      class="col-6 font-color-dark font-family-regular pt-custlg-4 pt-17px px-custlg-36px px-3 custom-scroll-1"
+      [ngClass]="{ disabled: canDeleteByPass }"
+    >
+      <app-products-bar
+        [disabled]="canDeleteByPass"
+        (focusGroup)="onSearchFocused($event)"
+        (productAdded)="onProductAdded($event)"
+        [isHorecaMode]="isHorecaMode"
+      ></app-products-bar>
+    </div>
+  </div>
+</app-authorized-layout>
+
+<ng-template #exhaustionTitle>
+  <div
+    class="m-auto px-0 d-flex rounded-circle bg-light-red d-flex justify-content-center align-items-center"
+    style="width: 80px; height: 80px;"
+  >
+    <app-icon icon="alert"></app-icon>
+  </div>
+
+  <div
+    class="col text-center font-family-bold font-color-dark font-size-20 line-height-normal"
+  ></div>
+  <div class="pt-32px font-family-bold font-color-dark font-size-20 pb-30px line-height-normal">
+    პროდუქტი რაოდენობაში აღარ არის
+  </div>
+</ng-template>
+
+<ng-template #exhaustionMessage>
+  <div class="pb-3 font-family-regular font-size-16 font-color-dark line-height-21">
+    თუ თანახმა ხარ, რომ პროდუქტის გაყიდვა გაგრძელდეს ბოლო შესყიდვის ფასით, დააჭირე
+    <p class="font-family-bold font-color-dark text-decoration-none mb-0">
+      გაგრძელებას.
+    </p>
+  </div>
+  <div class="font-family-regular font-size-16 font-color-dark line-height-21 pb-32px">
+    სხვა შემთხვევაში დაუკავშირდი ადმინისტრატორს და დაელოდე ახალი შესყიდვის დადასტურებას.
+  </div>
+</ng-template>
+<ng-template #deleteDialog>
+  <div
+    class="m-auto px-0 bg-product-list-bg d-flex rounded-circle d-flex justify-content-center align-items-center"
+    style="width: 80px; height: 80px;"
+  >
+    <app-icon icon="correct-gray"></app-icon>
+  </div>
+
+  <div
+    class="w-100 py-32px font-size-20 font-family-bold font-color-dark text-center line-height-normal"
+  >
+    ნამდვილად გსურთ დასრულება?
+  </div>
+</ng-template>

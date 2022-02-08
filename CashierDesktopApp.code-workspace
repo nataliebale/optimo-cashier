@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "git_modules\\hardware-integration"
+		}
+	],
+	"settings": {
+		"omnisharp.defaultLaunchSolution": "git_modules/hardware-integration/OdinHardwareNetFramework.sln",
+		"editor.tabSize": 2
+	}
+}

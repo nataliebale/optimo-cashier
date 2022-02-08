@@ -1,0 +1,218 @@
+.dashboard {
+  $root: &;
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    width: 6px;
+    border-radius: 10px;
+    background: #bec0ca;
+  }
+  &-numpad-sections {
+    @include transition;
+    height: 90px;
+    font-family: $font-bold;
+    &:last-child {
+      height: 94px;
+    }
+    @media screen and (max-width: 1440px) {
+      height: 60px;
+      font-family: $font-regular;
+      &:last-child {
+        height: 60px;
+      }
+    }
+    border-right: 1px solid $item-border-color;
+
+    .icon-back {
+      opacity: 0;
+      visibility: hidden;
+      transform: rotate(180deg);
+      @media screen and (max-width: 1440px) {
+        height: 18px;
+      }
+    }
+    &:not(:last-child) {
+      border-bottom: 1px solid $item-border-color;
+    }
+    &.active {
+      background-color: #e4e6ed !important;
+      .icon-back {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+    &.disabled {
+      opacity: 1 !important;
+      span {
+        opacity: 0.35;
+      }
+    }
+  }
+  &-checks {
+    @include transition;
+
+    position: absolute;
+    z-index: 200;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      width: 6px;
+      border-radius: 10px;
+      background: #bec0ca;
+    }
+
+    height: 0px;
+    width: 100%;
+    &.active {
+      height: 100%;
+    }
+  }
+  // &:hover{
+  // #{$root}__checks{
+  //   background-color: blue !important;
+
+  // }
+
+  // }
+}
+
+.images-dark-overlay {
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: #3a3e56;
+    opacity: 0.1;
+    z-index: 10;
+    cursor: pointer;
+  }
+}
+
+.category-divs {
+  &_first {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 30;
+    background-size: cover;
+  }
+  &_sec {
+    width: 95%;
+    top: 5px;
+    z-index: 20;
+    background-color: #d2d4d9;
+  }
+  &_third {
+    width: 90%;
+    top: 10px;
+    z-index: 10;
+    background-color: #e4e6ed;
+  }
+}
+
+.row.product-list-row {
+  height: 77px;
+  @media screen and (max-width: 1440px) {
+    height: 64px;
+  }
+  @include transition;
+  background-color: white;
+  &:hover {
+    background-color: $basket-row-bg;
+
+    .icon-trash-hover {
+      svg {
+        path {
+          @include transition;
+
+          fill: $dark;
+        }
+      }
+    }
+  }
+  &.active {
+    background-color: $basket-row-bg;
+  }
+}
+
+.product-entity {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 100;
+  &.red {
+    background-color: $alert-red;
+    color: $red-regular;
+  }
+  &.green {
+    background-color: $light-green;
+    color: $green;
+  }
+}
+
+.single-receipt {
+  @include transition;
+  background-color: white;
+  height: 230px;
+  @media screen and (max-width: 1440px) {
+    height: 155px;
+  }
+  border: 1px solid $receipt-border;
+  &.active {
+    border: 2px solid $blue;
+  }
+  &-new {
+    @media screen and (max-width: 1440px) {
+      height: 155px;
+    }
+    height: 230px;
+  }
+  button.btn {
+    top: 24px;
+    right: 24px;
+    @media screen and (max-width: 1440px) {
+      top: 8px;
+      right: 8px;
+    }
+  }
+}
+
+.item-searchbar {
+  $root: &;
+  height: 56px;
+  @media screen and (max-width: 1440px) {
+    height: 46px;
+  }
+  &-close {
+    @include transition;
+    visibility: hidden;
+    &.active {
+      width: auto;
+      height: auto;
+      visibility: visible;
+    }
+  }
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-background-clip: text;
+    &:first-line {
+      color: $dark !important;
+    }
+  }
+  input {
+    &::placeholder {
+      opacity: 0.5;
+    }
+    @include text-truncate;
+  }
+}

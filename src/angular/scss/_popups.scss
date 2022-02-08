@@ -1,0 +1,277 @@
+.more-btn-popup {
+  position: absolute;
+  bottom: 90px;
+  background-color: red;
+  border: 1px solid #ced0db;
+  border-radius: 5px;
+  background-color: white;
+  width: 288px;
+  padding: 4px 0px;
+  z-index: 100;
+  @include custom-scroll-2;
+  max-height: 346px;
+
+  // @include media-breakpoint-down(custlg) {
+  //   bottom: 72px;
+  //   max-height: 290px;
+  // }
+  @include media-breakpoint-down(xl) {
+    max-height: 290px;
+  }
+  @media screen and (max-width: 1440px) {
+    max-height: 346px;
+  }
+  @media screen and (max-width: 1439px) {
+    bottom: 68px;
+    max-height: 346px;
+  }
+  @media screen and (max-width: 1279px) {
+    max-height: 272px;
+  }
+  @include media-breakpoint-down(md) {
+    width: 272px;
+    bottom: 66px;
+    .btn-div {
+      height: 42px;
+    }
+  }
+  div {
+    border-radius: 0px;
+    &:hover {
+      background-color: #dee8ff;
+    }
+  }
+}
+.blur-popup {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 1000;
+  // -webkit-backdrop-filter: blur(10px);
+  // backdrop-filter: blur(10px);
+  background-color: rgba(58, 62, 86, 0.7);
+
+  .guest-num {
+    margin-top: 187px;
+    width: 497px;
+    box-shadow: 0 10px 15px -17px rgba(58, 62, 86, 0.75);
+  }
+
+  .on-burger-blur {
+    position: absolute;
+    top: 245px;
+    // max-width: 704px;
+    width: 100%;
+    box-shadow: 0 10px 15px -17px rgba(58, 62, 86, 0.75);
+  }
+  .cash-giving-away {
+    width: 557px;
+    position: absolute;
+    top: 170px;
+    padding: 48px 77.5px;
+    box-shadow: 0 10px 15px -17px rgba(58, 62, 86, 0.75);
+    border: 1px solid $item-border-color;
+
+    .popup-400 {
+      .numpad-wrapper {
+        margin-left: -1px;
+      }
+    }
+  }
+}
+
+.white-popup {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  background-color: white;
+  z-index: 2000;
+  opacity: 0.75;
+
+  .shift-start-end {
+    margin-top: 145px;
+    width: 388px;
+  }
+}
+
+.headbar-icons-popup {
+  position: absolute;
+  top: 42px;
+  // right: 300px;
+  border: 1px solid $item-border-color;
+  background-color: white;
+  box-shadow: 0 10px 15px -17px rgba(58, 62, 86, 0.75);
+  border-radius: 4px;
+  padding: 32px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 100;
+  @include media-breakpoint-down(lg) {
+    width: 288px !important;
+  }
+
+  &:after {
+    content: '';
+    background-color: white;
+    width: 6px;
+    height: 6px;
+    border-left: 1px solid $item-border-color;
+    border-top: 1px solid $item-border-color;
+    position: absolute;
+    top: -4px;
+    transform: rotate(45deg);
+  }
+  &.no-triangle {
+    &:after {
+      display: none;
+    }
+  }
+  &.max-h-568px {
+    max-height: 568px;
+    @include custom-scroll-2;
+  }
+  &.w-unset {
+    width: unset !important;
+  }
+}
+
+.imei-row-hover {
+  @include transition;
+  border-top: 1px solid $item-border-color;
+
+  &:hover {
+    cursor: pointer;
+    border-top: 1px solid $product-list-bg !important;
+
+    background-color: $product-list-bg;
+  }
+}
+
+.Assortiments-dialog-popup {
+  .mat-dialog-container {
+    padding: 0px;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+}
+.headbar-icons-popup {
+  button {
+    &.gray-hover {
+      @include transition;
+      &:hover {
+        background-color: $basket-row-bg;
+      }
+    }
+    &.selected {
+      background-color: $light-blue;
+    }
+  }
+}
+
+.order-detail-popup {
+  .mat-dialog-container {
+    padding: 0px;
+    border-radius: 5px;
+  }
+}
+
+.dashboard-Functions-popup {
+  .mat-dialog-container {
+    padding: 0px;
+    box-shadow: $popup-box-shadow;
+    border: 0px !important;
+  }
+}
+
+// .product-delete-popup {
+//   .mat-dialog-container {
+//     padding: 48px 80px 32px;
+//   }
+// }
+
+.payment-method-popup {
+  .mat-dialog-container {
+    padding: 0px;
+  }
+}
+
+.withdrawal-dialog-popup {
+  .mat-dialog-container {
+    padding: 48px 78px;
+    overflow: visible !important;
+  }
+}
+
+// overrides
+.cdk-overlay-container {
+  // panelClass:
+  .cdk-overlay-backdrop {
+    // -webkit-backdrop-filter: blur(8px);
+    // backdrop-filter: blur(8px);
+    // background-color: rgba(58, 62, 86, 0.7); old
+    background-color: rgba(18, 22, 40, 0.4);
+  }
+
+  .cdk-global-overlay-wrapper {
+    align-items: start !important;
+    padding-top: 168px;
+    @media screen and (max-width: 1440px), screen and (max-height: 900px) {
+      align-items: center !important;
+      padding-top: unset;
+    }
+  }
+}
+
+.wifi-network-item {
+  @include transition;
+  cursor: pointer;
+  border-radius: 5px;
+  &:hover {
+    background-color: $basket-row-bg;
+  }
+  &.active {
+    background-color: #dee8ff;
+  }
+
+  &::after {
+    @include transition;
+    cursor: pointer;
+    content: '';
+    width: 24px;
+    height: 24px;
+    background-repeat: no-repeat;
+    background-image: none;
+  }
+  &.blocked {
+    &::after {
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KICAgIDxwYXRoIGZpbGw9IiMzQTNFNTYiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTE2LjU0IDEwLjM5OGgtLjQzMmwtLjAwMi0yLjE1Yy0uMDAyLTIuMzQ0LTEuOTA4LTQuMjUtNC4yNTEtNC4yNDgtMi4zNDMuMDAyLTQuMjUgMS45MDgtNC4yNDggNC4yNTFsLjAwNCAyLjE1aC0uMTU0Yy0uODA1LjAwMy0xLjQ1OS42NTYtMS40NTcgMS40NjJ2Ni40MDNjMCAuODA2LjY1NSAxLjQ2IDEuNDYgMS40Nmw5LjA4My0uMDA2Yy44MDUgMCAxLjQ1OS0uNjU0IDEuNDU3LTEuNDZ2LTYuNDA0YzAtLjgwNi0uNjU1LTEuNDU4LTEuNDYtMS40NTh6bS03LjM2NC4wMDRMOS4xNzMgOC4yNWMwLTEuNDggMS4yMDItMi42ODQgMi42ODItMi42ODUgMS40OCAwIDIuNjg0IDEuMjAzIDIuNjg0IDIuNjgybC4wMDMgMi4xNS01LjM2Ni4wMDR6Ii8+Cjwvc3ZnPgo=');
+    }
+  }
+  &.active {
+    &::after {
+      background-image: url($selected-blue-mark);
+    }
+  }
+}
+
+.table-change-dialog-popup {
+  max-width: 100% !important;
+  position: absolute !important;
+  top: 0px;
+  height: 100%;
+  .mat-dialog-container {
+    box-shadow: none !important;
+    border-radius: 0px !important;
+    border: 0px !important;
+    padding: 0px !important;
+  }
+}
+.with-titlebar {
+  .table-change-dialog-popup {
+    top: 30px !important;
+  }
+}
+//nothing

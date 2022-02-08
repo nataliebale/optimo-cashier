@@ -1,0 +1,108 @@
+<div class="d-flex flex-column">
+  <div
+    class="w-100 d-flex align-items-center shadow-header-1 px-5 position-fixed bg-white"
+    style="height: 100px; z-index: 10;"
+  >
+    <div
+      (focusOut)="toggleSpaceDropdown(false)"
+      class="position-relative col-3 px-0"
+      *ngLet="spaces$ | async as spaces"
+    >
+      <div class="d-flex" (click)="toggleSpaceDropdown(true)">
+        <div
+          style="max-width: 330px;"
+          class="text-truncate font-color-dark font-size-16 font-family-bold cursor-pointer"
+        >
+          {{ selectedSpace?.name }}
+        </div>
+
+        <app-icon icon="arrow-down-small" class="icon-arrow-down"></app-icon>
+      </div>
+      <div
+        class="headbar-icons-popup px-0 py-5px no-triangle"
+        style="min-width: 92px; max-width: 348px;"
+        *ngIf="showSpaceDropdown"
+      >
+        <ng-container *ngFor="let space of spaces$ | async">
+          <button
+            [disabled]="selectedSpace.id === space.id"
+            class="btn shadow-none gray-hover px-3 border-0 w-100 rounded-0 font-size-16 font-color-dark font-family-regular d-flex py-3 align-items-center"
+            (click)="selectSpace(space)"
+          >
+            <span class="text-truncate cursor-pointer"> {{ space.name }} </span>
+          </button>
+        </ng-container>
+      </div>
+    </div>
+    <div class="col text-center font-size-20 font-color-dark font-family-bold">
+      აირჩიე მაგიდა
+    </div>
+    <div class="col-3 px-0 d-flex justify-content-end">
+      <button (click)="closeDialog(false)" class="btn btn-clean">
+        <app-icon icon="close-bold"></app-icon>
+      </button>
+    </div>
+  </div>
+
+  <!-- <div
+    class="w-100 flex-grow-1 m-0 align-items-start custom-scroll-1 py-32px pl-64px pr-60px"
+    style="margin-top: 100px !important;"
+  >
+    <div class="row m-0 justify-content-md-start justify-content-center">
+      <div
+        class="single-table-wrapper"
+        *ngFor="let table of tables$ | async"
+        (click)="selectTable(table)"
+      >
+        <div class="single-table" [class.busy]="table.tableStatus === TableStatus.busy">
+          <span class="w-100 single-table-name text-truncate text-center"> {{ table.name }} </span>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <div class="position-relative" #container style="margin-top: 102px !important;">
+    <ng-container *ngFor="let table of tables$ | async">
+      <div
+        class="single-table-wrapper p-0"
+        (click)="selectTable($event, table)"
+        [style.width.px]="table.arrangement?.width"
+        [style.height.px]="table.arrangement?.height"
+        [style.top.px]="table.arrangement?.top"
+        [style.left.px]="table.arrangement?.left"
+      >
+        <div
+          class="single-table"
+          [class.busy]="table.tableStatus === ETableStatus.busy"
+          [style.borderRadius]="
+            table.arrangement?.boxType === EBoxType.Rectangle
+              ? 0 + 'px'
+              : table.arrangement?.width > table.arrangement?.height
+              ? table.arrangement?.height + 'px'
+              : table.arrangement?.width + 'px'
+          "
+          [ngStyle]="{
+            cursor: table.tableStatus === ETableStatus.busy ? 'default' : 'pointer'
+          }"
+        >
+          <div
+            class="d-flex align-items-center justify-content-center flex-column w-100 mw-100"
+            [class.disabled]="table.tableStatus === ETableStatus.busy"
+          >
+            <span class="w-100 single-table-name text-truncate text-center">
+              {{ table.name }}
+            </span>
+            <span
+              class="operator font-size-16 font-family-regular text-truncate mw-100 px-2"
+              *ngIf="table.arrangement?.height > 80"
+            >
+              {{ (table.operatorName?.split(' '))[0] }}
+              <ng-container *ngIf="(table.operatorName?.split(' '))[1]">
+                {{ (table.operatorName?.split(' '))[1][0] }}
+              </ng-container>
+            </span>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

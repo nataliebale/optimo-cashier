@@ -1,0 +1,136 @@
+<div class="row m-0 align-items-center p-32px">
+  <div class="col-2 px-0"></div>
+  <div class="col text-center font-family-bold font-color-dark font-size-20">
+    {{ order?.name }}
+  </div>
+  <div class="col-2 text-right px-0">
+    <button class="btn btn-clean" (click)="onClose()">
+      <app-icon icon="close"></app-icon>
+    </button>
+  </div>
+</div>
+
+<div class="row m-0 pr-32px pl-32px">
+  <div
+    class="font-family-bold font-color-dark font-size-16 w-100 col px-0"
+    style="max-width: 395px;"
+  >
+    დასახელება
+  </div>
+
+  <div class="col d-flex px-0">
+    <div class="w-175px font-family-bold font-color-dark font-size-16">
+      შეკვეთილი
+    </div>
+    <div class="w-175px font-family-bold font-color-dark font-size-16 mx-4">
+      მიღებული
+    </div>
+    <div class="w-175px font-family-bold font-color-dark font-size-16">
+      შესყიდვის ფასი
+    </div>
+  </div>
+</div>
+
+<form *ngIf="order.purchaseOrderLines" [formGroup]="form" (submit)="onSubmit()">
+  <div class="w-100 overflow-auto custom-scroll-1" style="max-height: 372px;">
+    <div
+      *ngFor="let item of order.purchaseOrderLines"
+      class="row border-bottom border-item-border-color m-0 py-3 pr-32px pl-32px pb-3 justify-content-between"
+    >
+      <div class="d-flex flex-column w-100 col px-0" style="max-width: 395px;">
+        <div class="d-flex align-items-center">
+          <div
+            class="border border-item-border-color rounded bg-white overflow-hidden"
+            style="
+              width: 71px;
+              height: 60px;
+              background-size: contain;
+              background-position: center;
+              background-repeat: no-repeat;
+            "
+            [ngStyle]="{
+              'background-image': 'url(' + item?.stockItem?.photoUrl + ')'
+            }"
+          >
+            <!-- <img [src]="item.stockItem.photoUrl" alt="" class="w-100 h-100" /> -->
+          </div>
+
+          <span
+            class="font-family-regular font-color-dark font-size-16 pl-4"
+            style="max-width: 280px;"
+          >
+            {{ item?.stockItem?.name }}</span
+          >
+        </div>
+      </div>
+      <div class="col d-flex px-0">
+        <div class="d-flex flex-column col px-0 align-items-center position-relative">
+          <input
+            type="number"
+            [value]="item.orderedQuantity"
+            disabled
+            class="input-regular h-56px w-175px mt-1 bg-white font-family-regular font-color-dark font-size-16"
+          />
+        </div>
+        <div class="d-flex flex-column mx-4 col p-0 align-items-center position-relative">
+          <input
+            type="text"
+            formControlName="receivedQuantity_{{ item.id }}"
+            (focus)="onInputFocus('receivedQuantity_' + item.id, $event)"
+            class="input-regular h-56px w-175px mt-1 bg-white font-family-regular font-color-dark font-size-16"
+          />
+        </div>
+        <div class="d-flex flex-column col p-0 align-items-center position-relative">
+          <input
+            type="text"
+            formControlName="receivedUnitCost_{{ item.id }}"
+            (focus)="onInputFocus('receivedUnitCost_' + item.id, $event)"
+            class="input-regular h-56px w-175px mt-1 bg-white font-family-regular font-color-dark font-size-16"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row m-0 justify-content-between py-3 px-32px align-items-center">
+    <div class="">
+      <span class="font-family-bold font-color-dark font-size-20 line-height-normal"
+        >ჯამური თანხა:</span
+      >
+      <span class="font-family-bold font-color-dark font-size-20 line-height-normal pl-3"
+        >{{ order?.expectedTotalCost }} ₾</span
+      >
+    </div>
+    <button
+      type="submit"
+      [disabled]="form.invalid || isSubmited"
+      class="btn btn-clean font-family-bold font-color-white bg-blue font-size-16 h-56px w-175px"
+    >
+      <span> მიღება </span>
+
+      <app-icon *ngIf="isSubmited" icon="loader"></app-icon>
+    </button>
+  </div>
+
+  <div
+    *ngIf="focusedFormControl"
+    (focusOut)="onNumpadFocusOut($event)"
+    class="numpad-second-wrapper d-flex flex-column justify-content-center"
+    [class.top]="numpadCoordinates.openTop"
+    [style.top.px]="numpadCoordinates.y"
+    [style.left.px]="numpadCoordinates.x"
+  >
+    <div class="numpad-second">
+      <app-numpad [formControl]="focusedFormControl" [isDecimal]="true"></app-numpad>
+    </div>
+
+    <button
+      (click)="onNumpadClose()"
+      class="btn btn-clean font-size-16 font-family-bold font-color-dark mt-20px"
+    >
+      დახურვა
+    </button>
+  </div>
+</form>
+<!-- </div>
+  </div>
+</div> -->

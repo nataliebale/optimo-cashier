@@ -1,0 +1,36 @@
+<div class="setup">
+  <div class="setup__menu" [ngSwitch]="step">
+    <app-setup-login *ngSwitchCase="'login'" (signIn)="onSignIn($event)"></app-setup-login>
+
+    <app-setup-companies
+      *ngSwitchCase="'companies'"
+      [credentials]="credentials"
+      [companies]="companies"
+      (signIn)="onSignIn($event)"
+      (back)="step = 'login'"
+    ></app-setup-companies>
+
+    <app-setup-legal-entity
+      *ngSwitchCase="'legalEntity'"
+      [credentials]="credentials"
+      (legalEntity)="onLegalEntityChange($event)"
+      (back)="step = 'login'"
+    ></app-setup-legal-entity>
+
+    <app-setup-location
+      *ngSwitchCase="'location'"
+      [role]="role"
+      [legalEntityId]="legalEntityId"
+      (locationChange)="onLocationChange($event)"
+      (back)="step = role === 'Admin' ? 'legalEntity' : 'login'"
+    ></app-setup-location>
+
+    <app-setup-config
+      *ngSwitchCase="'config'"
+      [legalEntityId]="legalEntityId"
+      [location]="location"
+      [productType]="productType"
+      (back)="step = 'location'"
+    ></app-setup-config>
+  </div>
+</div>

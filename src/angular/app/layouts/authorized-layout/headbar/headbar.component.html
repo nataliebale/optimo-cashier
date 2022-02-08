@@ -1,0 +1,252 @@
+<div
+  class="w-100 d-flex shadow-header-1 px-0 position-relative bg-white headbar"
+  *ngLet="shift$ | async as shift"
+  [class.disabled]="deletePrivilegePassword"
+>
+  <!-- px-custlg-5 -->
+
+  <!-- left side start -->
+  <div class="col d-flex align-items-center px-0">
+    <div class="w-100 d-flex h-100">
+      <div class="d-flex align-items-center h-100">
+        <!-- Back button start -->
+        <ng-container
+          *ngIf="(!isSpacesPage && isHorecaMode) || isPaymentPage || isOrderHistoryPage"
+        >
+          <button
+            class="btn shadow-none border-0 p-0 m-0 pl-custlg-5 pl-4 h-100"
+            (click)="onBack()"
+          >
+            <app-icon icon="back"></app-icon>
+          </button>
+        </ng-container>
+        <!-- Back button end -->
+
+        <!-- Entity Switcher start -->
+        <ng-container *ngIf="!isPaymentPage && !isSpacesPage && !isOrderHistoryPage">
+          <div
+            class="cursor-pointer font-color-dark font-family-bold font-size-custlg-16 font-size-14"
+            [ngClass]="{ 'pl-custlg-5 pl-4': !isHorecaMode, 'pl-custlg-4 pl-2': isHorecaMode }"
+            (click)="onSwitchEntity()"
+          >
+            <app-icon icon="change"></app-icon>
+            <!-- {{ entitySwitcher }} -->
+            <span *ngIf="entitySwitcher === 'საცალო გაყიდვები'" class="cursor-pointer pl-1">
+              <span class="d-xxl-none d-inline cursor-pointer">საც.</span>
+              <span class="d-xxl-inline d-none cursor-pointer">საცალო</span> გაყიდვები</span
+            >
+            <span *ngIf="entitySwitcher !== 'საცალო გაყიდვები'" class="cursor-pointer pl-1"
+              >ი/პ გაყიდვები</span
+            >
+          </div>
+        </ng-container>
+        <!-- Entity Switcher end -->
+
+        <!-- space dropdown start -->
+        <ng-container *ngIf="isHorecaMode && isSpacesPage">
+          <div (focusOut)="toggleSpaceDropdown(false)" class="position-relative pl-5">
+            <div class="d-flex" (click)="toggleSpaceDropdown(true)">
+              <div
+                style="max-width: 330px;"
+                class="text-truncate font-color-dark font-size-16 font-family-bold"
+              >
+                {{ selectedSpace.name }}
+              </div>
+
+              <app-icon icon="arrow-down-small" class="icon-arrow-down"></app-icon>
+            </div>
+            <div
+              class="headbar-icons-popup px-0 py-5px no-triangle max-h-568px"
+              style="min-width: 92px; width: 342px;"
+              *ngIf="showSpaceDropdown"
+            >
+              <ng-container *ngFor="let space of spaces">
+                <button
+                  [class.selected]="selectedSpace.id === space.id"
+                  class="btn shadow-none gray-hover px-3 border-0 w-100 rounded-0 font-size-16 font-color-dark font-family-regular d-flex py-3 align-items-center justify-content-between"
+                  (click)="selectSpaceHandler(space.id)"
+                >
+                  <span class="text-truncate cursor-pointer w-90 text-left">
+                    {{ space.name }}
+                  </span>
+                  <ng-container *ngIf="space.checks">
+                    <div class="d-flex align-items-center flex-grow-1 justify-content-end">
+                      <div
+                        class="font-family-bold font-color-dark font-size-14 flex-grow-1 text-center text-truncate pr-1"
+                      >
+                        {{ space.checks }}
+                      </div>
+                      <div class="rounded-circle bg-green" style="width: 8px; height: 8px;"></div>
+                    </div>
+                  </ng-container>
+                </button>
+              </ng-container>
+            </div>
+          </div>
+        </ng-container>
+        <!-- space dropdown end -->
+      </div>
+
+      <!-- check info start -->
+      <ng-container *ngIf="!isSpacesPage && !isOrderHistoryPage && !isPaymentPage">
+        <ng-container *ngIf="!isHorecaMode">
+          <div
+            class="col px-0 d-flex justify-content-center align-items-center font-color-dark font-family-bold font-size-custlg-16 font-size-14"
+          >
+            <div
+              class="pl-3 py-11px pr-5px btn-div d-flex align-items-center"
+              (click)="checksButtonClicked.emit(true); openCheck = true"
+              [ngClass]="{ disabled: !shift, 'bg-product-list-bg': openCheck }"
+            >
+              <span style="max-width: 194px;" class="overflow-hidden text-nowrap pr-custlg-1">
+                <span class="d-none d-xxl-inline">შეკვეთა: </span> <span>#{{ activeCheckId }}</span>
+              </span>
+              <app-icon
+                icon="arrow-down-small"
+                class="icon-arrow-down"
+                [class.open]="openCheck"
+              ></app-icon>
+            </div>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="isHorecaMode">
+          <div
+            class="col px-0 d-flex justify-content-center align-items-center font-color-dark font-family-bold"
+          >
+            <div
+              class="font-color-dark font-family-bold font-size-custlg-16 font-size-14 pr-custlg-4 pr-2 border-right text-truncate headbar-order-text"
+            >
+              <span class="d-none d-xxl-inline">მაგიდა: </span><span>{{ selectedTableName }}</span>
+            </div>
+            <div
+              class="font-color-dark font-family-bold font-size-custlg-16 font-size-14 pl-custlg-4 pl-2 overflow-hidden text-nowrap headbar-table-text"
+            >
+              <span class="d-none d-xxl-inline">შეკვეთა: </span><span>#{{ activeCheckId }}</span>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+      <!-- check info end -->
+    </div>
+  </div>
+  <!-- left side end -->
+
+  <!-- center start -->
+  <div class="d-flex justify-content-center align-items-center px-0">
+    <a (click)="goToMainPageUrl()" class="d-flex">
+      <img
+        class="headbar-logo d-custmd-flex d-none"
+        src="../../../../assets/images/logo/logo.svg"
+      />
+      <img
+        class="headbar-logo d-custmd-none d-flex"
+        src="../../../../assets/images/logo/logo-sm.svg"
+      />
+    </a>
+  </div>
+  <!-- center end -->
+
+  <!-- right side start -->
+  <div class="col d-flex justify-content-end align-items-center px-0 position-relative">
+    <app-headbar-update
+      [updateIsAvaliable]="updateIsAvaliable"
+      (open)="checkForUpdate$.next()"
+      (update)="onClickUpdate()"
+    ></app-headbar-update>
+
+    <app-headbar-sync
+      [openAndStart$]="openAndStartSyncDropdown$"
+      [syncStatus]="syncStatus"
+      (sync)="onSync()"
+    ></app-headbar-sync>
+    <div (click)="openWifiPopup()" class="btn-div p-0 ml-3">
+      <app-icon icon="wifi" *ngIf="activeWifiNetwork?.ssid"></app-icon>
+      <app-icon icon="wifi-white" *ngIf="!activeWifiNetwork?.ssid"></app-icon>
+    </div>
+
+    <div
+      class="font-size-16 font-color-dark font-family-bold pr-custlg-4 pr-3 d-flex align-items-center ml-custlg-4 ml-3"
+    >
+      <div class="bg-border-color-bg mr-4" style="width: 1px; height: 24px;"></div>
+      <div (focusOut)="toggleUserDropdown(false)">
+        <div
+          class="d-flex align-items-center justify-content-center position-relative"
+          (click)="toggleUserDropdown(true)"
+        >
+          <div
+            class="btn-div bg-payment-details-bg rounded-circle mr-2 d-flex justify-content-center align-items-center"
+            style="width: 36px; height: 36px; flex: 0 0 36px;"
+          >
+            <span
+              class="pt-2px font-color-white font-family-bold font-size-custlg-15 font-size-14 cursor-pointer"
+            >
+              {{ (operator?.name)[0] }}
+            </span>
+          </div>
+          <span class="ml-1 cursor-pointer font-size-custlg-16 font-size-14">
+            {{ (operator?.name?.split(' '))[0] }}
+            <ng-container *ngIf="(operator?.name?.split(' '))[1]">
+              {{ (operator?.name?.split(' '))[1][0] }}.
+            </ng-container>
+          </span>
+
+          <div
+            *ngIf="isHorecaMode && showUserDropdown"
+            class="headbar-icons-popup px-0 py-5px"
+            style="width: 305px;"
+          >
+            <button
+              (click)="onSwitchUser()"
+              class="btn shadow-none gray-hover pl-3 border-0 w-100 p-0 rounded-0 font-size-16 font-color-dark font-family-regular d-flex py-10px align-items-center"
+            >
+              <app-icon icon="users"></app-icon>
+              <span class="pl-2"> მომხმარებლის შეცვლა </span>
+            </button>
+
+            <button
+              (click)="onLogout()"
+              class="btn shadow-none gray-hover pl-3 border-0 w-100 p-0 rounded-0 font-size-16 font-color-dark font-family-regular d-flex py-10px align-items-center"
+            >
+              <app-icon icon="log-out"></app-icon>
+              <span class="pl-2"> გამოსვლა </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-border-color-bg" style="width: 1px; height: 24px;"></div>
+
+    <div
+      [class.disabled]="syncStatus === SyncStatus.Progress"
+      class="btn-div ml-custlg-4 ml-3 bg-blue rounded-circle d-flex justify-content-center align-items-center mr-custlg-5 mr-4"
+      style="width: 36px; height: 36px; flex: 0 0 36px;"
+      (click)="onBurgerMenuClick()"
+    >
+      <app-icon icon="burger-white"></app-icon>
+    </div>
+  </div>
+  <!-- right side end -->
+
+  <ng-template *ngIf="shift" #shiftPopupFooter>
+    <div class="font-size-15 font-color-dark w-100 text-center">
+      <span class="font-family-regular">{{ operator?.name }}, </span>
+      <span class="font-family-bold"> {{ shift.dateBegin | date: 'd MMM y, HH:mm' }}</span>
+    </div>
+  </ng-template>
+</div>
+
+<ng-template #closeDayTitle>
+  <div
+    class="m-auto px-0 bg-product-list-bg d-flex rounded-circle d-flex justify-content-center align-items-center"
+    style="width: 80px; height: 80px;"
+  >
+    <app-icon icon="keys" class="icon-dark"></app-icon>
+  </div>
+
+  <div
+    class="w-100 py-32px font-size-20 font-family-bold font-color-dark text-center line-height-normal"
+  >
+    ნამდვილად გსურთ დღის დახურვა?
+  </div>
+</ng-template>

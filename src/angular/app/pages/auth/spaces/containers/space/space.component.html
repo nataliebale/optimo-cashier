@@ -1,0 +1,17 @@
+<app-authorized-layout
+  (selectSpace)="selectSpace($event)"
+  [spaces]="spaces"
+  [selectedSpace]="selectedSpace"
+  [isHorecaMode]="isHorecaMode"
+  [openBurgerMenuForShiftStart]="openBurgerMenuForShiftStart"
+>
+  <ng-container *ngIf="selectedSpace">
+    <app-tables
+      [tables]="tables"
+      [operatorData]="operatorData"
+      (tableSelect)="selectTable($event)"
+      [disabled]="!!!(shift$ | async)"
+    >
+    </app-tables>
+  </ng-container>
+</app-authorized-layout>

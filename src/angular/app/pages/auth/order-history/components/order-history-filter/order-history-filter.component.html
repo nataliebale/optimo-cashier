@@ -1,0 +1,104 @@
+<div class="d-flex align-items-center justify-content-between">
+  <div class="position-relative d-xl-none" (focusOut)="toggleEntitySwitcher(false)">
+    <div class="d-flex align-items-center">
+      <div
+        style="width: 138px;"
+        class="text-truncate font-color-dark font-size-14 font-family-bold cursor-pointer"
+        (click)="toggleEntitySwitcher(true)"
+      >
+        <ng-container *ngIf="!this.entity">საცალო გაყიდვები</ng-container>
+        <ng-container *ngIf="this.entity">ი/პ გაყიდვები</ng-container>
+      </div>
+
+      <app-icon icon="arrow-down-small" class="icon-arrow-down"></app-icon>
+    </div>
+    <div
+      *ngIf="showEntitySwitcher"
+      class="headbar-icons-popup px-0 py-5px no-triangle"
+      style="min-width: 92px; width: 342px;"
+    >
+      <button
+        class="btn shadow-none gray-hover px-3 border-0 w-100 rounded-0 font-size-16 font-color-dark font-family-regular d-flex py-3 align-items-center justify-content-between"
+      >
+        <span
+          *ngIf="!this.entity"
+          class="text-truncate cursor-pointer w-90 text-left"
+          (click)="changeOrderTypeHandler(true)"
+          >ი/პ გაყიდვები</span
+        >
+        <span
+          *ngIf="this.entity"
+          class="text-truncate cursor-pointer w-90 text-left"
+          (click)="changeOrderTypeHandler(false)"
+          >საცალო გაყიდვები</span
+        >
+      </button>
+    </div>
+  </div>
+  <div class="custom-switcher-wrapper" style="max-width: 360px; height: 48px;">
+    <div
+      class="custom-switch col px-0 first"
+      [class.active]="!this.entity"
+      (click)="changeOrderTypeHandler(false)"
+    >
+      საცალო გაყიდვები
+    </div>
+    <div
+      class="custom-switch col px-0"
+      [class.active]="this.entity"
+      (click)="changeOrderTypeHandler(true)"
+    >
+      ი/პ გაყიდვები
+    </div>
+    <div class="custom-switch-bg"></div>
+  </div>
+  <div class="d-flex">
+    <div class="position-relative" (focusOut)="toggleFilterDropdown(false)">
+      <div
+        [class.bg-basket-row-bg]="showFilter"
+        (click)="toggleFilterDropdown()"
+        class="rounded-7px"
+      >
+        <app-icon icon="filter" class="icon-w-h-48px cursor-pointer"></app-icon>
+      </div>
+      <div
+        class="headbar-icons-popup px-0 py-5px no-triangle"
+        style="min-width: 92px; width: 288px; top: 52px;"
+        *ngIf="showFilter"
+      >
+        <button
+          [class.selected]="filter.paymentMethod === paymentMethod.value"
+          class="btn shadow-none gray-hover px-3 border-0 w-100 rounded-0 font-size-16 font-color-dark font-family-regular d-flex py-3 align-items-center justify-content-between"
+          (click)="selectPaymentMethod(paymentMethod.value)"
+          *ngFor="let paymentMethod of paymentMethodsList"
+        >
+          <span class="text-truncate cursor-pointer w-90 text-left">
+            {{ paymentMethod.label }}
+          </span>
+          <app-icon
+            [class.d-none]="!(filter.paymentMethod === paymentMethod.value)"
+            icon="correct-blue-sm"
+          ></app-icon>
+        </button>
+      </div>
+    </div>
+    <div class="position-relative">
+      <div
+        [class.bg-basket-row-bg]="isDatePickerVisible"
+        class="rounded-7px"
+        (click)="toggleDatePicker($event)"
+      >
+        <app-icon icon="calendar" class="icon-w-h-48px cursor-pointer"></app-icon>
+      </div>
+      <app-date-picker
+        [showActionsAndInput]="false"
+        [isDatePickerVisible]="isDatePickerVisible"
+        (onIsDatePickerVisible)="isDatePickerVisible = $event"
+        (dateChange)="onDateChanged($event)"
+        [defaultDate]="[filter?.from, filter?.to]"
+        [isRangePicker]="true"
+        class="date-picker-regular w-340px top-4px l-0"
+      ></app-date-picker>
+    </div>
+  </div>
+</div>

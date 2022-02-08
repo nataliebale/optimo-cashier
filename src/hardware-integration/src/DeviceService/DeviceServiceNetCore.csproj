@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <ApplicationIcon>Resources\favicon.ico</ApplicationIcon>
+    <AssemblyName>OptimoDeviceService</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="3.1.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Serilog" Version="2.8.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="4.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Drivers\IngenicoCLS\IngenicoCLS.csproj" />
+    <ProjectReference Include="..\Services\Odin\Polymath.Odin.DaisyExpert\Polymath.Odin.DaisyExpert.csproj" />
+    <ProjectReference Include="..\Services\Odin\Polymath.Odin.HAL.NodeJS\Polymath.Odin.HAL.NodeJS.csproj" />
+    <ProjectReference Include="..\Services\Odin\Polymath.Odin.HAL\Polymath.Odin.HAL.csproj" />
+    <ProjectReference Include="..\Services\Odin\Polymath.Odin.Ingenico\Polymath.Odin.Ingenico.csproj" />
+    <ProjectReference Include="..\Services\Odin\Polymath.Odin.IntegrationShared\Polymath.Odin.IntegrationShared.csproj" />
+    <ProjectReference Include="..\Services\Odin\Polymath.Odin.KasaGe\Polymath.Odin.KasaGe.csproj" />
+  </ItemGroup>
+</Project>

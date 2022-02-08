@@ -1,0 +1,35 @@
+<div class="card">
+  <div class="card-header">ფილიალი</div>
+  <div class="card-body">
+    <ng-select
+      [items]="locationList"
+      [(ngModel)]="location"
+      bindLabel="name"
+      [searchable]="true"
+      [clearable]="false"
+      class="form-control custom-ng-select setup-select"
+      placeholder="აირჩიეთ ფილიალი"
+    >
+    </ng-select>
+  </div>
+  <div class="card-footer">
+    <button
+      class="form-button setup__form-button-back"
+      (click)="back.emit()"
+      style="height: 48px;"
+      type="button"
+    >
+      უკან
+    </button>
+    <button
+      class="form-button setup__form-button-next"
+      style="height: 48px;"
+      [disabled]="!location"
+      type="submit"
+      (click)="onSubmit()"
+    >
+      შემდეგ
+    </button>
+    <div style="clear: both;"></div>
+  </div>
+</div>

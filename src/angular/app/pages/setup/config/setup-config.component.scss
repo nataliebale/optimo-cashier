@@ -1,0 +1,77 @@
+$blue: #4562ff;
+$white: #e6ecf5;
+$border-color: #e6ecf5;
+$border-radius: 5px;
+$body-color: #515366;
+$custom-checkbox-width: 18px;
+$custom-checkbox-height: 18px;
+$custom-checkbox-box-shadow: 0 7px 64px 0 rgba(0, 0, 0, 0.07);
+$custom-checkbox-selected-bg: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiMwMDc3ZmYiIGZpbGwtcnVsZT0ibm9uemVybyIgZD0iTTExLjQ5NCA0Ljc1OGEuODgyLjg4MiAwIDAgMSAxLjI0OCAxLjI0OEw3LjQ0NyAxMS4zYS44ODIuODgyIDAgMCAxLTEuMjQ3IDBMMy4yNTggOC4zNkEuODgyLjg4MiAwIDAgMSA0LjUwNiA3LjExTDYuODI0IDkuNDNsNC42Ny00LjY3eiIvPgo8L3N2Zz4K';
+$custom-checkbox-selected-blue-bg: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiNmZmYiIGZpbGwtcnVsZT0ibm9uemVybyIgZD0iTTExLjQ5NCA0Ljc1OGEuODgyLjg4MiAwIDAgMSAxLjI0OCAxLjI0OEw3LjQ0NyAxMS4zYS44ODIuODgyIDAgMCAxLTEuMjQ3IDBMMy4yNTggOC4zNkEuODgyLjg4MiAwIDAgMSA0LjUwNiA3LjExTDYuODI0IDkuNDNsNC42Ny00LjY3eiIvPgo8L3N2Zz4K';
+$custom-checkbox-disabled-bg: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiNDMEM1RDIiIGZpbGwtcnVsZT0ibm9uemVybyIgZD0iTTExLjQ5NCA0Ljc1OGEuODgyLjg4MiAwIDAgMSAxLjI0OCAxLjI0OEw3LjQ0NyAxMS4zYS44ODIuODgyIDAgMCAxLTEuMjQ3IDBMMy4yNTggOC4zNkEuODgyLjg4MiAwIDAgMSA0LjUwNiA3LjExTDYuODI0IDkuNDNsNC42Ny00LjY3eiIvPgo8L3N2Zz4K';
+.custom-checkbox {
+  line-height: 1.43;
+  $root: &;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  &-selected-blue {
+    #{$root}-control {
+      &:not(:disabled):checked ~ label::before {
+        background: {
+          image: url($custom-checkbox-selected-blue-bg);
+          color: $blue;
+        }
+      }
+    }
+  }
+  &-control {
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+    &:checked ~ label::before {
+      background: url($custom-checkbox-selected-bg) no-repeat center $white;
+      background-size: 96%;
+      border-color: transparent;
+    }
+    &:disabled {
+      ~ label {
+        cursor: not-allowed;
+        color: #c0c5d2;
+        &::before {
+          background-color: #f5f6f9;
+        }
+      }
+      &:checked {
+        ~ label::before {
+          background-image: url($custom-checkbox-disabled-bg);
+        }
+      }
+    }
+  }
+  &-label {
+    font-family: 'NotoSans';
+    font-size: 14px;
+    font-weight: 400;
+    $checkbox-label: &;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+    float: left;
+    width: 50%;
+    cursor: pointer;
+    position: relative;
+    color: $body-color;
+    &::before {
+      content: '';
+      display: block;
+      width: $custom-checkbox-width;
+      height: $custom-checkbox-height;
+      box-shadow: $custom-checkbox-box-shadow;
+      background-color: $white;
+      border: 2px solid $border-color;
+      border-radius: $border-radius;
+      margin-right: 10px;
+    }
+  }
+}

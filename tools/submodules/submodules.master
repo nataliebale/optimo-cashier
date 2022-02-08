@@ -1,0 +1,12 @@
+[submodule "git_modules/hardware-integration"]
+	path = git_modules/hardware-integration
+	url = git@bitbucket.org:polymathodin/hardware-integration
+	branch = master
+	update = rebase
+	ignore = all
+[submodule "git_modules/odin-shell"]
+	path = git_modules/odin-shell
+	url = git@bitbucket.org:polymathodin/odin-shell.git
+	branch = master
+	update = rebase
+	ignore = all

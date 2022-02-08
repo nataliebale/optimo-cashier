@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Edge.js.CSharp" Version="1.2.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis" Version="3.4.0" />
+    <PackageReference Include="Microsoft.DotNet.InternalAbstractions" Version="1.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="3.1.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Serilog" Version="2.8.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="4.0.0" />
+    <PackageReference Include="Edge.js" Version="8.2.1" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Drivers\IngenicoCLS\IngenicoCLS.csproj" />
+    <ProjectReference Include="..\..\src\Services\Odin\Polymath.Odin.DaisyExpert\Polymath.Odin.DaisyExpert.csproj" />
+    <ProjectReference Include="..\..\src\Services\Odin\Polymath.Odin.HAL.NodeJS\Polymath.Odin.HAL.NodeJS.csproj" />
+    <ProjectReference Include="..\..\src\Services\Odin\Polymath.Odin.HAL\Polymath.Odin.HAL.csproj" />
+    <ProjectReference Include="..\..\src\Services\Odin\Polymath.Odin.Ingenico\Polymath.Odin.Ingenico.csproj" />
+    <ProjectReference Include="..\..\src\Services\Odin\Polymath.Odin.IntegrationShared\Polymath.Odin.IntegrationShared.csproj" />
+    <ProjectReference Include="..\..\src\Services\Odin\Polymath.Odin.KasaGe\Polymath.Odin.KasaGe.csproj" />
+  </ItemGroup>
+
+</Project>

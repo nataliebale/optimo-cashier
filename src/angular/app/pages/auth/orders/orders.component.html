@@ -1,0 +1,50 @@
+<div class="w-100 bg-white h-100 d-flex flex-column custom-scroll-1">
+  <div
+    class="row m-0 justify-content-between pr-5 pl-0 d-flex align-items-center"
+    style="height: 100px;"
+  >
+    <div class="col-2 px-0 h-100">
+      <button class="btn shadow-none border-0 m-0 p-0 pl-5 h-100" (click)="goToDashboard()">
+        <app-icon icon="back"></app-icon>
+      </button>
+    </div>
+    <div class="col text-center font-size-20 font-family-bold font-color-dark">
+      შესყიდვები
+    </div>
+    <div class="col-2 px-0"></div>
+  </div>
+
+  <div
+    *ngIf="!purchaseGroupedOrders?.length"
+    class="w-100 flex-grow-1 flex-column d-flex align-items-center align-items-center justify-content-center"
+  >
+    <app-icon icon="empty-orders"></app-icon>
+    <div class="font-size-16 font-color-dark font-family-regular">შესყიდვები ცარიელია</div>
+  </div>
+
+  <div
+    class="row m-0 px-36px orders-row mt-32px pb-20px"
+    *ngFor="let orders of purchaseGroupedOrders"
+  >
+    <div class="row m-0 justify-content-between w-100 mb-20px px-12px">
+      <div class="font-size-18 font-family-bold font-color-dark">
+        {{ orders.label }}
+      </div>
+      <div>
+        <button (click)="orders.collapsed = !orders.collapsed" class="btn btn-clean">
+          <app-icon icon="arrow-down" class="icon-arrow-down" [class.open]="orders.collapsed">
+          </app-icon>
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="orders.collapsed" class="row m-0 w-100 row-dropdown">
+      <div class="col-xl-3 col-4 py-12px" *ngFor="let order of orders.value">
+        <app-order-item
+          [order]="order"
+          [overtime]="orders.label === 'დაგვიანებული'"
+        ></app-order-item>
+      </div>
+    </div>
+  </div>
+</div>

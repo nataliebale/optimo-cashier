@@ -1,0 +1,53 @@
+.numpad {
+  & * {
+    box-sizing: border-box;
+  }
+
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &-header {
+    text-align: right;
+    height: 90px;
+    padding: 28px;
+    flex-shrink: 0;
+  }
+
+  &-keys {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-grow: 1;
+  }
+
+  &-key {
+    background-color: transparent;
+    flex: 0 0 33.333333%;
+    // height: 100px;
+    padding: 0;
+    margin: 0;
+    border: 1px solid transparent;
+    border-top-color: #e6ecf5;
+    font-family: NotoSans;
+    font-size: 24px;
+    color: #969ab2;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:active {
+      border: solid 1px #4562ff;
+
+      &:not(:nth-child(3n)) {
+        border-color: #4562ff;
+      }
+    }
+
+    &:not(:nth-child(3n)) {
+      border-right-color: #e6ecf5;
+    }
+  }
+}

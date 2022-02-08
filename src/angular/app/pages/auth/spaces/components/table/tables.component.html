@@ -1,0 +1,79 @@
+<div
+  class="bg-white w-100 h-100 m-0 align-items-start custom-scroll-1"
+  [class.disabled]="disabled"
+  style="overflow-x: hidden;"
+>
+  <div class="position-relative h-100">
+    <ng-container *ngFor="let table of tables">
+      <div
+        class="single-table-wrapper p-0"
+        (click)="tableSelectHandler(table)"
+        (focusOut)="hideShowEstimatedNumberOfGuests(table)"
+        [style.width.px]="table.arrangement?.width"
+        [style.height.px]="table.arrangement?.height"
+        [style.top.px]="table.arrangement?.top"
+        [style.left.px]="table.arrangement?.left"
+      >
+        <div
+          class="single-table"
+          [class.busy]="table.tableStatus === ETableStatus.busy"
+          [class.showGuest]="table.showGuest"
+          [style.borderRadius]="
+            table.arrangement?.boxType === EBoxType.Rectangle
+              ? 0 + 'px'
+              : table.arrangement?.width > table.arrangement?.height
+              ? table.arrangement?.height + 'px'
+              : table.arrangement?.width + 'px'
+          "
+        >
+          <div
+            class="d-flex align-items-center justify-content-center flex-column w-100 text-wrapper"
+            [class.top]="getGuestWrapperPosition(tableName)"
+          >
+            <span
+              class="w-100 single-table-name text-truncate text-center cursor-pointer"
+              #tableName
+            >
+              {{ table.name }}
+            </span>
+            <span
+              class="mw-100 text-center operator font-size-16 font-family-regular text-truncate px-2"
+              *ngIf="table.arrangement?.height > 80"
+            >
+              {{ (table.operatorName?.split(' '))[0] }}
+              <ng-container *ngIf="(table.operatorName?.split(' '))[1]">
+                {{ (table.operatorName?.split(' '))[1][0] }}
+              </ng-container>
+            </span>
+          </div>
+          <ng-container *ngIf="table.showGuest">
+            <div
+              class="single-table-guests-wrapper"
+              [class.top]="getGuestWrapperPosition(tableName)"
+              [class]="getXOffsetClass(table)"
+            >
+              <div class="single-table-guests d-flex flex-column">
+                <div class="single-table-guests-number no-hover">
+                  სტუმარი
+                </div>
+                <div
+                  class="custom-scroll-2 w-100 flex-grow-1 d-flex flex-column single-table-guests-number-wrapper"
+                >
+                  <ng-container *ngFor="let number of estimatedNumberOfGuests">
+                    <button
+                      class="single-table-guests-number btn w-100 bg-white shadow-none py-0"
+                      (click)="selectEstimatedNumberOfGuests(number, table)"
+                    >
+                      <span class="text-truncate"> {{ number }} </span>
+                    </button>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
+<!-- //nothing -->

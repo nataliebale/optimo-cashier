@@ -1,0 +1,57 @@
+<div class="card">
+  <div class="card-header">
+    კონფიგურაცია
+  </div>
+  <div class="card-body">
+    <div class="form-group">
+      <ng-select
+        [items]="environmentMap"
+        [(ngModel)]="selectedEnv"
+        bindValue="value"
+        bindLabel="text"
+        [searchable]="true"
+        [clearable]="false"
+        class="form-control custom-ng-select setup-select"
+      >
+      </ng-select>
+    </div>
+    <div class="form-group">
+      <input
+        type="text"
+        class="form-control h-56px"
+        placeholder="დევაისის სერიული ნომერი"
+        [(ngModel)]="deviceSerialNumber"
+      />
+    </div>
+    <ng-select
+      [items]="legalEntities$ | async"
+      bindLabel="caption"
+      [loading]="legalEntitiesLoading"
+      [typeahead]="search$"
+      [(ngModel)]="selectedLegalEntity"
+      class="form-control custom-ng-select setup-select"
+      placeholder="აირჩიე"
+    >
+    </ng-select>
+  </div>
+  <div class="card-footer">
+    <button
+      class="form-button setup__form-button-back"
+      (click)="back.emit()"
+      style="height: 48px;"
+      type="button"
+    >
+      უკან
+    </button>
+    <button
+      class="form-button setup__form-button-next"
+      type="submit"
+      (click)="onSubmit()"
+      style="height: 48px;"
+      [disabled]="!selectedLegalEntity"
+    >
+      შემდეგ
+    </button>
+    <div style="clear: both;"></div>
+  </div>
+</div>

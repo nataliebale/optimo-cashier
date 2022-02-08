@@ -1,0 +1,205 @@
+<!-- <div
+  class="d-flex flex-column bg-white justify-content-center"
+  style="padding-top: 8px; padding-bottom: 8px;"
+>
+  <div class="row m-0 align-items-center px-4 pb-32px">
+    <div class="col-2 px-0"></div>
+    <div
+      class="col text-center font-family-bold font-color-dark font-size-20 line-height-normal"
+    >
+      {{ (data?.products)[0][data?.isIMEI ? 'name' : 'barcode'] }}
+    </div>
+    <div class="col-2 text-right px-0">
+      <button (click)="onClose()" class="btn btn-clean">
+        <app-icon icon="close"></app-icon>
+      </button>
+    </div>
+  </div>
+
+
+
+
+
+  <div *ngIf="!data?.isIMEI" class="assortiments-dialog__list">
+    <div class="assortiments-dialog__list-header">
+      <div>დასახელება</div>
+      <div>მარაგი</div>
+    </div>
+    <div
+      *ngFor="let item of data.products"
+      class="assortiments-dialog__list-item"
+      (click)="onSelect(item)"
+    >
+      <img
+        *ngIf="item?.photoUrl"
+        class="assortiments-dialog__list-item-img"
+        [src]="sanitizer.bypassSecurityTrustUrl(item.photoPath)"
+        alt=""
+      />
+      <div
+        *ngIf="!item?.photoUrl"
+        class="assortiments-dialog__list-item-img-placeholder"
+      >
+        {{ item.name.substring(0, 2) }}
+      </div>
+
+      {{ item.name }}
+
+      <div style="margin-left: auto;">{{ item.quantity }}</div>
+    </div>
+  </div>
+
+
+
+
+
+
+  <div class="row m-0 px-4 pb-12px" *ngIf="!data?.isIMEI">
+    <div
+      class="col-7 font-family-bold font-color-dark font-size-16 px-0 mr-10px"
+    >
+      დასახელება
+    </div>
+    <div class="col font-family-bold font-color-dark font-size-16 px-0">
+      მარაგი
+    </div>
+  </div>
+
+  <div class="row m-0 px-4 pb-12px" *ngIf="data?.isIMEI">
+    <div
+      class="col-7 font-family-bold font-color-dark font-size-16 px-0 mr-10px"
+    >
+      დასახელება
+    </div>
+    <div class="col font-family-bold font-color-dark font-size-16 px-0">
+      IMEI კოდი
+    </div>
+  </div>
+
+  <div
+    *ngFor="let item of data[data?.isIMEI ? 'IMEICodes' : 'products']"
+    (click)="onSelect(item)"
+    [ngClass]="{ passive: data?.isIMEI && checkIfIMEI(item) }"
+    class="row m-0 border-top py-3 px-4 imei-row-hover"
+  >
+    <div
+      class="col-7 font-family-bold font-color-dark font-size-16 px-0 mr-10px d-flex align-items-center"
+    >
+      <div
+        class="border border-item-border-color rounded bg-white overflow-hidden"
+        style="width: 71px; height: 60px;"
+      >
+        <img
+          *ngIf="data?.isIMEI ? data.products[0]?.photoUrl : item?.photoUrl"
+          [src]="
+            sanitizer.bypassSecurityTrustUrl(
+              data?.isIMEI ? data.products[0].photoPath : item.photoPath
+            )
+          "
+          alt=""
+          class="w-100 h-100"
+        />
+
+        <div
+          *ngIf="!(data?.isIMEI ? data.products[0]?.photoUrl : item?.photoUrl)"
+        >
+          {{
+            (data?.isIMEI ? data.products[0].name : item.name).substring(0, 2)
+          }}
+        </div>
+      </div>
+      <span
+        class="font-family-regular font-color-dark font-size-16 pl-4 text-truncate"
+        style="max-width: 280px;"
+      >
+        {{ data?.isIMEI ? data.products[0].name : item.name }}
+      </span>
+    </div>
+    <div
+      class="col font-family-regular font-color-dark font-size-16 px-0 d-flex align-items-center text-truncate"
+    >
+      <span class="w-100 text-truncate">{{
+        data?.isIMEI ? item.imei : item.quantity
+      }}</span>
+    </div>
+  </div>
+</div> -->
+
+<div
+  class="d-flex flex-column bg-white justify-content-center rounded pt-32px"
+  style="width: 705px; max-height: 590px;"
+>
+  <div class="row m-0 align-items-center px-4 pb-32px">
+    <div class="col-2 px-0"></div>
+    <div class="col text-center font-family-bold font-color-dark font-size-20 line-height-normal">
+      {{ data.products[0].barcode }}
+    </div>
+    <div class="col-2 text-right px-0">
+      <button class="btn btn-clean" (click)="onClose()">
+        <app-icon icon="close"></app-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="row m-0 px-4 pb-12px">
+    <div class="col-7 font-family-bold font-color-dark font-size-16 px-0 mr-10px">
+      დასახელება
+    </div>
+    <div class="col font-family-bold font-color-dark font-size-16 px-0" *ngIf="data?.isIMEI">
+      IMEI კოდი
+    </div>
+    <div class="col font-family-bold font-color-dark font-size-16 px-0" *ngIf="!data?.isIMEI">
+      რაოდენობა
+    </div>
+  </div>
+  <div class="flex-grow-1 custom-scroll-1">
+    <div
+      class="row m-0 border-top py-3 px-4 imei-row-hover"
+      *ngFor="let item of data[data?.isIMEI ? 'IMEICodes' : 'products']"
+      (click)="onSelect(item)"
+      [ngClass]="{ disabled: data?.isIMEI && checkIfIMEI(item) }"
+    >
+      <div
+        class="col-7 font-family-bold font-color-dark font-size-16 px-0 mr-10px d-flex align-items-center"
+      >
+        <div
+          class="border border-item-border-color rounded bg-white overflow-hidden"
+          style="
+            width: 71px;
+            height: 60px;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+          "
+          [ngStyle]="{
+            'background-image':
+              'url(' + (data?.isIMEI ? (data?.products)[0]?.photoUrl : item?.photoUrl) + ')'
+          }"
+          *ngIf="data?.isIMEI ? data.products[0]?.photoUrl : item?.photoUrl"
+        ></div>
+        <div
+          class="border border-item-border-color rounded bg-white overflow-hidden"
+          style="width: 71px; height: 60px;"
+          *ngIf="!(data?.isIMEI ? data.products[0]?.photoUrl : item?.photoUrl)"
+        >
+          <div class="d-flex justify-content-center align-items-center w-100 h-100">
+            {{ (data?.isIMEI ? data.products[0].name : item.name).substring(0, 2) }}
+          </div>
+        </div>
+        <span
+          class="font-family-regular font-color-dark font-size-16 pl-4 text-truncate"
+          style="max-width: 280px;"
+        >
+          {{ data?.isIMEI ? data.products[0].name : item.name }}
+        </span>
+      </div>
+      <div
+        class="col font-family-regular font-color-dark font-size-16 px-0 d-flex align-items-center text-truncate"
+      >
+        <span class="w-100 text-truncate">
+          {{ data?.isIMEI ? item.imei : item.quantity }}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

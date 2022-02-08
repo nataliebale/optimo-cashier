@@ -1,0 +1,113 @@
+<div class="row m-0 border-bottom pt-lg-32px pt-4 pb-12px justify-content-between">
+  <div class="font-size-15 font-family-regular font-color-dark col pl-0">
+    <span>დასახელება</span>
+  </div>
+  <div class="d-flex col pr-0 justify-content-end">
+    <div class="font-size-15 font-family-regular font-color-dark col-4 px-0 text-right">
+      ფასი
+    </div>
+    <div class="font-size-15 font-family-regular font-color-dark col-3 px-0 text-right ml-3">
+      რაოდ
+    </div>
+    <div class="font-size-15 font-family-regular font-color-dark col-4 px-0 text-right ml-3">
+      ჯამი
+    </div>
+  </div>
+</div>
+
+<div class="row m-0 border-bottom py-26px justify-content-between" *ngFor="let product of products">
+  <div class="font-size-16 font-family-bold font-color-dark col pl-0 text-truncate d-flex">
+    <span class="w-100 text-truncate" style="max-width: 370px;">
+      {{ product.name }}
+    </span>
+  </div>
+  <div class="d-flex col pr-0 justify-content-end">
+    <div class="font-size-16 font-family-bold font-color-dark col-4 px-0 text-right text-truncate">
+      {{ product.unitPrice | number: '1.2-2':'en' }}
+      ₾
+    </div>
+    <div
+      class="font-size-15 font-family-regular font-color-dark col-3 px-0 text-right ml-3 text-truncate"
+    >
+      {{ product.quantity | number: '':'en' }} {{ getUnitOfMeasurement(product) }}
+    </div>
+    <div
+      class="font-size-16 font-family-bold font-color-dark col-4 px-0 text-right ml-3 text-truncate"
+    >
+      {{ countProductPrice(product.quantity, product.unitPrice) | number: '1.2-2':'en' }}
+      ₾
+    </div>
+  </div>
+</div>
+
+<!--  -->
+<div class="d-flex justify-content-end" [className]="isHorecaMode ? 'pt-32px' : 'pt-4'">
+  <div class="d-flex flex-column pr-3">
+    <ng-container *ngIf="isHorecaMode && !checkTaxRateIsOff">
+      <span
+        class="pb-10px text-right font-size-custlg-16 font-size-14 font-color-dark font-family-regular line-height-normal"
+      >
+        <span>შეკვეთის ჯამი:</span>
+        <!-- <span class="d-custmd-none d-inline">სულ:</span> -->
+      </span>
+      <span
+        class="pb-10px text-right font-size-custlg-16 font-size-14 font-color-dark font-family-regular line-height-normal"
+      >
+        <span class="d-custmd-inline d-none">მომსახურების საკომისიო:</span>
+        <span class="d-custmd-none d-inline">მომს. საკომისიო:</span>
+      </span>
+    </ng-container>
+
+    <span class="text-right font-size-20 font-color-dark font-family-bold line-height-normal">
+      სულ გადასახდელი:
+    </span>
+  </div>
+  <div class="d-flex flex-column">
+    <ng-container *ngIf="isHorecaMode && !checkTaxRateIsOff">
+      <span
+        class="pb-10px text-right font-size-custlg-16 font-size-14 font-color-dark font-family-bold line-height-normal"
+        >{{ totalCost | number: '1.2-2':'en' }}
+        ₾
+      </span>
+      <span
+        class="pb-10px text-right font-size-custlg-16 font-size-14 font-color-dark font-family-bold line-height-normal"
+        >{{ taxAmount | number: '1.2-2':'en' }} ₾</span
+      >
+    </ng-container>
+    <span class="text-right font-size-20 font-color-dark font-family-bold line-height-normal"
+      >{{ totalPrice | number: '1.2-2':'en' }} ₾</span
+    >
+  </div>
+</div>
+<!--  -->
+<!-- <ng-container *ngIf="isHorecaMode && !checkTaxRateIsOff">
+  <div class="row m-0 justify-content-end pt-4">
+    <span
+      class="pb-1 text-right font-size-custlg-16 font-size-14 font-color-dark font-family-regular line-height-normal"
+    >
+      შეკვეთის ჯამი:
+    </span>
+    <span class="font-size-20 font-family-bold font-color-dark pl-4 line-height-normal">
+      {{ totalCost | number: '1.2-2':'en' }} ₾</span
+    >
+  </div>
+  <div class="row m-0 justify-content-end pt-4">
+    <span
+      class="pb-1 text-right font-size-custlg-16 font-size-14 font-color-dark font-family-regular line-height-normal"
+    >
+      მომსახურების საკომისიო:
+    </span>
+    <span class="font-size-20 font-family-bold font-color-dark pl-4 line-height-normal">
+      {{ taxAmount | number: '1.2-2':'en' }} ₾</span
+    >
+  </div>
+</ng-container> -->
+
+<!-- <div class="row m-0 justify-content-end pt-4">
+  <span class="font-size-20 font-family-bold font-color-dark line-height-normal">
+    სულ გადასახდელი:</span
+  >
+  <span class="font-size-20 font-family-bold font-color-dark pl-4 line-height-normal">
+    {{ totalPrice | number: '1.2-2':'en' }} ₾</span
+  >
+</div> -->

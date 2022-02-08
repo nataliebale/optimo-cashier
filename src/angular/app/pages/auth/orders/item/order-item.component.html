@@ -1,0 +1,31 @@
+<div
+  class="rounded w-100 orders-card px-4 pt-30px pb-3 w-100"
+  [ngClass]="{ overtime: overtime, today: !overtime }"
+  (click)="onClick()"
+>
+  <div
+    class="font-size-16 font-family-bold font-color-dark text-truncate pr-3 pb-14 line-height-normal"
+  >
+    {{ order?.name }}
+  </div>
+  <div class="font-size-16 font-family-regular font-color-dark text-truncate pr-3 pb-14">
+    {{ order?.supplier?.name }}
+  </div>
+  <!-- <div
+    class="font-size-16 font-family-regular font-color-dark text-truncate pr-3 pb-14"
+  >
+    TODO TODO TODO
+    TODO - არ მიბრუნებს ბექი კურიერის ინფორმაციას
+  </div> -->
+  <div class="font-size-16 font-family-regular font-color-dark text-truncate pr-3 pb-3">
+    {{ order?.orderDate | date }}
+  </div>
+  <div class="row m-0 border-top border-product-list-bg justify-content-between pt-3">
+    <div class="font-size-16 font-family-bold font-color-dark line-height-normal text-truncate">
+      {{ totalQuantity }}
+    </div>
+    <div class="font-size-16 font-family-bold font-color-dark line-height-normal text-truncate">
+      {{ order?.expectedTotalCost }} ₾
+    </div>
+  </div>
+</div>

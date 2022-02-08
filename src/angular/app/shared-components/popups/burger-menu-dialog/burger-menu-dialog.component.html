@@ -1,0 +1,213 @@
+<div
+  class="row m-0 w-100 align-items-center pb-32px pt-32px px-4 border-top border-left border-right border-item-border-color"
+>
+  <div class="col-3 px-0"></div>
+  <div class="col text-center font-color-dark font-size-20 font-family-bold line-height-normal">
+    ფუნქციები
+  </div>
+  <div class="col-3 d-flex justify-content-end px-0">
+    <button
+      class="btn shadow-none border-0 p-0"
+      (click)="dialogRef.close()"
+      *ngIf="!data.forShiftStart"
+    >
+      <app-icon icon="close-bold"></app-icon>
+    </button>
+  </div>
+</div>
+
+<div class="row w-100 m-0 overflow-hidden">
+  <!-- disabled btn-custom-disabled -->
+
+  <button
+    [disabled]="data?.unauthorized || !operatorData?.permissions?.canOpenShift"
+    style="height: 145px;"
+    class="btn col ml-n1px bg-blue shadow-none border-0 py-0 px-3 d-flex align-items-center flex-column justify-content-center font-color-white font-family-bold font-size-18 rounded-0"
+    (click)="dialogRef.close({ methodName: 'openShiftPopup', params: [shiftStatus] })"
+  >
+    <div class="d-flex align-items-center flex-column justify-content-center cursor-pointer">
+      <app-icon icon="icon-close-shift" class="icon-keys-48"></app-icon>
+
+      <div class="col pt-2 cursor-pointer line-height-normal">
+        {{ shiftStatus ? 'ცვლის დახურვა' : 'ცვლის დაწყება' }}
+      </div>
+    </div>
+  </button>
+
+  <!-- disabled btn-custom-disabled -->
+  <button
+    [disabled]="
+      data?.unauthorized || data.forShiftStart || !operatorData?.permissions?.canOpenShift
+    "
+    style="height: 145px;"
+    class="btn col bg-payment-details-bg shadow-none py-0 d-flex align-items-center justify-content-center border-0 px-3 font-color-white font-family-bold font-size-18 rounded-0"
+    (click)="dialogRef.close({ methodName: 'onCloseDay' })"
+  >
+    <div class="d-flex align-items-center flex-column cursor-pointer">
+      <app-icon icon="keys" class="icon-keys-white"></app-icon>
+
+      <div class="col pt-2 cursor-pointer line-height-normal">დღის დახურვა</div>
+    </div>
+  </button>
+</div>
+
+<div class="row w-100 m-0 border-left border-right border-item-border-color">
+  <div class="border-right col-3 d-flex justify-content-center p-0">
+    <button
+      [disabled]="
+        data?.unauthorized || data.forShiftStart || !operatorData?.permissions?.canSeeShiftSums
+      "
+      (click)="dialogRef.close({ methodName: 'onOpenDailySalesDialog' })"
+      style="height: 145px;"
+      class="btn shift-btn w-100 btn-white-on-hover rounded-0 shadow-none border-0 d-flex flex-column justify-content-center align-items-center font-color-dark font-family-regular font-size-16"
+    >
+      <app-icon icon="lari-time"></app-icon>
+
+      <div class="pt-2 cursor-pointer">ცვლის ნავაჭრი</div>
+    </button>
+  </div>
+  <div class="border-right col-3 d-flex justify-content-center p-0">
+    <button
+      [disabled]="
+        data?.unauthorized ||
+        !shiftStatus ||
+        data.forShiftStart ||
+        !operatorData?.permissions?.canWithdrawCash
+      "
+      style="height: 145px;"
+      class="btn shift-btn w-100 btn-white-on-hover rounded-0 shadow-none border-0 d-flex flex-column justify-content-center align-items-center font-color-dark font-family-regular font-size-16"
+      (click)="dialogRef.close({ methodName: 'onOpenWithdrawalPopup' })"
+    >
+      <app-icon icon="lari-next"></app-icon>
+
+      <div class="pt-2 cursor-pointer">თანხის გაცემა</div>
+    </button>
+  </div>
+  <div class="border-right col-3 d-flex justify-content-center p-0">
+    <button
+      style="height: 145px;"
+      [disabled]="
+        !data?.canReceivePurchaseOrders ||
+        data?.unauthorized ||
+        !shiftStatus ||
+        isHorecaMode ||
+        data.forShiftStart
+      "
+      class="btn shift-btn w-100 btn-white-on-hover rounded-0 shadow-none border-0 d-flex flex-column justify-content-center align-items-center font-color-dark font-family-regular font-size-16"
+      (click)="onOrdersButtonClick()"
+    >
+      <app-icon icon="buy-gray"></app-icon>
+
+      <div class="pt-2 cursor-pointer">შესყიდვები</div>
+    </button>
+  </div>
+  <div class="col-3 d-flex justify-content-center p-0">
+    <button
+      style="height: 145px;"
+      [disabled]="data?.unauthorized || !operatorData?.permissions?.canSeeAllOrders"
+      class="btn shift-btn w-100 btn-white-on-hover rounded-0 shadow-none border-0 d-flex flex-column justify-content-center align-items-center font-color-dark font-family-regular font-size-16"
+      (click)="onOrderHistoryButtonClick()"
+    >
+      <app-icon icon="history" class="icon-w-h-48px cursor-pointer"></app-icon>
+
+      <div class="pt-2 cursor-pointer">გაყიდვების ისტორია</div>
+    </button>
+  </div>
+</div>
+
+<div class="row w-100 m-0 border-left border-right border-item-border-color">
+  <div class="border-right border-top col-3 d-flex justify-content-center p-0">
+    <button
+      [disabled]="data?.unauthorized || isHorecaMode || data.forShiftStart"
+      [disabled]="data?.unauthorized || data.forShiftStart || data.selectedSpace"
+      style="height: 145px;"
+      class="btn shift-btn w-100 btn-white-on-hover rounded-0 shadow-none border-0 d-flex flex-column justify-content-center align-items-center font-color-dark font-family-regular font-size-16"
+      (click)="dialogRef.close({ methodName: 'onSwitchEntity' })"
+    >
+      <app-icon icon="arrows-gray"></app-icon>
+
+      <div class="pt-2 cursor-pointer">
+        {{ data?.entityButton }}
+      </div>
+    </button>
+  </div>
+  <div class="border-right border-top col-3 d-flex justify-content-center p-0">
+    <button
+      [disabled]="data?.unauthorized || data.forShiftStart"
+      style="height: 145px;"
+      class="btn shift-btn w-100 btn-white-on-hover rounded-0 shadow-none border-0 d-flex flex-column justify-content-center align-items-center font-color-dark font-family-regular font-size-16"
+      (click)="dialogRef.close({ methodName: 'openAndStartSyncDropdown' })"
+    >
+      <app-icon icon="sync-gray"></app-icon>
+
+      <div class="pt-2 cursor-pointer">სინქრონიზაცია</div>
+    </button>
+  </div>
+  <div class="border-right border-top col-3 d-flex justify-content-center p-0">
+    <button
+      [disabled]="data?.unauthorized || data.forShiftStart"
+      style="height: 145px;"
+      class="btn shift-btn w-100 btn-white-on-hover rounded-0 shadow-none border-0 d-flex flex-column justify-content-center align-items-center font-color-dark font-family-regular font-size-16"
+      (click)="dialogRef.close({ methodName: 'openWifiPopup' })"
+    >
+      <app-icon icon="wifi-gray"></app-icon>
+
+      <div class="pt-2 cursor-pointer">Wi-Fi</div>
+    </button>
+  </div>
+  <div class="border-top col-3 d-flex justify-content-center p-0">
+    <button
+      [disabled]="!data?.updateIsAvaliable || data?.unauthorized || data.forShiftStart"
+      style="height: 145px;"
+      class="btn shift-btn w-100 btn-white-on-hover rounded-0 shadow-none border-0 d-flex flex-column justify-content-center align-items-center font-color-dark font-family-regular font-size-16"
+      (click)="dialogRef.close({ methodName: 'onClickUpdate' })"
+    >
+      <app-icon icon="download-gray"></app-icon>
+
+      <div class="pt-2 cursor-pointer">განახლება</div>
+    </button>
+  </div>
+</div>
+
+<div class="row w-100 m-0 border-left border-right border-item-border-color border-bottom">
+  <div class="border-right border-top col-3 d-flex justify-content-center p-0">
+    <button
+      [disabled]="data?.unauthorized"
+      style="height: 145px;"
+      class="btn shift-btn w-100 btn-white-on-hover rounded-0 shadow-none border-0 d-flex flex-column justify-content-center align-items-center font-color-dark font-family-regular font-size-16"
+      (click)="dialogRef.close({ methodName: 'onLogout' })"
+    >
+      <app-icon icon="logout-blue"></app-icon>
+
+      <div class="pt-2 cursor-pointer">გასვლა</div>
+    </button>
+  </div>
+  <div class="border-right border-top col-3 d-flex justify-content-center p-0">
+    <button
+      style="height: 145px;"
+      class="btn shift-btn w-100 btn-white-on-hover rounded-0 shadow-none border-0 d-flex flex-column justify-content-center align-items-center font-color-dark font-family-regular font-size-16"
+      (click)="onShutDown()"
+    >
+      <app-icon icon="turn-off-red"></app-icon>
+
+      <div class="pt-2 cursor-pointer">გათიშვა</div>
+    </button>
+  </div>
+
+  <div class="border-right border-top col-3 d-flex justify-content-center"></div>
+  <div class="border-right border-top col-3 d-flex justify-content-center"></div>
+  <div class="border-top col-3 d-flex justify-content-center"></div>
+</div>
+
+<ng-template #shoutDownTitle>
+  <div
+    class="m-auto px-0 bg-light-red d-flex rounded-circle d-flex justify-content-center align-items-center"
+    style="width: 80px; height: 80px;"
+  >
+    <app-icon icon="turn-off-red"></app-icon>
+  </div>
+
+  <div class="w-100 pt-32px font-size-20 font-family-bold font-color-dark text-center">
+    ნამდვილად გსურთ გათიშვა?
+  </div>
+</ng-template>

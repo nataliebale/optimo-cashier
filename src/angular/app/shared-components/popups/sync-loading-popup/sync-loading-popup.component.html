@@ -1,0 +1,73 @@
+<div mat-dialog-content class="py-2">
+  <ng-container *ngIf="result === undefined">
+    <div class="row m-0 justify-content-center">
+      <div
+        class="rounded-circle d-flex justify-content-center align-items-center position-relative"
+        style="width: 94px; height: 94px;"
+      >
+        <app-icon class="position-absolute w-100 h-100" icon="loader-big"></app-icon>
+        <div
+          style="width: 80px; height: 80px;"
+          class="rounded-circle bg-product-list-bg d-flex justify-content-center align-items-center"
+        >
+          <app-icon icon="sync-gray" class="icon-dark"></app-icon>
+        </div>
+      </div>
+    </div>
+
+    <div class="font-size-20 font-color-dark font-family-bold pt-4 w-100 text-center">
+      მიმდინარეობს სინქრონიზაცია
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="result">
+    <div class="row justify-content-center m-0">
+      <div
+        class="rounded-circle bg-light-green d-flex justify-content-center align-items-center"
+        style="width: 80px; height: 80px;"
+      >
+        <app-icon icon="complete" class="icon-keys-48"></app-icon>
+      </div>
+    </div>
+    <div class="font-size-20 font-color-dark font-family-bold py-32px w-100 text-center">
+      სინქრონიზაცია წარმატებით განხორციელდა
+    </div>
+    <div class="row m-0 justify-content-center">
+      <button
+        class="btn bg-blue py-18px px-32px shadow-none font-color-white font-size-16 font-family-bold line-height-normal mx-2"
+        (click)="onClose()"
+      >
+        დაბრუნება
+      </button>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="result === false">
+    <div class="row m-0 justify-content-center">
+      <div
+        style="width: 80px; height: 80px;"
+        class="rounded-circle bg-light-red d-flex justify-content-center align-items-center"
+      >
+        <app-icon icon="alert"></app-icon>
+      </div>
+    </div>
+    <div class="font-size-20 font-color-dark font-family-bold py-32px w-100 text-center">
+      სინქრონიზაცია ვერ განხორციელდა
+    </div>
+    <div class="row m-0 justify-content-center">
+      <button
+        class="btn bg-product-list-bg py-18px px-32px shadow-none font-color-dark font-size-16 font-family-bold line-height-normal mx-2"
+        (click)="onClose()"
+      >
+        გაუქმება
+      </button>
+
+      <button
+        class="btn bg-blue py-18px px-32px shadow-none font-color-white font-size-16 font-family-bold line-height-normal mx-2"
+        (click)="sync()"
+      >
+        ახლიდან
+      </button>
+    </div>
+  </ng-container>
+</div>

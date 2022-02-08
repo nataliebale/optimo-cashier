@@ -1,0 +1,47 @@
+<div class="d-flex flex-column bg-white justify-content-center px-4 py-2">
+  <button *ngIf="!data.hideClose" class="dialog-popup__close" type="button" (click)="onClose()">
+    <img src="../../../../assets/images/icons/delete.svg" />
+  </button>
+
+  <ng-container *ngIf="data.title">
+    <p *ngIf="!$any(data.title).elementRef" class="dialog-popup__title">
+      {{ data.title }}
+    </p>
+    <ng-container
+      *ngIf="$any(data.title).elementRef"
+      [ngTemplateOutlet]="data.title"
+    ></ng-container>
+  </ng-container>
+  <ng-container *ngIf="data.message">
+    <div
+      *ngIf="!$any(data.message).elementRef"
+      class="py-32px text-center font-size-20 font-color-dark font-family-bold"
+    >
+      {{ data.message }}
+    </div>
+
+    <ng-container
+      *ngIf="$any(data.message).elementRef"
+      [ngTemplateOutlet]="data.message"
+    ></ng-container>
+  </ng-container>
+
+  <div class="row m-0 justify-content-center">
+    <button
+      type="button"
+      (click)="onDecline()"
+      class="btn shadow-none h-56px mr-2 border-0 rounded bg-product-list-bg font-size-16 font-family-bold font-color-dark px-32px"
+      style="min-width: 120px;"
+    >
+      {{ data.declineLabel || 'არა' }}
+    </button>
+    <button
+      type="submit"
+      (click)="onApprove()"
+      class="btn shadow-none h-56px ml-2 border-0 rounded bg-blue font-size-16 font-family-bold font-color-white px-32px"
+      style="min-width: 120px;"
+    >
+      {{ data.approveLabel || 'კი' }}
+    </button>
+  </div>
+</div>

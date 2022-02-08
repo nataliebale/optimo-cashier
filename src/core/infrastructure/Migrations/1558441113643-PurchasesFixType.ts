@@ -1,0 +1,27 @@
+import {MigrationInterface, QueryRunner} from "typeorm";
+
+export class PurchasesFixType1558441113643 implements MigrationInterface {
+
+    public async up(queryRunner: QueryRunner): Promise<any> {
+        await queryRunner.query(`CREATE TABLE "temporary_purchase_order_line" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "orderedQuantity" varchar NOT NULL, "expectedUnitCost" decimal NOT NULL, "expectedTotalCost" decimal NOT NULL, "receivedQuantity" integer NOT NULL, "receivedUnitCost" decimal NOT NULL, "receivedTotalCost" decimal NOT NULL, "stockItemId" integer, "purchaseOrderId" integer, CONSTRAINT "FK_1fd41493ce75a251e0367fac9fb" FOREIGN KEY ("purchaseOrderId") REFERENCES "purchase_order" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION, CONSTRAINT "FK_740abfd3fd124bb4ec5924ee54b" FOREIGN KEY ("stockItemId") REFERENCES "stock_item" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION)`);
+        await queryRunner.query(`INSERT INTO "temporary_purchase_order_line"("id", "orderedQuantity", "expectedUnitCost", "expectedTotalCost", "receivedQuantity", "receivedUnitCost", "receivedTotalCost", "stockItemId", "purchaseOrderId") SELECT "id", "orderedQuantity", "expectedUnitCost", "expectedTotalCost", "receivedQuantity", "receivedUnitCost", "receivedTotalCost", "stockItemId", "purchaseOrderId" FROM "purchase_order_line"`);
+        await queryRunner.query(`DROP TABLE "purchase_order_line"`);
+        await queryRunner.query(`ALTER TABLE "temporary_purchase_order_line" RENAME TO "purchase_order_line"`);
+        await queryRunner.query(`CREATE TABLE "temporary_purchase_order_line" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "orderedQuantity" integer NOT NULL, "expectedUnitCost" decimal NOT NULL, "expectedTotalCost" decimal NOT NULL, "receivedQuantity" integer NOT NULL, "receivedUnitCost" decimal NOT NULL, "receivedTotalCost" decimal NOT NULL, "stockItemId" integer, "purchaseOrderId" integer, CONSTRAINT "FK_1fd41493ce75a251e0367fac9fb" FOREIGN KEY ("purchaseOrderId") REFERENCES "purchase_order" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION, CONSTRAINT "FK_740abfd3fd124bb4ec5924ee54b" FOREIGN KEY ("stockItemId") REFERENCES "stock_item" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION)`);
+        await queryRunner.query(`INSERT INTO "temporary_purchase_order_line"("id", "orderedQuantity", "expectedUnitCost", "expectedTotalCost", "receivedQuantity", "receivedUnitCost", "receivedTotalCost", "stockItemId", "purchaseOrderId") SELECT "id", "orderedQuantity", "expectedUnitCost", "expectedTotalCost", "receivedQuantity", "receivedUnitCost", "receivedTotalCost", "stockItemId", "purchaseOrderId" FROM "purchase_order_line"`);
+        await queryRunner.query(`DROP TABLE "purchase_order_line"`);
+        await queryRunner.query(`ALTER TABLE "temporary_purchase_order_line" RENAME TO "purchase_order_line"`);
+    }
+
+    public async down(queryRunner: QueryRunner): Promise<any> {
+        await queryRunner.query(`ALTER TABLE "purchase_order_line" RENAME TO "temporary_purchase_order_line"`);
+        await queryRunner.query(`CREATE TABLE "purchase_order_line" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "orderedQuantity" varchar NOT NULL, "expectedUnitCost" decimal NOT NULL, "expectedTotalCost" decimal NOT NULL, "receivedQuantity" integer NOT NULL, "receivedUnitCost" decimal NOT NULL, "receivedTotalCost" decimal NOT NULL, "stockItemId" integer, "purchaseOrderId" integer, CONSTRAINT "FK_1fd41493ce75a251e0367fac9fb" FOREIGN KEY ("purchaseOrderId") REFERENCES "purchase_order" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION, CONSTRAINT "FK_740abfd3fd124bb4ec5924ee54b" FOREIGN KEY ("stockItemId") REFERENCES "stock_item" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION)`);
+        await queryRunner.query(`INSERT INTO "purchase_order_line"("id", "orderedQuantity", "expectedUnitCost", "expectedTotalCost", "receivedQuantity", "receivedUnitCost", "receivedTotalCost", "stockItemId", "purchaseOrderId") SELECT "id", "orderedQuantity", "expectedUnitCost", "expectedTotalCost", "receivedQuantity", "receivedUnitCost", "receivedTotalCost", "stockItemId", "purchaseOrderId" FROM "temporary_purchase_order_line"`);
+        await queryRunner.query(`DROP TABLE "temporary_purchase_order_line"`);
+        await queryRunner.query(`ALTER TABLE "purchase_order_line" RENAME TO "temporary_purchase_order_line"`);
+        await queryRunner.query(`CREATE TABLE "purchase_order_line" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "orderedQuantity" varchar NOT NULL, "expectedUnitCost" decimal NOT NULL, "expectedTotalCost" decimal NOT NULL, "receivedQuantity" integer NOT NULL, "receivedUnitCost" decimal NOT NULL, "receivedTotalCost" decimal NOT NULL, "stockItemId" integer, "purchaseOrderId" integer, CONSTRAINT "FK_1fd41493ce75a251e0367fac9fb" FOREIGN KEY ("purchaseOrderId") REFERENCES "purchase_order" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION, CONSTRAINT "FK_740abfd3fd124bb4ec5924ee54b" FOREIGN KEY ("stockItemId") REFERENCES "stock_item" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION)`);
+        await queryRunner.query(`INSERT INTO "purchase_order_line"("id", "orderedQuantity", "expectedUnitCost", "expectedTotalCost", "receivedQuantity", "receivedUnitCost", "receivedTotalCost", "stockItemId", "purchaseOrderId") SELECT "id", "orderedQuantity", "expectedUnitCost", "expectedTotalCost", "receivedQuantity", "receivedUnitCost", "receivedTotalCost", "stockItemId", "purchaseOrderId" FROM "temporary_purchase_order_line"`);
+        await queryRunner.query(`DROP TABLE "temporary_purchase_order_line"`);
+    }
+
+}

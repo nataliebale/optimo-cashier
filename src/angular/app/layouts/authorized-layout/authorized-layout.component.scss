@@ -1,0 +1,21 @@
+.authorized-layout {
+  position: relative;
+
+  &__content-container {
+    width: 100%;
+    // height: calc(100vh - 103px);
+    height: calc(100% - 100px);
+    @media screen and (max-width: 1440px) {
+      height: calc(100% - 80px);
+    }
+    @media screen and (max-width: 1280px) {
+      height: calc(100% - 70px);
+    }
+
+    overflow: hidden;
+
+    // @media only screen and (max-width: 1640px) and (min-width: 1280px) {
+    //   height: calc(100vh - 75px);
+    // }
+  }
+}

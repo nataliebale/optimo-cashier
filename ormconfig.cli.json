@@ -1,0 +1,17 @@
+{
+   "type": "sqlite",
+   "database": "database.migrations.sqlite",
+   "synchronize": false,
+   "logging": false,
+   "migrationsTableName": "__migrations",
+   "entities": [
+      "src/core/infrastructure/Entities/**/*.ts"
+   ],
+   "migrations": [
+      "src/core/infrastructure/Migrations/**/*.ts"
+   ],
+   "cli": {
+      "entitiesDir": "src/core/infrastructure/Entities",
+      "migrationsDir": "src/core/infrastructure/Migrations"
+   }
+}

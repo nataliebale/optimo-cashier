@@ -1,0 +1,229 @@
+// Reboot
+$font-family-base: $font-regular;
+$body-color: #3a3e56;
+// transitin mixin
+$transition-base: all 0.15s linear;
+$enable-prefers-reduced-motion-media-query: false;
+
+// Color system
+
+$red: #e21331;
+$blue: #4563ff;
+$light-red: #ffc8d7;
+$light-green: #c6f3d4;
+$orange: #ff6257;
+$grepfruit: #ffd8d5;
+$dark-green-blue: #26d4a3;
+$lightish-blue: #4463ff;
+// $dark: #515366;
+$yellow: #feb904;
+$text-muted: #888ea8;
+$purple: #713ac9;
+$pink: #f4f5f7;
+$green-blue: #daf8f0;
+$darkish-purple: #cec5dd;
+$product-list-bg: #e4e6ed;
+$product-item-bg: #f4f5f7;
+$payment-details-bg: #3a3e56;
+$border-color: #d2d4d9;
+$item-border-color: #ced0db;
+$tables-container-bg: #e8eaed;
+$deep-purple: #3d1877;
+$light-blue: #dee8ff;
+$pagination-border: #d6d6d6;
+$table-border-color: #e7e7e7;
+$no-img-bg: #ececee;
+
+$light-border: rgba(210, 212, 217, 0.25);
+// $rama:#E7E7E7;
+
+$theme-colors: (
+  'orange': $orange,
+  'blue': $blue,
+  'pink': $pink,
+  'red': $red,
+  'grapefruit': $grepfruit,
+  'darkish-purple': $darkish-purple,
+  'product-list-bg': $product-list-bg,
+  'product-item-bg': $product-item-bg,
+  'payment-details-bg': $payment-details-bg,
+  'border-color-bg': $border-color,
+  'item-border-color': $item-border-color,
+  'tables-container-bg': $tables-container-bg,
+  'deep-purple': $deep-purple,
+  'light-green': $light-green,
+  'light-red': $light-red,
+  'green-blue': $green-blue,
+  'dark-green-blue': $dark-green-blue,
+  'lightish-blue': $lightish-blue,
+  'green': $green,
+  'light-blue': $light-blue,
+  'alert-red': $alert-red,
+  'alert-border': $alert-border,
+  'placeholder-gray': $placeholder-gray,
+  'receipt-border': $receipt-border,
+  'pay-btn-green': $pay-btn-green,
+  'pagination-border': $pagination-border,
+  'table-border-color': $table-border-color,
+  'basket-row-bg': $basket-row-bg,
+  'light-border': $light-border,
+  'no-img-bg': $no-img-bg,
+);
+
+// Grid breakpoints
+$grid-breakpoints: (
+  xs: 0,
+  sm: 768px,
+  md: 1024px,
+  custmd: 1280px,
+  lg: 1367px,
+  custlg: 1440px,
+  xl: 1685px,
+  xxl: 1900px,
+);
+
+// // Grid containers
+$container-max-widths: (
+  md: 960px,
+  xl: 1224px,
+);
+
+// // grid  container sizes generator
+@each $size, $value in $container-max-widths {
+  .container-#{$size} {
+    max-width: $value !important;
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+
+//buttons
+$btn-disabled-opacity: 0.35;
+
+// // Grid columns
+$grid-gutter-width: 24px;
+// $grid-columns: 12;
+
+$spacers: (
+  1px: 1px,
+  2px: 2px,
+  3px: 3px,
+  5px: 5px,
+  6px: 6px,
+  7px: 7px,
+  10px: 10px,
+  11px: 11px,
+  12px: 12px,
+  13px: 13px,
+  14: 14px,
+  15px: 15px,
+  16px: 16px,
+  17px: 17px,
+  18px: 18px,
+  19px: 19px,
+  20px: 20px,
+  21px: 21px,
+  22px: 22px,
+  24px: 24px,
+  26px: 26px,
+  27px: 27px,
+  28px: 28px,
+  29px: 29px,
+  30px: 30px,
+  32px: 32px,
+  33px: 33px,
+  34px: 34px,
+  35px: 35px,
+  36px: 36px,
+  38px: 38px,
+  40: 40px,
+  42px: 42px,
+  43px: 43px,
+  44px: 44px,
+  52px: 52px,
+  56px: 56px,
+  60px: 60px,
+  64px: 64px,
+  65px: 65px,
+  72px: 72px,
+  76px: 76px,
+  78px: 78px,
+  80px: 80px,
+);
+
+// solution for bug on browser screen resolution 80% and under ODIN-2144 and 2137s
+
+// .form-control{
+// border:none !important;
+// -webkit-box-shadow: 0 0 0 2px #e6ecf5;
+// -moz-box-shadow:  0 0 0 2px #e6ecf5;
+// box-shadow:0 0 0 2px #e6ecf5;
+// }
+
+// // Components
+
+// $component-active-color: $blue;
+
+// // Card
+// $card-border-color: $border-color;
+// $card-spacer-x: 32px;
+
+// // Dropdown
+// $dropdown-link-color: #c0c5d2;
+// $dropdown-link-active-color: #515366;
+// $dropdown-link-active-bg: #f2f5fa;
+
+// // Inputs
+// $input-group-addon-bg: #fafbfc;
+// $input-border-color: $border-color;
+// $input-padding-x-sm: 1rem;
+// $input-font-size: 0.875rem;
+// // $input-padding-y: 12.5px; rem moitxova
+// $input-padding-y: 1rem;
+
+// $input-disabled-bg: #fafbfc;
+
+// //Buttons
+// $input-btn-padding-y: 0.8125rem;
+// $input-btn-padding-x: 1rem;
+// $input-btn-padding-y-lg: 1.5rem;
+// $input-btn-padding-x-lg: 2.5rem;
+// $input-btn-padding-y-sm: .5rem;
+// $input-btn-padding-x-sm: 2.25rem;
+// $btn-line-height: 1.25;
+// $btn-focus-box-shadow: none;
+// $input-btn-focus-box-shadow: none;
+// $btn-focus-width: 0;
+// $btn-font-size: 14px;
+// $btn-disabled-opacity: 1;
+
+// //Modals
+// $modal-backdrop-opacity: .3;
+// $modal-content-box-shadow-xs: 0 30px 30px 0 rgba(0, 0, 0, 0.1);
+// $modal-content-border-color: $border-color;
+// $modal-lg: 685px;
+
+// // Tables
+// $table-cell-padding: 0.625rem 1rem;
+// $table-hover-bg: red;
+// $table-border-color: rgba(#E6ECF5, .5);
+// $table-color: #888ea8;
+// $table-hover-color: red;
+
+// Nav
+//$nav-link-padding-x: 0;
+//$nav-tabs-border-width: 0;
+//$nav-tabs-link-active-border-color: $blue;
+//$nav-tabs-link-active-color: $dark;
+
+// Pagination
+// $pagination-color: #888ea8;
+
+// Forms
+// $form-group-margin-bottom: 0.875rem;
+// $input-focus-border-color: $blue;
+// $form-grid-gutter-width: 16px;
+// $input-color: $dark;
+// $form-feedback-icon-invalid: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAyNCAyNCI+CiAgICA8ZGVmcz4KICAgICAgICA8cGF0aCBpZD0iYSIgZD0iTTAgMi4zMDRoMjMuODY2VjIyLjgxSDB6Ii8+CiAgICA8L2RlZnM+CiAgICA8ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgICAgIDxwYXRoIGZpbGw9IiNGQzNDMkQiIGZpbGwtcnVsZT0ibm9uemVybyIgZD0iTTExLjkzMyAxNy4wNzlhMS4xMDQgMS4xMDQgMCAxIDEtMS4xMDMgMS4xMDZjMC0uNjExLjQ5NC0xLjEwNiAxLjEwMy0xLjEwNk0xMS43ODUgMTUuMzE2YS42MDguNjA4IDAgMCAwIC42MDgtLjYwOVY4LjkyNGEuNjA4LjYwOCAwIDEgMC0xLjIxNiAwdjUuNzgzYzAgLjMzNi4yNzMuNjA5LjYwOC42MDkiLz4KICAgICAgICA8bWFzayBpZD0iYiIgZmlsbD0iI2ZmZiI+CiAgICAgICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI2EiLz4KICAgICAgICA8L21hc2s+CiAgICAgICAgPHBhdGggZmlsbD0iI0ZDM0MyRCIgZmlsbC1ydWxlPSJub256ZXJvIiBkPSJNMjEuNzQ0IDIxLjU5MUgyLjExYy0uNTgtLjAwNy0uOTE1LS42NzUtLjYyLTEuMTc1bDkuMjY4LTE1LjcwMmMuNDcyLS43NTcuNzgyLTEuMjA3IDEuMTc1LTEuMjA3LjM4MyAwIC43NDcuNTcgMS4xNjggMS4yMmw5LjI3NSAxNS42ODdjLjI5Ni41LS4wMzggMS4xNy0uNjE5IDEuMTc3aC0uMDEzek0xNC4xNDggNC4xMTRsLS4wMjgtLjA0M2MtLjU2Mi0uODY4LTEuMTQ0LTEuNzY3LTIuMTg3LTEuNzY3LTEuMDg3IDAtMS42NTUuOTEyLTIuMjA2IDEuNzkzbC0uMDIyLjAzNi05LjYyIDE2LjMzMmMtLjA1Ni4wOTQtLjA4NS4xNDMtLjA4NS4yNTEgMCAxLjE4Ni45NTIgMi4wOTMgMi4xMjMgMi4wOTNoMTkuNjJjMS4xNzIgMCAyLjEyMy0uOTA3IDIuMTIzLTIuMDkzYS41MTIuNTEyIDAgMCAwLS4wODMtLjI4TDE0LjE0OCA0LjExNHoiIG1hc2s9InVybCgjYikiLz4KICAgIDwvZz4KPC9zdmc+Cg==');
+
+// $spinner-border-width-sm: 2px;

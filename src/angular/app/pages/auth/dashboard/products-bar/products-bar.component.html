@@ -1,0 +1,22 @@
+<app-products-bar-search
+  [formControl]="searchFormControl"
+  (focus)="focusGroup.emit(searchForm)"
+  (blur)="focusGroup.emit(null)"
+  [tab]="activeTab"
+  [hasSubtitle]="hasSubtitle"
+></app-products-bar-search>
+
+<app-products-bar-tabs
+  (change)="onChangeTab($event)"
+  [isHorecaMode]="isHorecaMode"
+></app-products-bar-tabs>
+
+<app-products-bar-content
+  [tab]="activeTab"
+  [searchTerm]="searchTerm"
+  (productChosen)="productAdded.emit($event)"
+  (resetSearchValue)="onResetSearchValue()"
+  (hasSubtitle)="onHasSubtitle($event)"
+  [isHorecaMode]="isHorecaMode"
+>
+</app-products-bar-content>

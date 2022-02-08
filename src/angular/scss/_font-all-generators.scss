@@ -1,0 +1,22 @@
+@each $name, $value in $font-families {
+  .font-family-#{$name} {
+    font-family: $value !important;
+  }
+}
+
+@each $breakpoint in map_keys($grid-breakpoints) {
+  $infix: breakpoint-infix($breakpoint);
+  @include media-breakpoint-up($breakpoint) {
+    @each $prop, $value in $font-sizes {
+      .font-size#{$infix}-#{$prop} {
+        font-size: $value !important;
+      }
+    }
+  }
+}
+
+@each $name, $value in $font-color {
+  .font-color-#{$name} {
+    color: $value !important;
+  }
+}

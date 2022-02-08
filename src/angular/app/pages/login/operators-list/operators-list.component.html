@@ -1,0 +1,70 @@
+<div class="w-100 h-100">
+  <div
+    *ngIf="!operators?.length"
+    class="position-absolute pointer-events-none font-size-16 font-color-dark font-family-regular no-employee d-flex flex-column justify-content-center align-items-center w-100"
+  >
+    <app-icon icon="employee-add" class="pointer-events-all"></app-icon>
+    <span class="pt-2 pointer-events-all">გთხოვთ დაამატოთ თანამშრომელი </span>
+  </div>
+
+  <div
+    class="font-color-dark font-size-xxl-30 font-size-24 font-family-bold w-100 text-center pt-xxl-4 pt-0"
+    *ngIf="operators?.length"
+  >
+    <span>აირჩიე თანამშრომელი</span>
+  </div>
+
+  <div class="w-100 h-100 d-flex justify-content-center pt-xxl-5 pt-28px" *ngIf="operators">
+    <div
+      *ngIf="sliderContent.scrollWidth > sliderContent.offsetWidth"
+      class="font-color-dark pr-xxl-52px pr-28px d-flex justify-content-center align-items-center"
+    >
+      <button class="btn shadow-none border-0 p-0" (click)="onArrowClick(true)">
+        <app-icon icon="arrow-left-big"></app-icon>
+      </button>
+    </div>
+
+    <div id="operators-wrapper" style="overflow-x: overlay;" #sliderContent>
+      <div class="operators-list d-flex" #sliderContentInside>
+        <div *ngFor="let matrixItems of operators">
+          <button
+            class="operator-item bg-product-list-bg border rounded btn shadow-none d-flex align-items-center pr-3 py-xxl-4 py-19px pl-4 my-xxl-2 my-2 mx-12px mx-xxl-4"
+            (click)="onSelect(item)"
+            [class.selected]="
+              (selectedOperator && item.id === selectedOperator.id) ||
+              item.id === activeShiftOperator?.id
+            "
+            [class.disabled]="
+              !isHorecaMode && activeShiftOperator && item.id !== activeShiftOperator?.id
+            "
+            *ngFor="let item of matrixItems"
+          >
+            <div
+              [class.active]="item.isLoggedIn"
+              class="user-logo rounded-circle d-flex justify-content-center align-items-center font-color-white font-size-xxl-16 font-size-14 font-family-bold"
+              [style.background-color]="item.bgColor"
+            >
+              <span class="pt-2px make-font-caps">
+                {{ item.name[0] }}
+              </span>
+            </div>
+            <span
+              class="pl-3 font-color-dark font-size-xxl-16 font-size-15 font-family-bold text-truncate"
+            >
+              {{ item.name }}
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div
+      *ngIf="sliderContent.scrollWidth > sliderContent.offsetWidth"
+      class="font-color-dark pl-xxl-52px pl-28px d-flex justify-content-center align-items-center"
+    >
+      <button class="btn shadow-none border-0 p-0" (click)="onArrowClick(false)">
+        <app-icon icon="arrow-right-big"></app-icon>
+      </button>
+    </div>
+  </div>
+</div>

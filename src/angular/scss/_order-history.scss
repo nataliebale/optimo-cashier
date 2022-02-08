@@ -1,0 +1,163 @@
+.order-history {
+  &-filter {
+    &-wrapper {
+      height: 80px;
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      padding-left: 48px;
+      padding-right: 34px;
+      @include media-breakpoint-down(xl) {
+        padding-left: 24px;
+        padding-right: 16px;
+      }
+      @include media-breakpoint-down(custlg) {
+        padding-left: 48px;
+      }
+      @include media-breakpoint-down(lg) {
+        padding-left: 24px;
+      }
+      @include media-breakpoint-down(custlg) {
+        height: 64px;
+        min-height: 64px;
+        .custom-switcher-wrapper {
+          display: none;
+        }
+      }
+    }
+  }
+  &-short-info {
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    @include transition;
+    position: relative;
+    @include media-breakpoint-down(lg) {
+      height: 64px;
+    }
+    * {
+      cursor: pointer;
+    }
+    &:after {
+      content: '';
+      width: 24px;
+      height: 24px;
+      background-image: url($arrow-right-on-hover);
+      background-position: center;
+      position: absolute;
+      right: 16px;
+      pointer-events: none;
+      opacity: 0;
+      @include transition;
+      @include media-breakpoint-down(lg) {
+        right: 8px;
+      }
+    }
+    &:hover,
+    &.active {
+      background-color: $basket-row-bg;
+      &:after {
+        opacity: 1;
+      }
+    }
+    .status-icon {
+      position: absolute;
+      top: 12px;
+      left: 20px;
+      margin-top: -2px;
+      @include media-breakpoint-down(lg) {
+        left: 0px;
+        svg {
+          width: 20px;
+          height: 20px;
+        }
+      }
+      &.both-display {
+        display: flex;
+        flex-direction: column;
+        height: 73%;
+        justify-content: space-evenly;
+      }
+    }
+  }
+  &-payment-method {
+    @include transition;
+    background-color: $basket-row-bg;
+    width: 56px;
+    height: 56px;
+    border-radius: 100%;
+    cursor: default;
+    * {
+      cursor: default !important;
+    }
+    @include media-breakpoint-down(lg) {
+      width: 42px;
+      height: 42px;
+      svg {
+        width: 30px !important;
+        height: 30px !important;
+      }
+    }
+    svg {
+      width: 40px;
+      height: 40px;
+      .fill-change {
+        fill: #b2b4bf;
+        @include transition;
+      }
+    }
+    &.by-cash {
+      &.active {
+        background-color: $green-blue;
+        svg {
+          .fill-change {
+            fill: #26d4a3;
+          }
+        }
+      }
+    }
+    &.by-card {
+      &.active {
+        background-color: $grepfruit;
+        svg {
+          .fill-change {
+            fill: #ff6257;
+          }
+        }
+      }
+    }
+    &.by-consignation {
+      &.active {
+        background-color: $darkish-purple;
+        svg {
+          .fill-change {
+            fill: #3d1877;
+          }
+        }
+      }
+    }
+  }
+  // &-description-text {
+  //   .ticket-name-text {
+  //     max-width: 176px;
+  //     @include media-breakpoint-down(lg) {
+  //       max-width: 153px;
+  //     }
+  //   }
+  //   .table-name-text {
+  //     max-width: 323px;
+  //     @include media-breakpoint-down(lg) {
+  //       max-width: 150px;
+  //     }
+  //   }
+  //   .space-name-text {
+  //     max-width: 387px;
+  //     @include media-breakpoint-down(lg) {
+  //       max-width: 365px;
+  //     }
+  //   }
+  // }
+  // cancelled
+}

@@ -1,0 +1,34 @@
+{
+  "PAGES": {
+    "HOME": {
+      "TITLE": "App works !"
+    },
+    "DASHBOARD": {
+      "PRODUCTS": "პროდუქტები",
+      "QUANTITY": "რაოდენობა"
+    },
+    "PAYMENT": {
+      "BACK": "კალათში დაბრუნება",
+      "PAYMENT": "გადახდა",
+      "PAYMENT_METHOD": "გადახდის მეთოდი",
+      "CASH": "ნაღდი ფული",
+      "CARD": "ბარათი",
+      "SUBMIT": "დადასტურება",
+      "INPUT_AMOUNT": "თანხის შეყვანა",
+      "SELECT_CUSTOMER": "მომხმარებლის არჩევა"
+    }
+  },
+  "COMPONENTS": {
+    "NUMPAD": {
+      "SUM": "ჯამი",
+      "QUANTITY": "რაოდენობა",
+      "DISCOUNT": "ფასდაკლება",
+      "PRICE": "ფასი",
+      "CUSTOMER": "მომხმარებელი",
+      "SUBMIT": "გადახდა"
+    }
+  },
+  "LOGIN": {
+    "SYNCHRONIZATION": "სინქრონიზაცია"
+  }
+}

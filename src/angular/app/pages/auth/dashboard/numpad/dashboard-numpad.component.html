@@ -1,0 +1,181 @@
+<!-- <div class="numpad">
+  <div *ngIf="collapse" class="numpad__small-keyboard">
+    <button class="numpad__small-keyboard-pay" (click)="submited.emit()">
+      <span>
+        გადახდა
+      </span>
+
+      <img src="./../../../assets/images/icons/next.svg" alt="Pay Arrow" />
+    </button>
+  </div>
+
+  <div *ngIf="!collapse" class="numpad__keyboard">
+    <div class="numpad__keyboard-actions">
+      <div
+        *ngFor="let action of actions"
+        class="numpad__keyboard-action"
+        [ngClass]="{
+          'numpad__keyboard-action--active': action.key === activeAction,
+          disabled: action.disabled
+        }"
+        (click)="activeAction = action.key"
+      >
+        <span>
+          {{ action.label }}
+        </span>
+      </div>
+    </div>
+
+    <div class="numpad__keyboard-keys">
+      <app-numpad
+        [formControl]="formControl"
+        [buttonsRows]="keys"
+        [hideBack]="true"
+      ></app-numpad>
+    </div>
+
+    <div class="numpad__keyboard-custom-actions">
+      <div class="numpad__keyboard-submit" (click)="submited.emit()">
+        <img src="./../../../assets/images/icons/next.svg" alt="Pay Arrow" />
+
+        <span>
+          გადახდა
+        </span>
+      </div>
+
+      <div class="numpad__keyboard-backspace" (click)="onBackspace()">
+        <span>
+          <img src="../../../assets/images/icons/backspace1.svg" alt="" />
+        </span>
+      </div>
+
+      <div class="numpad__keyboard-c" (click)="onClear()">
+        <span>
+          C
+        </span>
+      </div>
+
+      <div class="clear"></div>
+    </div>
+
+    <div class="clear"></div>
+  </div>
+</div> -->
+
+<!-- full size button after minimize numpad-->
+
+<div class="row m-0 d-flex" *ngIf="collapse">
+  <button
+    class="btn shadow-none bg-blue w-100 h-100 p-0 m-0 rounded-0 d-flex align-items-center"
+    [class.bg-pay-btn-green]="isEntitySale"
+    (click)="submited.emit()"
+    [disabled]="disabledPayButton"
+  >
+    <div class="col-1 cursor-pointer"></div>
+    <span class="font-color-white font-size-19 col text-center font-family-bold cursor-pointer"
+      >გადახდა</span
+    >
+
+    <span
+      class="font-color-white font-size-19 col text-center font-family-bold d-none cursor-pointer"
+      >დადასტურება
+    </span>
+    <!-- d-none moushale -->
+
+    <div class="col-1 mr-4 pr-2 py-4">
+      <app-icon icon="pay" class="cursor-pointer"></app-icon>
+      <app-icon icon="correct-white" class="cursor-pointer d-none"></app-icon>
+      <!-- d-none moushale-->
+    </div>
+  </button>
+</div>
+
+<div class="d-flex flex-column" *ngIf="!collapse">
+  <div class="row m-0">
+    <div class="d-flex w-100">
+      <div class="w-100" style="max-width: 73.957%;">
+        <div class="w-100 d-flex">
+          <div class="w-100 px-0" style="max-width: 47.186%;">
+            <div
+              class="bg-white font-size-custmd-16 font-size-14 d-flex align-items-center dashboard-numpad-sections cursor-pointer"
+              *ngFor="let action of actions"
+              [ngClass]="{
+                active: action.key === dashboardNumpadProps.activeAction,
+                disabled: action.disabled
+              }"
+              (click)="activeActionChange.emit(action.key)"
+            >
+              <div class="col-1 px-0"></div>
+              <span class="text-center col cursor-pointer">
+                {{ action.label }}
+              </span>
+
+              <!-- <button
+                class="btn shadow-none p-0"
+                *ngIf="action.key === dashboardNumpadProps.activeAction && !action.disabled"
+              >
+                <app-icon
+                  icon="back"
+                  style="transform: rotate(180deg);"
+                ></app-icon>
+              </button> -->
+              <div class="col-1 text-right px-0">
+                <!-- <app-icon icon="back" class="icon-back"></app-icon> -->
+              </div>
+            </div>
+          </div>
+          <div class="flex-grow-1 px-0">
+            <div class="w-100">
+              <div class="dashboard-numpad">
+                <app-numpad
+                  [formControl]="dashboardNumpadProps.control"
+                  [buttonsRows]="keys"
+                  [maxFractionDigits]="maxFractionDigits"
+                  [hideBack]="true"
+                  class="numpad-first"
+                ></app-numpad>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex-grow-1 d-flex flex-column">
+        <div
+          class="btn-div w-100 bg-blue d-flex justify-content-center align-items-center flex-column rounded-0 flex-grow-1"
+          [class.bg-pay-btn-green]="isEntitySale"
+          (click)="submited.emit()"
+          [class.disabled]="disabledPayButton"
+        >
+          <app-icon icon="pay"></app-icon>
+
+          <span
+            class="font-color-white font-family-bold font-size-custlg-20 font-size-custmd-18 font-size-16 pt-lg-12px cursor-pointer"
+            >გადახდა
+          </span>
+          <span
+            class="font-size-custlg-15 font-size-12 font-family-regular font-color-white pt-lg-3 pt-12px cursor-pointer"
+            >{{ isEntitySale ? '(ი/პ გაყიდვები)' : '(საცალო გაყიდვები)' }}</span
+          >
+          <!-- <span class="font-size-15 font-family-regular font-color-white pt-3"
+            >(ი/პ გაყიდვები)</span
+          > -->
+        </div>
+        <div class="d-flex px-0 numpad-first">
+          <!-- btn shadow-none number-btn  -->
+
+          <div
+            class="col btn-div number-btn border-bottom-0 font-family-regular font-color-dark font-size-lg-24 font-size-20 d-flex justify-content-center align-items-center min-h-94px"
+            (click)="onClear()"
+          >
+            C
+          </div>
+          <div
+            class="col btn-div number-btn border-bottom-0 font-family-regular font-color-dark font-size-24 d-flex justify-content-center align-items-center ml-0 min-h-94px"
+          >
+            <span class="disabled"> +/-</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
